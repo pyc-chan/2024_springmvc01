@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="emp">
+ 	<select id="list" resultType="com.ict.edu05.vo.EmpVO">
+ 		select * from emp order by empno
+ 	</select>
+ 	<select id="search" parameterType="String" resultType="com.ict.edu05.vo.EmpVO" >
+ 		select * from emp where deptno = #{deptno}
+ 	</select>
+ 	<select id="dynamic" parameterType="com.ict.edu05.vo.EmpVO" resultType="com.ict.edu05.vo.EmpVO" >
+ 		<!-- 
+ 		select * from emp where empno = #{keyword}
+ 		 -->
+ 		 
+ 		 <!-- 1. choose, when 
+ 		 select * from emp where 
+ 		 <choose>
+ 		 	<when test="idx == 1"> empno = #{keyword} </when>
+ 		 	<when test="idx == 2"> Lower(ename) like concat('%', Lower(#{keyword}), '%') </when>
+ 		 	<when test="idx == 3"> Lower(job) like concat('%', Lower(#{keyword}), '%') </when>
+ 		 	<when test="idx == 4"> deptno = #{keyword} </when>
+ 		 </choose> -->
+ 		 
+ 		 
+ 		 <!--  prefix="where" : 자동으로 where 삽입 -->
+ 		 <!-- AND로 시작하는 구문이 있더라도 자동으로 이를 제거하고 올바른 sql 구문을 생성 -->
+ 		 select * from emp
+ 		 <trim prefix="where" prefixOverrides="AND / OR">
+ 		 	<if test="idx == 1"> AND empno = #{keyword} </if>
+ 		 	<if test="idx == 2"> AND Lower(ename) like concat('%', Lower(#{keyword}), '%') </if>
+ 		 	<if test="idx == 3"> AND Lower(job) like concat('%', Lower(#{keyword}), '%') </if>
+ 		 	<if test="idx == 4"> AND deptno = #{keyword} </if>
+ 		 </trim>
+ 		 
+ 	</select>
+ 	 	<select id="dynamic2" parameterType="Map" resultType="com.ict.edu05.vo.EmpVO" >
+ 	 		select * from emp
+	 		 <trim prefix="where" prefixOverrides="AND / OR">
+	 		 	<if test="idx == 1"> AND empno = #{keyword} </if>
+	 		 	<if test="idx == 2"> AND Lower(ename) like concat('%', Lower(#{keyword}), '%') </if>
+	 		 	<if test="idx == 3"> AND Lower(job) like concat('%', Lower(#{keyword}), '%') </if>
+	 		 	<if test="idx == 4"> AND deptno = #{keyword} </if>
+	 	 	</trim>
+ 	 	</select>
+</mapper>
