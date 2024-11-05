@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+  	<select id="list" resultType="bvo">
+		select * from bbs_t order by b_idx desc
+	</select> 
+	
+	<insert id="insert" parameterType="bvo">
+		insert into bbs_t(subject, writer,content, f_name, pwd, write_date, hit)
+		values(#{subject}, #{writer},#{content}, #{f_name}, #{pwd}, now(), 0)
+	</insert>
+	
+	<select id="count" resultType="int">
+		select count(*) from bbs_t
+	</select>
+	
+	<!--  결과 행 제한하기 - LIMIT = 출력값을 제한함. (MySQL(MariaDB)과 PostgreSQL)
+ 	      SELECT 명령 FROM 테이블명 LIMIT 행수 [OFFSET 시작행]; 
+ 	       offset = limit * (현재페이지 - 1)
+ 	      LIMIT 구는 SELECT 명령의 마지막에 지정하는 것으로 WHERE구나 ORDER BY구의 뒤에 지정한다.
+ 	-->
+	<select id="pageList" parameterType="Map" resultType="bvo">
+		SELECT * FROM bbs_t order by b_idx desc limit #{limit} offset #{offset};
+	</select>
+	
+	<update id="hitupdate" parameterType="String">
+		update bbs_t set hit = hit + 1 where b_idx = #{b_idx} 
+	</update>
+	
+	<select id="detail" parameterType="String" resultType="bvo">
+		select * from bbs_t where b_idx = #{b_idx}
+	</select>
+	
+	<select id="clist" parameterType="String" resultType="cvo">
+		select * from comment_t where b_idx = #{b_idx}
+	</select>
+	
+	<insert id="cinsert" parameterType="cvo">
+		insert into comment_t(writer, content, write_date, b_idx)
+		values(#{writer}, #{content}, now(), #{b_idx})
+	</insert>
+	
+	<delete id="cdelete" parameterType="String">
+		delete from comment_t where c_idx = #{c_idx}
+	</delete>
+	
+	<!-- 삭제 이지만 active = 1 로 변경하는 업데이트 -->
+	<update id="delete" parameterType="String">
+		update 	bbs_t set active = 1 where b_idx = #{b_idx}
+	</update>
+	
+	<update id="update" parameterType="bvo">
+		update 	bbs_t 
+		set subject = #{subject}, content=#{content}, writer = #{writer}, f_name = #{f_name} 
+		where b_idx = #{b_idx}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- MyBatis가 해당 값의 타입을 명시적으로 알지 못하면 null 취급하게 된다. -->
+	<!-- 매번 쿼리를 실행할 때마다 데이터베이스에 요청이 가고, 결과를 새로 받아옵니다. -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.ict.guestbook2.vo.GuestBook2VO"  alias="gb2vo" />
+		<typeAlias type="com.ict.bbs.vo.BbsVO"  alias="bvo" />
+		<typeAlias type="com.ict.bbs.vo.CommVO"  alias="cvo" />
+		<typeAlias type="com.ict.shop.vo.ShopVO"  alias="svo" />
+		<typeAlias type="com.ict.member.vo.MemberVO"  alias="mvo" />
+		<typeAlias type="com.ict.shop.vo.CartVO"  alias="cartvo" />
+		<typeAlias type="com.ict.board.vo.BoardVO"  alias="bovo" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/guestbook2_mapper.xml" />
+		<mapper resource="mappers/bbs_mapper.xml" />
+		<mapper resource="mappers/shop_mapper.xml" />
+		<mapper resource="mappers/member_mapper.xml" />
+		<mapper resource="mappers/board_mapper.xml" />
+	</mappers>
+</configuration>

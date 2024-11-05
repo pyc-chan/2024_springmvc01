@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+  	<select id="count" resultType="int">
+  		select count(*) from board
+  	</select>
+  	
+  	<select id="board_list" parameterType="Map" resultType="bovo">
+  		select * from board order by b_groups desc, b_lev asc limit #{limit} offset #{offset}
+  	</select>
+  	
+  	
+  	<!-- b_groups 값을 idx의 최대값 +1로 설정 -->
+  	<insert id="board_insert" parameterType="bovo">
+  		<selectKey keyProperty="b_groups" resultType="String" order="BEFORE">
+  			select(ifnull(max(idx),0)+1) as b_groups from board
+  		</selectKey>
+  		insert into board(writer, title, content, pwd, hit, b_groups, b_step, b_lev, regdate, f_name)
+  		values(#{writer}, #{title}, #{content}, #{pwd}, 0, #{b_groups}, 0, 0, now(), #{f_name})
+  	</insert>
+  	
+  	<!-- 같은 b_groups를 찾아서 기존 lev이 들어온 lev보다 크거나 같으면 기존 lev 증가시키자 -->
+  	<!-- <, 사용하면 오류 => ![CDATA[부등호를 갖고 있는 내용]] 사용 
+  		&lt;  =>  < , &gt;  =>  >      &gt;=   =>  >=
+  	
+  	-->
+  	<update id="ans_lev_up" parameterType="Map">
+  	<![CDATA[
+  		update board set b_lev = lev+1 where b_groups=#{b_groups} and  b_lev &gt;= #{b_lev}
+  	]]>  
+  	</update>
+  	
+  	<insert id="ans_insert" parameterType="bovo">
+  		insert into board(writer, title, content, pwd, hit, b_groups, b_step, b_lev, regdate, f_name)
+  		values(#{writer}, #{title}, #{content}, #{pwd}, 0, #{b_groups}, #{b_step}, #{b_lev}, now(), #{f_name})
+  	</insert>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
