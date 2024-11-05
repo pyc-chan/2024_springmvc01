@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC 
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+	<insert id="insert" parameterType="lvo">
+		insert into u_db (u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_reg, u_out, a_idx, u_outr, u_kakao, u_naver)
+		value (#{u_id}, #{u_pw}, #{u_na}, #{u_phone}, #{u_gen}, #{u_bir}, #{u_em}, DATE(NOW()), #{u_out}, #{a_idx}, #{u_outr}, #{u_kakao}, #{u_naver}) 
+	</insert>
+	<select id="check" parameterType="String" resultType="String">
+		select u_id from u_db where u_id=#{u_id}
+	</select>
+	
+	<select id="loginok" parameterType="String" resultType="lvo">
+		select * from u_db where u_id=#{u_id}
+	</select>
+	
+	<select id="idfind" parameterType="String" resultType="String">
+		select u_id from u_db where u_em=#{u_em} 
+	</select>
+	
+	<select id="pwfind" parameterType="lvo" resultType="lvo">
+		select * from u_db where u_id=#{u_id} 
+	</select>
+	
+	<select id="kakaochk" parameterType="String" resultType="String">
+		select u_kakao from u_db where u_kakao=#{u_kakao}
+	</select>
+	
+</mapper>

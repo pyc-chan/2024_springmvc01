@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC 
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crud">
+	
+	<select id="crud_list" resultType="cvo">
+		select * from crud_db order by desc
+	</select>
+	
+	<select id="crud_detail" parameterType="String" resultType="cvo">
+		select * from crud_db where idx = #{idx}
+	</select>
+	
+	<insert id="crud_insert" parameterType="cvo">
+		insert into crud_db (idx, id, tle, con, dat, ans, acon)
+		values (#{idx}, #{id}, #{tle}, #{con}, #{dat}, #{ans}, #{acon})
+	</insert>
+	
+	<update id="crud_update" parameterType="cvo">
+		update into crud_db id = #{id}, tle = #{tle}, con = #{con}, dat = #{dat}, ans = #{ans}, acon = #{acon}
+		where idx = #{idx}
+	</update>
+	
+	<delete id="crud_delete" parameterType="Stirng">
+		delete from crud_db where idx = #{idx}
+	</delete>
+</mapper>
