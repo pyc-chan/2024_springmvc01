@@ -28,7 +28,7 @@
 			<div class="idfind_container">
 				<div id="box">
 					<h3 class="h3">아이디 찾기</h3>
-					<form id="input" action="/idFind" method="post">
+					<form id="input_form" action="/idFind" method="post">
 						<input type="text" placeholder="이메일을 입력하세요" name="u_em" id="idinput" class="width100"
 						pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*">
 						<input type="submit" value="입 력" id="user_id" class="width100">

@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<c:if test="${loginok} == 'fail'">
+	<c:if test="${loginok == 'fail'}">
 		alert("로그인에 실패했습니다.");
 	</c:if>
     <div id="login">
@@ -36,11 +36,11 @@
 					<h2 id="logintxt" data-aos="fade-up">로그인</h2>
 					<form action="loginok" method="post" style="margin-top: 29px">
 						<h3 class="h3">아이디</h3>
-						<input class="id" type="text"
+						<input class="id" type="text" name="u_id"
 							style="border-bottom: 1px solid #dddddd;"
 							placeholder="아이디를 입력해주세요.">
 						<h3 class="h3">비밀번호</h3>
-						<input class="pw" type="password"
+						<input class="pw" type="password" name="u_pw"
 							style="border-bottom: 1px solid #dddddd;"
 							placeholder="비밀번호를 입력해주세요.">
 						<button id="loginbtn" onclick="submit()">로그인</button>
@@ -61,7 +61,7 @@
 					<button class="sns naver" onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=bv_786diGR8Y0y00e9Bx&redirect_uri=http://localhost:8080/naverlogin&state=STATE_STRING'">네이버로 로그인</button>
 				</div>
 			</div>
-
+			<button></button>
 		</main>
         <footer>
             <h2>푸터입니다</h2>

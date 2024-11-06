@@ -87,25 +87,26 @@ public class KakaoUserInfoController {
 				lvo.setU_pic(kakaoUser.getProperties().getProfile_image()); 
 				lvo.setU_kakao(String.valueOf(kakaoUser.getId())); 
 				lvo.setU_em(kakaoUser.getKakao_account().getEmail());  // 이메일은 동의한 경우에만 제공
+				
 				System.out.println("u_em : "+lvo.getU_em());
 				System.out.println("u_na : "+lvo.getU_na());
 				System.out.println("u_pic : "+lvo.getU_pic());
 				System.out.println("u_kakao : "+lvo.getU_kakao());
 				// 카카오 아이디가 없을경우 회원가입
 				if(loginService.kakaoChk(lvo.getU_kakao())==null) {
-					System.out.println("무야호");
+					// System.out.println("회원가입 진행");
 					// 기존 아이디에 kakaoid가 존재하지 않으면 아이디를 kakaoid로 설정
 					if(loginService.idChk(String.valueOf(kakaoUser.getId()))== null) {
-						System.out.println("여긴가?");
+						// System.out.println("아이디가 카카오아이디");
 						lvo.setU_id(String.valueOf(kakaoUser.getId()));
 					}else {
 						// 만약 kakaoid가 기존 아이디에 있으면 
 						// uuid를 유저 아이디로 생성
-						System.out.println("여기니?");
+						// System.out.println("아이디가 uuid");
 						String uuid;
 						do {
 							uuid= UUID.randomUUID().toString();
-						} while(loginService.idChk(uuid).isEmpty());
+						} while(loginService.idChk(uuid)!=null);
 						
 						lvo.setU_id(uuid);
 					}
@@ -115,7 +116,9 @@ public class KakaoUserInfoController {
 						System.out.println("에러 발생");
 					}
 				}else {
-					System.out.println("여기니?"+loginService.kakaoChk(lvo.getU_kakao()).toString());
+					// 카카오 아이디로 아이디 가져오기
+					String id = loginService.idKakao(lvo.getU_kakao());
+					lvo.setU_id(id);
 				}
 					
 				// String fullName = kakaoUser.getProperties().getFullName();
@@ -124,15 +127,8 @@ public class KakaoUserInfoController {
 				// id 가지고 사용자 DB에 검색해서 id가 없으면 처음 kakao로 로그인 한 사람이므로 등록한다.
 				
 				System.out.println("id"+lvo.getU_id());
-				System.out.println("nickname"+lvo.getU_na());
-				System.out.println("profileImage"+lvo.getU_pic());
-				System.out.println("email: " + lvo.getU_em());
-				
-				request.getSession().setAttribute("u_id",lvo.getU_na());
-				request.getSession().setAttribute("u_na",lvo.getU_na());
-				request.getSession().setAttribute("u_pro",lvo.getU_pic());
-				request.getSession().setAttribute("u_em", lvo.getU_em());
-				
+
+				request.getSession().setAttribute("u_id",lvo.getU_id());
 				
 				return new ModelAndView("redirect:/mainGo");
 			}

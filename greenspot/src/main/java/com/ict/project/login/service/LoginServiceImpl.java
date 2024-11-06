@@ -15,11 +15,6 @@ public class LoginServiceImpl implements LoginService{
 	private LoginDAO loginDAO;
 	
 	@Override
-	public LoginVO loginOK(String u_id) {
-		return loginDAO.loginOK(u_id);
-	}
-	
-	@Override
 	public int joinOK(LoginVO lvo) {
 		return loginDAO.joinOK(lvo);
 	}
@@ -30,32 +25,44 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public int getList() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getDetail() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
 	public List<String> getId(String u_em) {
 		return loginDAO.getId(u_em);
-	}
-
-
-	@Override
-	public LoginVO pwFind(LoginVO lvo) {
-		return loginDAO.pwFind(lvo);
 	}
 
 	@Override
 	public String kakaoChk(String u_kakao) {
 		return loginDAO.kakaoChk(u_kakao);
 	}
+	
+	@Override
+	public String naverChk(String u_naver) {
+		return loginDAO.naverChk(u_naver);
+	}
+
+	@Override
+	public LoginVO getDetail(String u_id) {
+		return loginDAO.getDetail(u_id);
+	}
+
+	@Override
+	public String idKakao(String u_kakao) {
+		return loginDAO.idKakao(u_kakao);
+	}
+
+	@Override
+	public String idNaver(String u_naver) {
+		return loginDAO.idNaver(u_naver);
+	}
+
+	@Override
+	public int update(LoginVO lvo) {
+		return loginDAO.update(lvo);
+	}
+
+	@Override
+	public int updatePw(LoginVO lvo) {
+		return loginDAO.updatePw(lvo);
+	}
+
 
 }

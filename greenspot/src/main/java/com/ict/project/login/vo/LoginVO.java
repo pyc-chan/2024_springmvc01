@@ -2,7 +2,9 @@ package com.ict.project.login.vo;
 
 public class LoginVO {
 	private String u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_out, a_idx, u_outr, u_kakao, u_naver, u_pic;
-
+	
+	// u_pic은 사진 경로로 저장
+	
 	public String getU_pic() {
 		return u_pic;
 	}

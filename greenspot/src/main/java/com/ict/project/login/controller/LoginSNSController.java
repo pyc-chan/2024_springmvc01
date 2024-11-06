@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.ict.project.comm.AppKeyJava;
 import com.ict.project.login.vo.AddrVO;
-import com.ict.project.login.vo.AppKeyJava;
 import com.ict.project.login.vo.KakaoVO;
 import com.ict.project.login.vo.NaverVO;
+import com.mysql.cj.Session;
 
 @Controller
 public class LoginSNSController {
@@ -182,9 +183,13 @@ public class LoginSNSController {
 				System.out.println(navo.getRefresh_token());
 				System.out.println(navo.getToken_type());
 				
-				// 해당 정보를 ajax 컨트롤러에서 사용하기 위해서 세션에 저장
-				request.getSession().setAttribute("navo", navo);
-				return new ModelAndView("redirect:/mainGo");
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("loginok", "ok");
+				
+				// 해당 정보를 컨트롤러에서 사용하기 위해서 세션에 저장
+				session.setAttribute("navo", navo);
+				return new ModelAndView("redirect:/naverUserInfo");
 			} else {
 				// 오류 메시지 출력
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));

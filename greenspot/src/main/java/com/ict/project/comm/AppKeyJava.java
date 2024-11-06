@@ -1,4 +1,4 @@
-package com.ict.project.login.vo;
+package com.ict.project.comm;
 
 public class AppKeyJava {
 	private String kakaoJavaScript = "0e4ccdb548ca74e6213debb7aad29378";

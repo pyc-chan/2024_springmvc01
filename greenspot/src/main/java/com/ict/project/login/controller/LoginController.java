@@ -66,8 +66,8 @@ public class LoginController {
 	// 패스워드 찾기
 	@GetMapping("/pwFind")
 	public ModelAndView pwFind(HttpServletRequest request, LoginVO lvo) {
-		ModelAndView mv = new ModelAndView("");
-		loginService.pwFind(lvo);
+		ModelAndView mv = new ModelAndView("login/emailpw");
+		loginService.getDetail(lvo.getU_id());
 		return mv;
 	}
 	
@@ -158,7 +158,7 @@ public class LoginController {
 	public ModelAndView loginOK(LoginVO lvo ,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		// DB에서 로그인 정보 가져옴
-		LoginVO lvo2 = loginService.loginOK(lvo.getU_id());
+		LoginVO lvo2 = loginService.getDetail(lvo.getU_id());
 		// 아이디가 DB에 없을때
 		if(lvo2 == null) {
 			// loginok 값 fail
@@ -171,7 +171,7 @@ public class LoginController {
 				// loginok값 ok
 				session.setAttribute("loginok", "ok");
 				// 세션에 정보 담기
-				session.setAttribute("lvo", lvo2);
+				session.setAttribute("u_id", lvo.getU_id());
 				// 메인으로 이동
 				mv.setViewName("redirect:/mainGo");
 			}
@@ -183,6 +183,31 @@ public class LoginController {
 				mv.setViewName("redirect:/loginGo");
 			}
 		}
+		return mv;
+	}
+	
+	
+	
+	@PostMapping("/u_update")
+	public ModelAndView updateOK(LoginVO lvo) {
+		ModelAndView mv = new ModelAndView();
+		int result = loginService.update(lvo);
+		if(result ==0) {
+			mv.setViewName("login/tmp");
+			return mv;
+		}
+		mv.setViewName("login");
+		
+		return mv;
+	}
+	
+	@PostMapping("/pwupdate")
+	public ModelAndView pwUpdate(LoginVO lvo) {
+		ModelAndView mv = new ModelAndView();
+		lvo.setU_pw(passwordEncoder.encode(lvo.getU_pw()));
+		loginService.updatePw(lvo);
+		
+		
 		return mv;
 	}
 	

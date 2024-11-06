@@ -6,19 +6,23 @@ import com.ict.project.login.vo.LoginVO;
 
 public interface LoginService {
 	
-	public LoginVO loginOK(String u_id);
-	
 	public int joinOK(LoginVO lvo);
 	
-	public String idChk(String u_id);
-	
-	public int getList();
-	
-	public int getDetail();
+	public LoginVO getDetail(String u_id);
 	
 	public List<String> getId(String u_em);
 	
-	public LoginVO pwFind(LoginVO lvo);
-	
 	public String kakaoChk(String u_kakao);
+	
+	public String naverChk(String u_naver);
+	
+	public String idChk(String u_id);
+	
+	public String idKakao(String u_kakao);
+
+	public String idNaver(String u_naver);
+	
+	public int update(LoginVO lvo);
+	
+	public int updatePw(LoginVO lvo);
 }
