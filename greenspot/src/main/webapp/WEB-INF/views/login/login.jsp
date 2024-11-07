@@ -22,7 +22,9 @@
 
 <body>
 	<c:if test="${loginok == 'fail'}">
+		<script type="text/javascript">
 		alert("로그인에 실패했습니다.");
+		</script>
 	</c:if>
     <div id="login">
         <header>

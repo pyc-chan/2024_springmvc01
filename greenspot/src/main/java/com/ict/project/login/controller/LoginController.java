@@ -1,5 +1,8 @@
 package com.ict.project.login.controller;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.project.login.service.LoginService;
@@ -64,10 +68,45 @@ public class LoginController {
 	}
 	
 	// 패스워드 찾기
-	@GetMapping("/pwFind")
+	@PostMapping("/pwFind")
 	public ModelAndView pwFind(HttpServletRequest request, LoginVO lvo) {
-		ModelAndView mv = new ModelAndView("login/emailpw");
-		loginService.getDetail(lvo.getU_id());
+		System.out.println(lvo.getU_id());
+		System.out.println(lvo.getU_em());
+		ModelAndView mv = new ModelAndView();
+		LoginVO dblvo;
+		
+		dblvo = loginService.getDetail(lvo.getU_id());
+		if(dblvo != null) {
+		if(lvo.getU_em().equals(dblvo.getU_em())) {
+			mv.setViewName("redirect:/emailsend");
+			request.getSession().setAttribute("cmd", "emailpw");
+			request.getSession().setAttribute("u_em", lvo.getU_em());
+			request.getSession().setAttribute("u_id", lvo.getU_id());
+			
+		} else {
+			mv.setViewName("login/pwfind");
+			System.out.println("아이디 이메일 틀림");
+			mv.addObject("pwfind","fail");
+		}} else {
+			mv.setViewName("login/pwfind");
+			System.out.println("아이디 이메일 틀림22");
+			mv.addObject("pwfind","fail");
+		}
+		return mv;
+	}
+	
+	@PostMapping("/pwfindok")
+	public ModelAndView pwFindOK() {
+		ModelAndView mv = new ModelAndView("login/pwfindok");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping("/emailpw")
+	public ModelAndView emailPw(ModelAndView mv) {
+		mv.setViewName("login/emailpw");
+		
 		return mv;
 	}
 	
@@ -93,6 +132,9 @@ public class LoginController {
 			// 비밀번호 암호화
 			lvo.setU_pw(passwordEncoder.encode(lvo.getU_pw()));
 			System.out.println(lvo.getU_pw());
+			// 프로필사진 기본값
+			lvo.setU_pic("기본사진값");
+			
 			// DB에 회원정보 입력
 			int result = loginService.joinOK(lvo);
 			
@@ -144,11 +186,13 @@ public class LoginController {
 	
 	// 아이디찾기 확인 후
 	@PostMapping("/idfindok")
-	public ModelAndView idFindOK(String u_em) {
+	public ModelAndView idFindOK(HttpSession session, String u_em) {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("u_em : " +u_em);
 		List<String> ids = loginService.getId(u_em);
-		mv.addObject(ids);
+		mv.addObject("ids",ids);
 		mv.setViewName("login/idfindok");
+		session.removeAttribute("u_em");
 		return mv;
 	}
 	
@@ -189,28 +233,63 @@ public class LoginController {
 	
 	
 	@PostMapping("/u_update")
-	public ModelAndView updateOK(LoginVO lvo) {
+	public ModelAndView updateOK(LoginVO lvo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		int result = loginService.update(lvo);
-		if(result ==0) {
-			mv.setViewName("login/tmp");
+		try {
+			String path = request.getSession().getServletContext().getRealPath("/resources");
+			MultipartFile file = lvo.getU_file();
+			
+			if(file.isEmpty()) {
+				lvo.setU_pic("기본사진값");
+			} else {
+				 // 현재 날짜와 시간 가져오기
+		        LocalDateTime now = LocalDateTime.now();
+
+		        // 원하는 형식으로 포맷하기
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		        String nowstr = now.format(formatter);
+		        
+		        // pic 파일이름 file 실제 파일
+		        // 업로드시간_파일명 의 형태로 저장
+		        String fname = nowstr+"_"+file.getOriginalFilename();
+		        lvo.setU_pic(fname);
+		        
+		        // 실질적인 파일 업로드
+		        file.transferTo(new File(path, fname));
+				
+			}
+			
+			int result = loginService.update(lvo);
+			if(result ==0) {
+				mv.setViewName("login/tmp");
+				return mv;
+			}
+			mv.setViewName("login");
+			
 			return mv;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
 		}
-		mv.setViewName("login");
-		
-		return mv;
 	}
 	
 	@PostMapping("/pwupdate")
 	public ModelAndView pwUpdate(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView();
 		lvo.setU_pw(passwordEncoder.encode(lvo.getU_pw()));
-		loginService.updatePw(lvo);
-		
+		int result = loginService.updatePw(lvo);
+		if(result >0 ) {
+			mv.setViewName("login/pwsuccess");
+		} else {
+			mv.setViewName("login/tmp");
+		}
 		
 		return mv;
 	}
 	
-	
-
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return new ModelAndView("redirect:/mainGo");
+	}
 }

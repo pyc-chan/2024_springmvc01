@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-#idfind {
 	
     header {
         width: 100%;
@@ -51,7 +50,6 @@
     
     #box {
         width: 500px;
-        heigth: 380px;
         text-align: left;
         padding: 30px 0px;
         margin: 50px auto;
@@ -129,4 +127,3 @@
 		     
     }
 
-}

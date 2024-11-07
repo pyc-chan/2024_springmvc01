@@ -54,7 +54,6 @@ public class Common {
 				// cmd값 꺼내서 viewName에 저장
 				mv.setViewName("redirect:/"+session.getAttribute("cmd").toString());
 				session.removeAttribute("cmd");
-				session.removeAttribute("u_em");
 				
 				System.out.println(request.getSession().getAttribute("cmd"));
 				

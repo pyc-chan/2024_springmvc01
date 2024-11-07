@@ -7,7 +7,7 @@
 <mapper namespace="crud">
 	
 	<select id="crud_list" resultType="cvo">
-		select * from crud_db order by desc
+		select * from crud_db order by idx desc
 	</select>
 	
 	<select id="crud_detail" parameterType="String" resultType="cvo">
@@ -20,7 +20,7 @@
 	</insert>
 	
 	<update id="crud_update" parameterType="cvo">
-		update into crud_db id = #{id}, tle = #{tle}, con = #{con}, dat = #{dat}, ans = #{ans}, acon = #{acon}
+		update crud_db set id = #{id}, tle = #{tle}, con = #{con}, dat = #{dat}, ans = #{ans}, acon = #{acon}
 		where idx = #{idx}
 	</update>
 	

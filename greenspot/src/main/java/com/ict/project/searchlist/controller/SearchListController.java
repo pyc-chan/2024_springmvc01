@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ict.project.comm.SearchPaging;
+import com.ict.project.comm.TreeSearchPaging;
 import com.ict.project.searchlist.service.SearchListService;
 import com.ict.project.searchlist.vo.TreeVO;
 
@@ -21,7 +21,7 @@ public class SearchListController {
 	private SearchListService searchListService;
 	
 	@Autowired
-	private SearchPaging paging;
+	private TreeSearchPaging paging;
 	
 	// 리스트 불러오기(페이징)
 	@RequestMapping("/treelist")
@@ -55,16 +55,19 @@ public class SearchListController {
 			paging.setNowPage(Integer.parseInt(cPage));
 		}
 		
+		// 현재 블럭을 구한다
+		paging.setNowBlock((paging.getNowPage()-1)/paging.getPagePerBlock()+1);
+		
 		// offset(DB에서 값을 가져올때 지나간 데이터(현재 2페이지일때 1페이지데이터)를 넘기는 갯수
 		// 페이지당 데이터 수와 현재 페이지 -1 만큼 offset을 설정 
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage()-1));
 		
 		// 시작 블럭 세팅
 		paging.setBeginBlock(
-				// 현재페이지 -1 한 값을 블럭당 페이지값으로 나누고 블럭당 페이지값을 곱해주고 그다음에 1을 더한다.
-				(int)(((paging.getNowPage()-1) / paging.getPagePerBlock()) * paging.getPagePerBlock()+1));
+				// 현재 블럭의 index값에 블럭당 페이지값을 곱해주고 그다음에 1을 더한다.
+				(int)((paging.getNowBlock()-1) * paging.getPagePerBlock()+1));
 		// 마지막 블럭은 시작블럭에 블럭당 페이지수를 더하고 1을 빼준다.
-		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() -1);
+		paging.setEndBlock(paging.getNowBlock()*paging.getPagePerBlock());
 		
 		// 만약 마지막 블럭이 총 페이지보다 크면
 		if(paging.getEndBlock() >  paging.getTotalPage()) {

@@ -28,7 +28,7 @@
             <h3 class="h3">받은 이메일의 인증번호를 넣어주세요</h3>
             <form id="authform" method="post">
                 <input type="number" id="authNumber" name="authNumber" placeholder="인증번호" maxlength="6" required> 
-                <input type="hidden" name="u_em" value="${u_em}">
+                
                 <!-- input을 button으로 변경 -->
                 <button type="button" id="send_btn">전송</button>
             </form>

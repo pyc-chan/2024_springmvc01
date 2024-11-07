@@ -3,7 +3,7 @@ package com.ict.project.comm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SearchPaging {
+public class TreeSearchPaging {
 	
 	// 현재 페이지
 	private int nowPage = 1 ;

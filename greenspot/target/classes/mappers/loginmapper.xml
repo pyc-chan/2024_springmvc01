@@ -6,8 +6,8 @@
 
 <mapper namespace="login">
 	<insert id="insert" parameterType="lvo">
-		insert into u_db (u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_reg, u_out, a_idx, u_outr, u_kakao, u_naver)
-		value (#{u_id}, #{u_pw}, #{u_na}, #{u_phone}, #{u_gen}, #{u_bir}, #{u_em}, DATE(NOW()), #{u_out}, #{a_idx}, #{u_outr}, #{u_kakao}, #{u_naver}) 
+		insert into u_db (u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_reg, u_out, a_idx, u_outr, u_kakao, u_naver, u_pic)
+		value (#{u_id}, #{u_pw}, #{u_na}, #{u_phone}, #{u_gen}, #{u_bir}, #{u_em}, DATE(NOW()), #{u_out}, #{a_idx}, #{u_outr}, #{u_kakao}, #{u_naver}, #{u_pic}) 
 	</insert>
 	
 	<select id="idchk" parameterType="String" resultType="String">

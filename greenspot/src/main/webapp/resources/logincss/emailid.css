@@ -23,7 +23,12 @@
     input {
         border: none;
     }
-
+	
+	#emid_form{
+		width: 500px;
+		margin: 0 auto;
+	}
+	
     /* send_btn에 대한 스타일 */
     #send_btn {
         width: 500px;
@@ -69,7 +74,7 @@
             width: 89.2%;
         }
 
-        #send_btn, #authNumber {
+        #send_btn, #authNumber {	
             width: 100%;
         }
     }

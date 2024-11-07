@@ -31,7 +31,7 @@
 					<form id="input_form" action="/pwupdate" method="post">
 						<input type="password" placeholder="비밀번호를 입력하세요" name="u_pw" id="pwinput" class="width100"
 						pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])[A-Za-z\d!@#$%^&*]{8,15}$">
-						<input type="hidden" value="${u_id }">
+						<input type="hidden" name="u_id" value="${u_id }">
 						<span id="pwtest"></span>
 						<input type="submit" value="입 력" id="user_id" class="width100">
 					</form>
@@ -64,6 +64,10 @@
 			}
 		}
 	});	
+	
+	$("#input_form").submit(function(){
+		alert("");
+	});
 	</script>
 </body>
 </html>

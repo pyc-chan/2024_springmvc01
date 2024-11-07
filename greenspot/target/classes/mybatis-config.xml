@@ -17,11 +17,16 @@
 		<typeAlias type="com.ict.project.login.vo.LoginVO" alias="lvo" />
 		<typeAlias type="com.ict.project.crud.vo.CrudVO" alias="cvo" />
 		<typeAlias type="com.ict.project.event.vo.EventVO" alias="evvo" />
+		<typeAlias type="com.ict.project.popup.vo.PopupVO" alias="popvo" />
 		<!--  <typeAlias type="" alias="" /> -->
 	</typeAliases>
 	
 	<mappers>
 		<!-- <mapper resource="매퍼 위치" /> -->
 		<mapper resource="mappers/loginmapper.xml" />
+		<mapper resource="mappers/eventmapper.xml" />
+		<mapper resource="mappers/treemapper.xml" />
+		<mapper resource="mappers/crudmapper.xml" />
+		<mapper resource="mappers/popupmapper.xml" />
 	</mappers>
 </configuration>

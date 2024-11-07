@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ict.project.comm.SearchPaging;
+import com.ict.project.comm.TreeSearchPaging;
 import com.ict.project.event.service.EventService;
 import com.ict.project.event.vo.EventVO;
 
@@ -17,7 +17,7 @@ import com.ict.project.event.vo.EventVO;
 public class EventController {
 	
 	@Autowired
-	private SearchPaging paging;
+	private TreeSearchPaging paging;
 	
 	@Autowired
 	private EventService eventService;

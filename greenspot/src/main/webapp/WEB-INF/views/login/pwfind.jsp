@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,17 +20,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:if test="${pwfind == 'fail'}">
+    <script type="text/javascript">
+        alert("입력을 다시 확인해주세요");
+    </script>
+</c:if>
 	<div id="idfind">
 		<header> </header>
-
-
+		
+		
 		<main>
 			<section class="pwfind_container">
 				<div id="box">
 					<h3 class="h3">비밀번호 찾기</h3>
-					<form id="input" action="/pwFind">
+					<form id="input" method="post" action="/pwFind">
 						<input type="text" placeholder="아이디를 입력하세요" name="u_id" class="idinput">
-						<input type="text" placeholder="이메일을 입력하세요" name="u_email" class="idinput">
+						<input type="text" placeholder="이메일을 입력하세요" name="u_em" class="idinput">
 						<input type="submit" value="입 력" id="input_id">
 					</form>
 					<div id="gobutton">
@@ -45,8 +51,6 @@
 	</div>
 	
 	<script type="text/javascript">
-	
-	
 	
 	
 	
