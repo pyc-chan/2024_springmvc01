@@ -6,7 +6,7 @@ import com.ict.project.login.vo.LoginVO;
 
 public interface LoginService {
 	
-	public int joinOK(LoginVO lvo);
+	public int loginInsert(LoginVO lvo);
 	
 	public LoginVO getDetail(String u_id);
 	
@@ -25,4 +25,8 @@ public interface LoginService {
 	public int update(LoginVO lvo);
 	
 	public int updatePw(LoginVO lvo);
+	
+	public List<LoginVO> getList();
+	
+	public int logindelete(LoginVO lvo);
 }

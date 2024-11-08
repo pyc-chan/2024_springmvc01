@@ -25,18 +25,18 @@ public class PopupDAOImpl implements PopupDAO{
 	}
 
 	@Override
-	public int getPopInsert(PopupVO cvo) {
-		return sqlSessionTemplate.insert("popup.popinsert",cvo);
+	public int getPopInsert(PopupVO pvo) {
+		return sqlSessionTemplate.insert("popup.popinsert",pvo);
 	}
 
 	@Override
-	public int getPopUpdate(PopupVO cvo) {
-		return sqlSessionTemplate.update("popup.popupdate",cvo);
+	public int getPopUpdate(PopupVO pvo) {
+		return sqlSessionTemplate.update("popup.popupdate",pvo);
 	}
 
 	@Override
-	public int getPopDelete(String pop_idx) {
-		return sqlSessionTemplate.update("popup.poplist",);
+	public int getPopDelete(PopupVO pvo) {
+		return sqlSessionTemplate.update("popup.popdelete",pvo);
 	}
 
 }

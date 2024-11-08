@@ -3,7 +3,15 @@ package com.ict.project.popup.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PopupVO {
-	private String pop_idx, a_idx, pop_tle, pop_con, pop_pic, pop_rdat, pop_odat, pop_link, pop_act, pop_etc;
+	private String pop_idx, a_idx, pop_tle, pop_con, pop_pic, pop_rdat, pop_odat, pop_link, pop_act, pop_etc, old_pic;
+	public String getOld_pic() {
+		return old_pic;
+	}
+
+	public void setOld_pic(String old_pic) {
+		this.old_pic = old_pic;
+	}
+
 	private MultipartFile pop_file;
 	
 	public MultipartFile getPop_file() {

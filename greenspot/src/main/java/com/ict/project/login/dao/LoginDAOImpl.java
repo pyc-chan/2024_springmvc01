@@ -17,54 +17,64 @@ public class LoginDAOImpl implements LoginDAO{
 	
 	@Override
 	// 회원가입
-	public int joinOK(LoginVO lvo) {
-		return sqlSessionTemplate.insert("login.insert",lvo);
+	public int loginInsert(LoginVO lvo) {
+		return sqlSessionTemplate.insert("login.login_insert",lvo);
 	}
 	
 	@Override
 	// id 중복체크
 	public String idChk(String u_id) {
-		return sqlSessionTemplate.selectOne("login.idchk",u_id);
+		return sqlSessionTemplate.selectOne("login.id_chk",u_id);
 	}
 
 	@Override
-	public List<String> getId(String u_em) {
-		return sqlSessionTemplate.selectList("login.idemail", u_em);
+	public List<String> getLoginId(String u_em) {
+		return sqlSessionTemplate.selectList("login.id_email", u_em);
 	}
 
 	@Override
 	public String kakaoChk(String u_kakao) {
-		return sqlSessionTemplate.selectOne("login.kakaochk",u_kakao);
+		return sqlSessionTemplate.selectOne("login.kakao_chk",u_kakao);
 	}
 	
 	@Override
 	public String naverChk(String u_naver) {
-		return sqlSessionTemplate.selectOne("login.naverchk",u_naver);
+		return sqlSessionTemplate.selectOne("login.naver_chk",u_naver);
 	}
 
 	@Override
-	public LoginVO getDetail(String u_id) {
-		return sqlSessionTemplate.selectOne("login.detail",u_id);
+	public LoginVO loginDetail(String u_id) {
+		return sqlSessionTemplate.selectOne("login.login_detail",u_id);
 	}
 
 	@Override
 	public String idKakao(String u_kakao) {
-		return sqlSessionTemplate.selectOne("login.idkakao",u_kakao);
+		return sqlSessionTemplate.selectOne("login.id_kakao",u_kakao);
 	}
 
 	@Override
 	public String idNaver(String u_naver) {
-		return sqlSessionTemplate.selectOne("login.idnaver", u_naver);
+		return sqlSessionTemplate.selectOne("login.id_naver", u_naver);
 	}
 
 	@Override
-	public int update(LoginVO lvo) {
-		return sqlSessionTemplate.update("login.update", lvo);
+	public int loginUpdate(LoginVO lvo) {
+		return sqlSessionTemplate.update("login.login_update", lvo);
 	}
 
 	@Override
-	public int updatePw(LoginVO lvo) {
-		return sqlSessionTemplate.update("login.pwupdate", lvo);
+	public int loginUpdatePw(LoginVO lvo) {
+		return sqlSessionTemplate.update("login.pw_update", lvo);
+	}
+
+	@Override
+	public List<LoginVO> loginList() {
+		return sqlSessionTemplate.selectList("login.login_list");
+	}
+
+	@Override
+	public int loginDelete(LoginVO lvo) {
+		return sqlSessionTemplate.update("login.login_delete", lvo);
 	}
 
 	

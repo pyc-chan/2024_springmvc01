@@ -17,27 +17,27 @@ public class PopupServiceImpl implements PopupService{
 	
 	@Override
 	public List<PopupVO> getPopList() {
-		return null;
+		return popupDAO.getPopList();
 	}
 
 	@Override
 	public PopupVO getPopDetail(String pop_idx) {
-		return null;
+		return popupDAO.getPopDetail(pop_idx);
 	}
 
 	@Override
-	public int getPopInsert(PopupVO cvo) {
-		return 0;
+	public int getPopInsert(PopupVO pvo) {
+		return popupDAO.getPopInsert(pvo);
 	}
 
 	@Override
-	public int getPopUpdate(PopupVO cvo) {
-		return 0;
+	public int getPopUpdate(PopupVO pvo) {
+		return popupDAO.getPopUpdate(pvo);
 	}
 
 	@Override
-	public int getPopDelete(String pop_idx) {
-		return 0;
+	public int getPopDelete(PopupVO pvo) {
+		return popupDAO.getPopDelete(pvo);
 	}
 
 }

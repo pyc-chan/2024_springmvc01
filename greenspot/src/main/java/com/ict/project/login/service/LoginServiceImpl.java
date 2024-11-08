@@ -15,8 +15,8 @@ public class LoginServiceImpl implements LoginService{
 	private LoginDAO loginDAO;
 	
 	@Override
-	public int joinOK(LoginVO lvo) {
-		return loginDAO.joinOK(lvo);
+	public int loginInsert(LoginVO lvo) {
+		return loginDAO.loginInsert(lvo);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public List<String> getId(String u_em) {
-		return loginDAO.getId(u_em);
+		return loginDAO.getLoginId(u_em);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public LoginVO getDetail(String u_id) {
-		return loginDAO.getDetail(u_id);
+		return loginDAO.loginDetail(u_id);
 	}
 
 	@Override
@@ -56,12 +56,22 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public int update(LoginVO lvo) {
-		return loginDAO.update(lvo);
+		return loginDAO.loginUpdate(lvo);
 	}
 
 	@Override
 	public int updatePw(LoginVO lvo) {
-		return loginDAO.updatePw(lvo);
+		return loginDAO.loginUpdatePw(lvo);
+	}
+
+	@Override
+	public List<LoginVO> getList() {
+		return null;
+	}
+
+	@Override
+	public int logindelete(LoginVO lvo) {
+		return loginDAO.loginDelete(lvo);
 	}
 
 

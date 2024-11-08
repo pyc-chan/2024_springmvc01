@@ -136,7 +136,7 @@ public class LoginController {
 			lvo.setU_pic("기본사진값");
 			
 			// DB에 회원정보 입력
-			int result = loginService.joinOK(lvo);
+			int result = loginService.loginInsert(lvo);
 			
 			System.out.println(result);
 			// 정보 삽입 성공시
@@ -236,7 +236,7 @@ public class LoginController {
 	public ModelAndView updateOK(LoginVO lvo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		try {
-			String path = request.getSession().getServletContext().getRealPath("/resources");
+			String path = request.getSession().getServletContext().getRealPath("/resources/images");
 			MultipartFile file = lvo.getU_file();
 			
 			if(file.isEmpty()) {

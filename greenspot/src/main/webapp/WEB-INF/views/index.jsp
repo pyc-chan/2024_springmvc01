@@ -28,6 +28,7 @@
            <img src="resources/images/logo.png" alt="logo">
        </h1>
    </div>
+   
    <div class="nav-left visible-xs">
        <div class="button" id="btn">
            <div class="bar top"></div>
@@ -127,6 +128,9 @@
            </section>
 
            <section class="event_find_contents">
+           		 <a href="/admin1">관리자1-1</a>
+    <a href="/admin2">관리자1-2</a>
+    <a href="/admin3">관리자1-3</a>
                <p class="title">녹지행사찾기</p>
                <ul>
                    <li>

@@ -7,13 +7,13 @@ import com.ict.project.login.vo.LoginVO;
 
 public interface LoginDAO {
 	
-	public int joinOK(LoginVO lvo);
+	public int loginInsert(LoginVO lvo);
 	
 	public String idChk(String u_id);
 	
-	public LoginVO getDetail(String u_id);
+	public LoginVO loginDetail(String u_id);
 	
-	public List<String> getId(String u_em);
+	public List<String> getLoginId(String u_em);
 	
 	public String kakaoChk(String u_kakao);
 
@@ -23,7 +23,11 @@ public interface LoginDAO {
 	
 	public String idNaver(String u_naver);
 	
-	public int update(LoginVO lvo);
+	public int loginUpdate(LoginVO lvo);
 	
-	public int updatePw(LoginVO lvo);
+	public int loginUpdatePw(LoginVO lvo);
+	
+	public List<LoginVO> loginList();
+	
+	public int loginDelete(LoginVO lvo);	
 }

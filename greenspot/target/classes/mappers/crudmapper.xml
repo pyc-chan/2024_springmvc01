@@ -24,7 +24,7 @@
 		where idx = #{idx}
 	</update>
 	
-	<delete id="crud_delete" parameterType="Stirng">
+	<delete id="crud_delete" parameterType="String">
 		delete from crud_db where idx = #{idx}
 	</delete>
 </mapper>

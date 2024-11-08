@@ -10,9 +10,9 @@ public interface PopupService {
 	
 	public PopupVO getPopDetail(String pop_idx);
 	
-	public int getPopInsert(PopupVO cvo);
+	public int getPopInsert(PopupVO pvo);
 	
-	public int getPopUpdate(PopupVO cvo);
+	public int getPopUpdate(PopupVO pvo);
 	
-	public int getPopDelete(String pop_idx);
+	public int getPopDelete(PopupVO pvo);
 }

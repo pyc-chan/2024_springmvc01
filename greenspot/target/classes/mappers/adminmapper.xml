@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC 
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	
+	<select id="admin_list" resultType="cvo">
+		select * from admin_db order by a_idx asc
+	</select>
+	
+	<select id="admin_detail" parameterType="String" resultType="cvo">
+		select * from admin_db where idx = #{idx}
+	</select>
+	
+	<insert id="admin_insert" parameterType="cvo">
+		insert into admin_db (idx, id, tle, con, dat, ans, acon)
+		values (#{idx}, #{id}, #{tle}, #{con}, #{dat}, #{ans}, #{acon})
+	</insert>
+	
+	<update id="admin_update" parameterType="cvo">
+		update admin_db set id = #{id}, tle = #{tle}, con = #{con}, dat = #{dat}, ans = #{ans}, acon = #{acon}
+		where idx = #{idx}
+	</update>
+	
+	<delete id="admin_delete" parameterType="String">
+		delete from admin_db where idx = #{idx}
+	</delete>
+</mapper>

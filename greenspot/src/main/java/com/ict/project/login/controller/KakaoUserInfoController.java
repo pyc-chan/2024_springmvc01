@@ -110,7 +110,7 @@ public class KakaoUserInfoController {
 						
 						lvo.setU_id(uuid);
 					}
-					int result = loginService.joinOK(lvo);
+					int result = loginService.loginInsert(lvo);
 					// 값을 못넣었을때
 					if(result == 0) {
 						System.out.println("에러 발생");
