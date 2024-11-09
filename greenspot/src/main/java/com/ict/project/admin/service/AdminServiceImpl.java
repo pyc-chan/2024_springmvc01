@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.ict.project.admin.dao.AdminDAO;
 import com.ict.project.admin.vo.AdminVO;
+import com.ict.project.comment.service.CommentService;
 import com.ict.project.fna.service.FnaService;
+import com.ict.project.inquery.service.InqueryService;
 import com.ict.project.login.service.LoginService;
+import com.ict.project.qna.service.QnaService;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -28,8 +31,6 @@ public class AdminServiceImpl implements AdminService{
 	private InqueryService inqueryService;
 	@Autowired
 	private CommentService commentService;
-	@Autowired
-	private FreeBoardService freeBoardService;
 	
 	@Override
 	public List<AdminVO> adminList() {
@@ -86,12 +87,5 @@ public class AdminServiceImpl implements AdminService{
 		return null;
 	}
 
-	@Override
-	public FreeBoardService freeBoardService() {
-		return null;
-	}
-	
-	
-	
 	
 }

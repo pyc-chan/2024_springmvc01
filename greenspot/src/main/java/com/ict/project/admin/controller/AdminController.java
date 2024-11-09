@@ -2,6 +2,8 @@ package com.ict.project.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.project.admin.service.AdminService;
+import com.ict.project.comm.Paging;
+import com.ict.project.comm.PagingService;
+import com.ict.project.comm.PerPageConstant;
+import com.ict.project.comment.service.CommentService;
+import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.fna.service.FnaService;
 import com.ict.project.fna.vo.FnaVO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
+import com.ict.project.qna.service.QnaService;
+import com.ict.project.qna.vo.QnaVO;
 
 @Controller
 public class AdminController {
@@ -20,6 +29,8 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private PagingService pagingService;
 	
 	@GetMapping("/admin1")
 	public ModelAndView adminGo1(){
@@ -54,6 +65,8 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	// 유저 탈퇴
 	@PostMapping("/admin/userdelete")
 	public ModelAndView userDelete(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView("");
@@ -62,6 +75,8 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	// 유저
 	@PostMapping("/admin/userupdate")
 	public ModelAndView userUpdate(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView("");
@@ -70,6 +85,8 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	// 
 	@PostMapping("/admin/userinsert")
 	public ModelAndView userInsert(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView("");
@@ -78,30 +95,53 @@ public class AdminController {
 		return mv;
 	}
 	
+	// qna 목록
 	@GetMapping("/admin/qnalist")
-	public ModelAndView qnaList() {
+	public ModelAndView qnaList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("");
 		QnaService qnaad = adminService.qnaService();
-		List<QnaVO> list = qnaad.getList();
+		
+		int count = qnaad.getQnaCount();
+		String cPage = request.getParameter("cPage");
+		PerPageConstant constant = new PerPageConstant();
+		int perpage = constant.getAdminqnaspage();
+		
+		Paging paging = pagingService.pagingservice(count , cPage, perpage);
+		int offset = paging.getOffset();
+		int limit = paging.getNumPerPage();
+		
+		List<QnaVO> list = qnaad.getQnaList(offset, limit);
 		mv.addObject("list", list);
 		
 		return mv;
 	}
+	
+	// qna 상세페이지
 	@PostMapping("/admin/qnadetail")
 	public ModelAndView qnaDetail(String q_idx) {
 		ModelAndView mv = new ModelAndView("");
 		QnaService qnaad = adminService.qnaService();
-		QnaVO qvo = qnaad.getDetail(q_idx);
+		QnaVO qvo = qnaad.getQnaDetail(q_idx);
 		mv.addObject("qvo",qvo);
 		
 		return mv;
 	}
 	
 	@GetMapping("/admin/fnalist")
-	public ModelAndView fnaList() {
+	public ModelAndView fnaList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("");
 		FnaService fnaad = adminService.fnaService();
-		List<FnaVO> list = fnaad.getFnaList();
+		
+		int count = fnaad.getFnaCount();
+		String cPage = request.getParameter("cPage");
+		PerPageConstant constant = new PerPageConstant();
+		int perpage = constant.getFnapage();
+		
+		Paging paging = pagingService.pagingservice(count , cPage, perpage);
+		int offset = paging.getOffset();
+		int limit = paging.getNumPerPage();
+		
+		List<FnaVO> list = fnaad.getFnaList(offset, limit);
 		mv.addObject("list", list);
 		
 		return mv;
@@ -109,8 +149,8 @@ public class AdminController {
 	@PostMapping("/admin/fnadetail")
 	public ModelAndView fnaDetail(String f_idx) {
 		ModelAndView mv = new ModelAndView("");
-		FnaService fnaad = adminService.FnaService();
-		FnaVO fvo = fnaad.getDetail(f_idx);
+		FnaService fnaad = adminService.fnaService();
+		FnaVO fvo = fnaad.getFnaDetail(f_idx);
 		mv.addObject("fvo",fvo);
 		
 		return mv;
@@ -136,10 +176,20 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/commentlist")
-	public ModelAndView commentList() {
+	public ModelAndView commentList(HttpServletRequest request, CommentVO cvo) {
 		ModelAndView mv = new ModelAndView("");
-		CommentService commentad = adminService.CommentService();
-		List<CommentVO> list = commentad.getList();
+		CommentService commentad = adminService.commentService();
+		
+		int count = commentad.getCommentCount();
+		String cPage = request.getParameter("cPage");
+		PerPageConstant constant = new PerPageConstant();
+		int perpage = constant.getFnapage();
+		
+		Paging paging = pagingService.pagingservice(count , cPage, perpage);
+		int offset = paging.getOffset();
+		int limit = paging.getNumPerPage();
+		
+		List<CommentVO> list = commentad.getCommentList(offset, limit, cvo);
 		mv.addObject("list", list);
 		
 		return mv;
@@ -147,28 +197,9 @@ public class AdminController {
 	@PostMapping("/admin/commentdetail")
 	public ModelAndView commentDetail(String c_idx) {
 		ModelAndView mv = new ModelAndView("");
-		CommentService commentad = adminService.CommentService();
-		CommentVO cvo = commentad.getDetail(c_idx);
+		CommentService commentad = adminService.commentService();
+		CommentVO cvo = commentad.getCommentDetail(c_idx);
 		mv.addObject("cvo",cvo);
-		
-		return mv;
-	}
-	
-	@GetMapping("/admin/freeboardlist")
-	public ModelAndView freeboardList() {
-		ModelAndView mv = new ModelAndView("");
-		FreeboardService freeboardad = adminService.FreeboardService();
-		List<FreeboardVO> list = freeboardad.getList();
-		mv.addObject("list", list);
-		
-		return mv;
-	}
-	@PostMapping("/admin/freeboarddetail")
-	public ModelAndView freeboardDetail(String f_idx) {
-		ModelAndView mv = new ModelAndView("");
-		FreeboardService freeboardad = adminService.FreeboardService();
-		FreeboardVO fvo = freeboardad.getDetail(f_idx);
-		mv.addObject("fvo",fvo);
 		
 		return mv;
 	}

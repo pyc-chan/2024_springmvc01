@@ -7,7 +7,8 @@
 <mapper namespace="Comment">
 	
 	<select id="Comment_list" resultType="cvo" parameterType="Map">
-		select * from comment_db order by c_idx desc limit = #{limit} offset = #{offset}
+		select * from comment_db order by c_idx desc limit #{offset}, #{limit} 
+		where c_ref = #{ref} and c_bor = #{bor}
 	</select>
 	
 	<select id="Comment_count" resultType="int">
@@ -15,7 +16,7 @@
 	</select>
 	
 	<select id="Comment_detail" parameterType="String" resultType="cvo">
-		select * from comment_db where f_idx = #{f_idx}
+		select * from comment_db where c_idx = #{c_idx}
 	</select>
 	
 	<insert id="Comment_insert" parameterType="cvo">	
@@ -25,10 +26,11 @@
 	
 	<update id="Comment_update" parameterType="cvo">
 		update comment_db set c_con = #{c_con}, c_up = '1'
-		where c_idx = #{c_idx}, c_bor = #{c_bor}, c_ref = #{c_ref}
+		where c_idx = #{c_idx} and c_bor = #{c_bor} and c_ref = #{c_ref}
 	</update>
 	
-	<delete id="Comment_delete" parameterType="String">
-		delete from comment_db where f_idx=#{f_idx}
-	</delete>
+	<update id="Comment_delete" parameterType="String">
+		update comment_db set c_out = '1'
+		where c_idx = #{c_idx}
+	</update>
 </mapper>

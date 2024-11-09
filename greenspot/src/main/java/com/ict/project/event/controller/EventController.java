@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.project.comm.Paging;
+import com.ict.project.comm.PagingService;
+import com.ict.project.comm.PerPageConstant;
 import com.ict.project.event.service.EventService;
 import com.ict.project.event.vo.EventVO;
 
@@ -17,47 +19,23 @@ import com.ict.project.event.vo.EventVO;
 public class EventController {
 	
 	@Autowired
-	private Paging paging;
+	private EventService eventService;
 	
 	@Autowired
-	private EventService eventService;
+	private PagingService pagingService;
 	
 	@RequestMapping("ev_list")
 	public ModelAndView getEventList(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("search/sub4-2");
+		
+		// pagingservice 메서드에 넣을 값
 		int count = eventService.getTotalCount();
-		paging.setTotalRecord(count);
-		
-		
-		if(paging.getTotalRecord() <= paging.getNumPerPage()) {
-			paging.setTotalPage(1);
-		}else {
-			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
-			if(paging.getTotalRecord() % paging.getNumPerPage() != 0) {
-				paging.setTotalPage(paging.getTotalPage() + 1 );
-			}
-		}
-			
 		String cPage = request.getParameter("cPage");
-		
-		if(cPage == null) {
-			paging.setNowPage(1);
-		}else {
-			paging.setNowPage(Integer.parseInt(cPage));
-		}
-		
-		
-		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage()-1));
-		
-		
-		paging.setBeginBlock(
-				(int)(((paging.getNowPage()-1) / paging.getPagePerBlock()) * paging.getPagePerBlock()+1));
-		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() -1);
-		
-		if(paging.getEndBlock() >  paging.getTotalPage()) {
-			paging.setEndBlock(paging.getTotalPage());
-		}
-		
+		PerPageConstant pageConstant = new PerPageConstant();
+		int perpage = pageConstant.getEventpage();
+				
+		// 페이징 기법
+		Paging paging = pagingService.pagingservice(count, cPage, perpage);
 		
 		// DB 갔다가 오기 
 		List<EventVO> list = eventService.getEventList(paging.getOffset(), paging.getNumPerPage());
@@ -71,6 +49,7 @@ public class EventController {
 	@RequestMapping("ev_search")
 	public ModelAndView getEventSearch(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		
 		return mv;

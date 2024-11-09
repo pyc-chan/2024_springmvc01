@@ -7,7 +7,6 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.project.fna.vo.FnaVO;
 
@@ -25,32 +24,32 @@ public class FnaDAOImpl implements FnaDAO{
 		map.put("offset", offset);
 		map.put("limit", limit);
 		
-		return sqlSessionTemplate.selectList("Fna.Fna_list",map);
+		return sqlSessionTemplate.selectList("fna.fna_list",map);
 	}
 
 	@Override
 	public FnaVO getFnaDetail(String idx) {
-		return sqlSessionTemplate.selectOne("Fna.Fna_detail",idx);
+		return sqlSessionTemplate.selectOne("fna.fna_detail",idx);
 	}
 
 	@Override
 	public int getFnaInsert(FnaVO fvo) {
-		return sqlSessionTemplate.insert("Fna.Fna_insert",fvo);
+		return sqlSessionTemplate.insert("fna.fna_insert",fvo);
 	}
 
 	@Override
 	public int getFnaUpdate(FnaVO fvo) {
-		return sqlSessionTemplate.update("Fna.Fna_update",fvo);
+		return sqlSessionTemplate.update("fna.fna_update",fvo);
 	}
 
 	@Override
 	public int getFnaDelete(String idx) {
-		return sqlSessionTemplate.delete("Fna.Fna_delete",idx);
+		return sqlSessionTemplate.delete("fna.fna_delete",idx);
 	}
 
 	@Override
 	public int getFnaCount() {
-		return sqlSessionTemplate.selectOne("Fna.Fna_count");
+		return sqlSessionTemplate.selectOne("fna.fna_count");
 	}
 	
 	

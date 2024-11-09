@@ -16,8 +16,8 @@ public class CommentServiceImpl implements CommentService{
 	private CommentDAO CommentDAO;
 
 	@Override
-	public List<CommentVO> getCommentList(int offset, int limit) {
-		return CommentDAO.getCommentList(offset, limit);
+	public List<CommentVO> getCommentList(int offset, int limit, CommentVO cvo) {
+		return CommentDAO.getCommentList(offset, limit, cvo);
 	}
 
 	@Override

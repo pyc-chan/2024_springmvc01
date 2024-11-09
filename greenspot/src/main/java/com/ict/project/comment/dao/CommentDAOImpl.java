@@ -19,10 +19,12 @@ public class CommentDAOImpl implements CommentDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<CommentVO> getCommentList(int offset, int limit) {
-		Map<String , Integer> map = new HashMap<String, Integer>();
-		map.put("offset", offset);
-		map.put("limit", limit);
+	public List<CommentVO> getCommentList(int offset, int limit,  CommentVO cvo) {
+		Map<String , String> map = new HashMap<String, String>();
+		map.put("offset",String.valueOf(offset));
+		map.put("limit", String.valueOf(limit));
+		map.put("ref", cvo.getC_ref());
+		map.put("bor", cvo.getC_bor());
 		
 		return sqlSessionTemplate.selectList("Comment.Comment_list",map);
 	}
