@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ict.project.comm.TreeSearchPaging;
+import com.ict.project.comm.Paging;
 import com.ict.project.searchlist.service.SearchListService;
 import com.ict.project.searchlist.vo.TreeVO;
 
@@ -21,7 +21,9 @@ public class SearchListController {
 	private SearchListService searchListService;
 	
 	@Autowired
-	private TreeSearchPaging paging;
+	private Paging paging;
+	
+	
 	
 	// 리스트 불러오기(페이징)
 	@RequestMapping("/treelist")
@@ -36,9 +38,9 @@ public class SearchListController {
 			// 최대 페이지를 1로 만듬
 			paging.setTotalPage(1);
 		}else {
-			// 총 데이터 수를 페이지당 데이터 수로 나눠서 총합 페이지수를 구하고
+			// 총합 페이지 구하기
 			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
-			// 페이지당 데이터 수로 나눴을때 나머지가 발생하면
+			// 마지막 페이지에 페이지당 게시물보다 적은 게시물이 있으면
 			if(paging.getTotalRecord() % paging.getNumPerPage() != 0) {
 				// 총합 페이지수를 하나 더 늘린다.
 				paging.setTotalPage(paging.getTotalPage() + 1 );
@@ -83,58 +85,6 @@ public class SearchListController {
 		mv.addObject("paging", paging);
 		return mv;
 		
-//		// 1. 전체 게시물의 수를 구한다.
-//		int count = bbsService.getTotalCount();
-//		paging.setTotalRecord(count);
-//		
-//		// 2. 전체 페이지의 수를 구한다. 
-//		// NumPerPage(6) 보다 작을 경우 1페이지
-//		if(paging.getTotalRecord() <= paging.getNumPerPage()) {
-//			paging.setTotalPage(1);
-//		}else {
-//			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
-//			if(paging.getTotalRecord() % paging.getNumPerPage() != 0) {
-//				paging.setTotalPage(paging.getTotalPage() + 1 );
-//			}
-//		}
-//		
-//		// 3. 파라미터에서 넘어오는 cPage(보고싶은 페이지번호)를 구하자 
-//		String cPage = request.getParameter("cPage");
-//	
-//	    // 만약에 cPage가 null 이면 무조건 1 page 이다.
-//		if(cPage == null) {
-//			paging.setNowPage(1);
-//		}else {
-//			paging.setNowPage(Integer.parseInt(cPage));
-//		}
-		
-		// 4. cPage를 기준으로 begin, end,  beginBlock, endBlock
-		// 오라클 인 경우 begin, end를 구해야 한다.
-		// MySQL, Maridb 는 limit, offset
-		// offset = limit * (현재페이지 - 1)
-		// limit = numPerPage
-		// SELECT * FROM bbs_t order by b_idx desc limit 3 offset 0 | 1 : 3;
-		
-//		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage()-1));
-//		
-//		
-//		// 시작블록과 끝블록 구하기
-//		paging.setBeginBlock(
-//				(int)(((paging.getNowPage()-1) / paging.getPagePerBlock()) * paging.getPagePerBlock()+1));
-//		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() -1);
-//		
-//		// 주의 사항 
-//		// enbBlock(3,6,9...) 실제 가지고 총 페이지는 20개일경우  4페이지 까지 
-//		if(paging.getEndBlock() >  paging.getTotalPage()) {
-//			paging.setEndBlock(paging.getTotalPage());
-//		}
-//		
-//		
-//		// DB 갔다가 오기 
-//		List<BbsVO> list = bbsService.getBbsList(paging.getOffset(), paging.getNumPerPage());
-//		
-//		mv.addObject("list", list);
-//		mv.addObject("paging", paging);
-//		return mv;
+
 	}
 }

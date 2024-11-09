@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.project.admin.dao.AdminDAO;
 import com.ict.project.admin.vo.AdminVO;
+import com.ict.project.fna.service.FnaService;
 import com.ict.project.login.service.LoginService;
 
 @Service

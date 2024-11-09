@@ -3,6 +3,7 @@ package com.ict.project.admin.service;
 import java.util.List;
 
 import com.ict.project.admin.vo.AdminVO;
+import com.ict.project.fna.service.FnaService;
 import com.ict.project.login.dao.LoginDAO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
@@ -17,11 +18,11 @@ public interface AdminService {
 	public AdminVO adminDetail(String a_idx);
 	
 	LoginService loginService();
-	QnaService qnaService();
+	QnaService qnaServiceImpl();
 	FnaService fnaService();
-	NoticeService noticeService();
-	InqueryService inqueryService();
-	CommentService commentService();
-	FreeBoardService freeBoardService();
+	NoticeService noticeServiceImpl();
+	InqueryService inqueryServiceImpl();
+	CommentService commentServiceImpl();
+	FreeBoardService freeBoardServiceImpl();
 	
 }

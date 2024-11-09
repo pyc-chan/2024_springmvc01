@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.project.admin.service.AdminService;
+import com.ict.project.fna.service.FnaService;
+import com.ict.project.fna.vo.FnaVO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
 
@@ -34,15 +36,15 @@ public class AdminController {
 		return new ModelAndView("admin/admin1-3"); 
 	}
 	
-	@GetMapping("/admin/userlist")
-	public ModelAndView userList() {
-		ModelAndView mv = new ModelAndView("");
-		LoginService loginad = adminService.loginService();
-		List<LoginVO> list = loginad.getList();
-		mv.addObject("list",list);
-		
-		return mv;
-	}
+		@GetMapping("/admin/userlist")
+		public ModelAndView userList() {
+			ModelAndView mv = new ModelAndView("");
+			LoginService loginad = adminService.loginService();
+			List<LoginVO> list = loginad.getList();
+			mv.addObject("list",list);
+			
+			return mv;
+		}
 	@PostMapping("/admin/userdetail")
 	public ModelAndView userDetail(String u_idx) {
 		ModelAndView mv = new ModelAndView("");
@@ -99,7 +101,7 @@ public class AdminController {
 	public ModelAndView fnaList() {
 		ModelAndView mv = new ModelAndView("");
 		FnaService fnaad = adminService.fnaService();
-		List<FnaVO> list = fnaad.getList();
+		List<FnaVO> list = fnaad.getFnaList();
 		mv.addObject("list", list);
 		
 		return mv;
