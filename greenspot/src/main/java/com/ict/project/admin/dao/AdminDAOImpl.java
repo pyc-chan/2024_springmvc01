@@ -16,7 +16,7 @@ public class AdminDAOImpl implements AdminDAO{
 	
 	@Override
 	public List<AdminVO> adminList() {
-		return sqlSessionTemplate.selectList("admin.admin_list");
+		return sqlSessionTemplate.selectList("admin.admin_list	");
 	}
 
 	@Override
