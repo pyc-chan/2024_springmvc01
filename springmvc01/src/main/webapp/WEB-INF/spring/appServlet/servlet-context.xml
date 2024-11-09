@@ -11,24 +11,40 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	<!-- 어노테이션 범위 -->
+	<context:component-scan base-package="com.ict" />
 	
-	<context:component-scan base-package="com.ict.project" />
 	
+	<!-- Handler Mapping : 요청에 따른 컨트롤러 지정 (일반적으로는 어노테이션한다.)-->
+	<!-- <beans:bean name="/start1" class="com.ict.edu01.Start1Controller"></beans:bean>
+	<beans:bean name="/start2" class="com.ict.edu01.Start2Controller"></beans:bean> -->
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="resources/**" location="/resources/" />
-	<resources mapping="logincss/**" location="/resources/logincss/" />
-	<resources mapping="images/**" location="/resources/images/" />
-	<resources mapping="searchcss/**" location="/resources/searchcss/" />
-	
+	<resources mapping="/resources/**" location="/resources/" />
 
+    <!-- 컨트롤러 갖다 왔다. (ModelAndView 가지고 왔음 (viewName = result1) --> 
+    
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- 요청 사항의 결과를 보여줄 장소 /WEB-INF/views/뷰네임.jsp-->
 	
-	
-	
+	<!-- 파일업로드용 클래스 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="524288000" /> <!-- 500*1024*1024 --> 
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
 </beans:beans>
+
+
+
+
+
+
+
+
+
+
