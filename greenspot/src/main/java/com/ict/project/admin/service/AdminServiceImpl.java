@@ -12,6 +12,7 @@ import com.ict.project.comment.service.CommentService;
 import com.ict.project.fna.service.FnaService;
 import com.ict.project.inquery.service.InqueryService;
 import com.ict.project.login.service.LoginService;
+import com.ict.project.notice.service.NoticeService;
 import com.ict.project.qna.service.QnaService;
 
 @Service
@@ -64,27 +65,27 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public QnaService qnaService() {
-		return null;
+		return qnaService;
 	}
 
 	@Override
 	public FnaService fnaService() {
-		return null;
+		return fnaService;
 	}
 
 	@Override
 	public NoticeService noticeService() {
-		return null;
+		return noticeService;
 	}
 
 	@Override
 	public InqueryService inqueryService() {
-		return null;
+		return inqueryService;
 	}
 
 	@Override
 	public CommentService commentService() {
-		return null;
+		return commentService;
 	}
 
 	

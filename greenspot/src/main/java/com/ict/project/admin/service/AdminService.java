@@ -9,6 +9,7 @@ import com.ict.project.inquery.service.InqueryService;
 import com.ict.project.login.dao.LoginDAO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
+import com.ict.project.notice.service.NoticeService;
 import com.ict.project.popup.vo.PopupVO;
 import com.ict.project.qna.service.QnaService;
 

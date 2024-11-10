@@ -20,6 +20,8 @@ import com.ict.project.fna.service.FnaService;
 import com.ict.project.fna.vo.FnaVO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
+import com.ict.project.notice.service.NoticeService;
+import com.ict.project.notice.vo.NoticeVO;
 import com.ict.project.qna.service.QnaService;
 import com.ict.project.qna.vo.QnaVO;
 
@@ -76,7 +78,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	// 유저
+	// 유저 업데이트
 	@PostMapping("/admin/userupdate")
 	public ModelAndView userUpdate(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView("");
@@ -86,7 +88,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	// 
+	// 유저 삽입
 	@PostMapping("/admin/userinsert")
 	public ModelAndView userInsert(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView("");
@@ -127,6 +129,36 @@ public class AdminController {
 		return mv;
 	}
 	
+	// qna 탈퇴
+		@PostMapping("/admin/qnadelete")
+		public ModelAndView qnaDelete(QnaVO qvo) {
+			ModelAndView mv = new ModelAndView("");
+			QnaService qnaad = adminService.qnaService();
+			qnaad.getQnaDelete(qvo.getQ_idx());
+			
+			return mv;
+		}
+		
+		// qna 업데이트
+		@PostMapping("/admin/qnaupdate")
+		public ModelAndView qnaUpdate(QnaVO qvo) {
+			ModelAndView mv = new ModelAndView("");
+			QnaService qnaad = adminService.qnaService();
+			qnaad.getQnaUpdate(qvo);
+			
+			return mv;
+		}
+		// qna 삽입
+		@PostMapping("/admin/qnainsert")
+		public ModelAndView qnaInsert(QnaVO qvo) {
+			ModelAndView mv = new ModelAndView("");
+			QnaService qnaad = adminService.qnaService();
+			qnaad.getQnaInsert(qvo);
+			
+			return mv;
+		}
+	
+	
 	@GetMapping("/admin/fnalist")
 	public ModelAndView fnaList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("");
@@ -146,6 +178,7 @@ public class AdminController {
 		
 		return mv;
 	}
+	
 	@PostMapping("/admin/fnadetail")
 	public ModelAndView fnaDetail(String f_idx) {
 		ModelAndView mv = new ModelAndView("");
@@ -156,11 +189,51 @@ public class AdminController {
 		return mv;
 	}
 	
+	// fna 탈퇴
+			@PostMapping("/admin/fnadelete")
+			public ModelAndView fnaDelete(FnaVO fvo) {
+				ModelAndView mv = new ModelAndView("");
+				FnaService fnaad = adminService.fnaService();
+				fnaad.getFnaDelete(fvo.getF_idx());
+				
+				return mv;
+			}
+			
+			// fna 업데이트
+			@PostMapping("/admin/fnaupdate")
+			public ModelAndView fnaUpdate(FnaVO fvo) {
+				ModelAndView mv = new ModelAndView("");
+				FnaService fnaad = adminService.fnaService();
+				fnaad.getFnaUpdate(fvo);
+				
+				return mv;
+			}
+			// fna 삽입
+			@PostMapping("/admin/fnainsert")
+			public ModelAndView fnaInsert(FnaVO fvo) {
+				ModelAndView mv = new ModelAndView("");
+				FnaService fnaad = adminService.fnaService();
+				fnaad.getFnaInsert(fvo);
+				
+				return mv;
+			}
+	
+	
 	@GetMapping("/admin/noticelist")
-	public ModelAndView noticeList() {
+	public ModelAndView noticeList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("");
-		NoticeService noticead = adminService.NoticeService();
-		List<NoticeVO> list = noticead.getList();
+		NoticeService noticead = adminService.noticeService();
+		
+		int count = noticead.getTotalCount();
+		String cPage = request.getParameter("cPage");
+		PerPageConstant constant = new PerPageConstant();
+		int perpage = constant.getFnapage();
+		
+		Paging paging = pagingService.pagingservice(count , cPage, perpage);
+		int offset = paging.getOffset();
+		int limit = paging.getNumPerPage();
+		
+		List<NoticeVO> list = noticead.getBoardList(offset, limit);
 		mv.addObject("list", list);
 		
 		return mv;
@@ -168,12 +241,43 @@ public class AdminController {
 	@PostMapping("/admin/noticedetail")
 	public ModelAndView noticeDetail(String n_idx) {
 		ModelAndView mv = new ModelAndView("");
-		NoticeService noticead = adminService.NoticeService();
-		NoticeVO nvo = noticead.getDetail(n_idx);
+		NoticeService noticead = adminService.noticeService();
+		NoticeVO nvo = noticead.getBoardDetail(n_idx);
 		mv.addObject("nvo",nvo);
 		
 		return mv;
 	}
+	
+	// notice 삭제
+				@PostMapping("/admin/noticedelete")
+				public ModelAndView noticeDelete(NoticeVO nvo) {
+					ModelAndView mv = new ModelAndView("");
+					NoticeService noticead = adminService.noticeService();
+					noticead.getBoardDelete(nvo.getN_idx());
+					
+					return mv;
+				}
+				
+				// notice 업데이트
+				@PostMapping("/admin/noticeupdate")
+				public ModelAndView noticeUpdate(NoticeVO nvo) {
+					ModelAndView mv = new ModelAndView("");
+					NoticeService noticead = adminService.noticeService();
+					noticead.getBoardUpdate(nvo);
+					
+					return mv;
+				}
+				// notice 삽입
+				@PostMapping("/admin/noticeinsert")
+				public ModelAndView noticeInsert(NoticeVO nvo) {
+					ModelAndView mv = new ModelAndView("");
+					NoticeService noticead = adminService.noticeService();
+					noticead.getBoardInsert(nvo);
+					
+					return mv;
+				}
+	
+	
 	
 	@GetMapping("/admin/commentlist")
 	public ModelAndView commentList(HttpServletRequest request, CommentVO cvo) {
@@ -200,6 +304,35 @@ public class AdminController {
 		CommentService commentad = adminService.commentService();
 		CommentVO cvo = commentad.getCommentDetail(c_idx);
 		mv.addObject("cvo",cvo);
+		
+		return mv;
+	}
+	
+	// notice 삭제
+	@PostMapping("/admin/commentdelete")
+	public ModelAndView commentDelete(CommentVO cvo) {
+		ModelAndView mv = new ModelAndView("");
+		CommentService commentad = adminService.commentService();
+		commentad.getCommentDelete(cvo.getC_idx());
+		
+		return mv;
+	}
+	
+	// comment 업데이트
+	@PostMapping("/admin/commentupdate")
+	public ModelAndView commentUpdate(CommentVO cvo) {
+		ModelAndView mv = new ModelAndView("");
+		CommentService commentad = adminService.commentService();
+		commentad.getCommentUpdate(cvo);
+		
+		return mv;
+	}
+	// comment 삽입
+	@PostMapping("/admin/commentinsert")
+	public ModelAndView commentInsert(CommentVO cvo) {
+		ModelAndView mv = new ModelAndView("");
+		CommentService commentad = adminService.commentService();
+		commentad.getCommentInsert(cvo);
 		
 		return mv;
 	}

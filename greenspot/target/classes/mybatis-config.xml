@@ -17,6 +17,7 @@
 		<typeAlias type="com.ict.project.login.vo.LoginVO" alias="lvo" />
 		<typeAlias type="com.ict.project.fna.vo.FnaVO" alias="fvo" />
 		<typeAlias type="com.ict.project.comment.vo.CommentVO" alias="cvo" />
+		<typeAlias type="com.ict.project.notice.vo.NoticeVO" alias="nvo" />
 		<typeAlias type="com.ict.project.event.vo.EventVO" alias="evvo" />
 		<typeAlias type="com.ict.project.popup.vo.PopupVO" alias="popvo" />
 		<!--  <typeAlias type="" alias="" /> -->
