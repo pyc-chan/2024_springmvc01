@@ -2,6 +2,12 @@ package com.ict.project.comm;
 
 public class PerPageConstant {
 	
+	// 메인페이지
+	private final int mainevent = 3;
+	private final int mainnotice = 4;
+	private final int mainreview = 6;
+	
+	// 서브페이지
 	private final int commentpage = 10;
 	private final int qnapage = 10;
 	private final int fnapage = 6;
@@ -19,7 +25,7 @@ public class PerPageConstant {
 	private final int parkpage = 4;
 	
 	// 관리자페이지
-	private final int adminpage = 1;
+	private final int adminpage = 1;		// 추후 변경
 	private final int adminuserpage = 5;
 	private final int adminqnapage = 5;
 	private final int adminnoticepage = 5;
@@ -29,6 +35,15 @@ public class PerPageConstant {
 	private final int adminreviewpage = 10;
 	
 	
+	public int getMainevent() {
+		return mainevent;
+	}
+	public int getMainnotice() {
+		return mainnotice;
+	}
+	public int getMainreview() {
+		return mainreview;
+	}
 	public int getReviewtoppage() {
 		return reviewtoppage;
 	}

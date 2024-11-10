@@ -15,11 +15,12 @@ import com.ict.project.qna.service.QnaService;
 
 public interface AdminService {
 	
-	public List<AdminVO> adminList();
+	public List<AdminVO> adminList(int offset, int limit);
 	public int adminUpdate(AdminVO avo);
 	public int adminDelete(AdminVO avo);
 	public int adminInsert(AdminVO avo);
 	public AdminVO adminDetail(String a_idx);
+	public int adminCount();
 	
 	LoginService loginService();
 	QnaService qnaService();

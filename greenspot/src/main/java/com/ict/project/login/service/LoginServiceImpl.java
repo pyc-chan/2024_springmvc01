@@ -65,13 +65,18 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public List<LoginVO> getList() {
-		return null;
+	public List<LoginVO> getList(int offset, int limit) {
+		return loginDAO.loginList(offset, limit);
 	}
 
 	@Override
 	public int logindelete(LoginVO lvo) {
 		return loginDAO.loginDelete(lvo);
+	}
+
+	@Override
+	public int userCount() {
+		return loginDAO.userCount();
 	}
 
 

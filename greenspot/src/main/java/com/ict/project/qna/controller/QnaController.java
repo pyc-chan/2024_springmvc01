@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.project.comm.Paging;
 import com.ict.project.comm.PagingService;
 import com.ict.project.comm.PerPageConstant;
+import com.ict.project.qna.service.QnaFileService;
 import com.ict.project.qna.service.QnaService;
 import com.ict.project.qna.vo.QnaVO;
 
@@ -20,14 +21,16 @@ import com.ict.project.qna.vo.QnaVO;
 public class QnaController {
 	
 	@Autowired
+	private QnaFileService qnaFileService;
+	@Autowired
 	private QnaService qnaService;
 	@Autowired
 	private PagingService pagingService;
 	
 	
-	@GetMapping("qna/list")
+	@GetMapping("/qna/list")
 	public ModelAndView getQnaList(HttpServletRequest request){
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("qna/list");
 		
 		int count = qnaService.getQnaCount();
 		// pagingservice 메서드에 넣을 값
@@ -46,32 +49,47 @@ public class QnaController {
 		return mv;
 	}
 	
-	@PostMapping("qna/detail")
-	public ModelAndView getQnaDetail(String idx) {
-		ModelAndView mv = new ModelAndView();
-		QnaVO fvo = qnaService.getQnaDetail(idx);
+	@PostMapping("/qna/detail")
+	public ModelAndView getQnaDetail(String q_idx) {
+		ModelAndView mv = new ModelAndView("qna/detail");
+		QnaVO fvo = qnaService.getQnaDetail(q_idx);
 		mv.addObject("fvo", fvo);
 		return mv;
 	}
 	
-	@PostMapping("qna/insert")
-	public ModelAndView getQnaInsert(QnaVO fvo) {
+	@PostMapping("/qna/insert")
+	public ModelAndView getQnaInsert(QnaVO qvo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		qnaService.getQnaInsert(fvo);
+		// 파일 업로드
+		qnaFileService.qnaFileUpload(request, qvo);
+		// DB에 저장
+		qnaService.getQnaInsert(qvo);
+		mv.setViewName("redirect:/qna/list");
+		return mv;
+		
+	}
+	
+	@PostMapping("/qna/update")
+	public ModelAndView getQnaUpdate(QnaVO qvo, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		QnaVO qvodb = qnaService.getQnaDetail(qvo.getQ_idx());
+		qvo.setQ_oldname(qvodb.getQ_filename());
+		
+		if(qvo.getQ_file()!=null) {
+			qnaFileService.qnaFileUpdate(request, qvo);
+		}else {
+			qvo.setQ_filename(qvo.getQ_oldname());
+		}
+		qnaService.getQnaUpdate(qvo);
+		mv.setViewName("redirect:/qna/list");
+		
 		return mv;
 	}
 	
-	@PostMapping("qna/update")
-	public ModelAndView getQnaUpdate(QnaVO fvo) {
-		ModelAndView mv = new ModelAndView();
-		qnaService.getQnaUpdate(fvo);
-		return mv;
-	}
-	
-	@PostMapping("qna/delete")
-	public ModelAndView getQnaDelete(String idx) {
-		ModelAndView mv = new ModelAndView();
-		qnaService.getQnaDelete(idx);
+	@PostMapping("/qna/delete")
+	public ModelAndView getQnaDelete(String q_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/poplist");
+		qnaService.getQnaDelete(q_idx);
 		return mv;
 	}
 	

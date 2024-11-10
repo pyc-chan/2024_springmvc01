@@ -1,52 +1,43 @@
 package com.ict.project.popup.controller;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ict.project.popup.service.FileService;
+import com.ict.project.popup.service.PopFileService;
 import com.ict.project.popup.service.PopupService;
 import com.ict.project.popup.vo.PopupVO;
 
 @Controller
 public class PopupController {
 	
-	@Autowired FileService fileService;
+	@Autowired PopFileService fileService;
 	
 	@Autowired
 	private PopupService popupService;
 	
 	// 삽입
-	@PostMapping("/popinsert")
+	@PostMapping("/pop/insert")
 	public ModelAndView popupInsert(HttpServletRequest request ,PopupVO pvo) {
 		ModelAndView mv = new ModelAndView();
 		// 파일 업로드
-		fileService.fileUpload(request, pvo);
+		pvo = fileService.popFileUpload(request, pvo);
 	    // DB에 저장
-		int result = popupService.getPopInsert(pvo);
-		if(result >0) {
-			request.getSession().setAttribute("insertok", "ok");
-		}else {
-			request.getSession().setAttribute("insertok", "fail");
-		}
+		popupService.getPopInsert(pvo);
+		
 		mv.setViewName("redirect:/poplist");
 		return mv;
 		
 	}
 	
 	// 리스트 출력
-	@RequestMapping("/poplist")
+	@RequestMapping("/pop/list")
 	public ModelAndView popupList() {
 		ModelAndView mv = new ModelAndView();
 		List<PopupVO> list = popupService.getPopList();
@@ -56,7 +47,7 @@ public class PopupController {
 	}
 	
 	// 상세보기
-	@RequestMapping("/popdetail")
+	@RequestMapping("/pop/detail")
 	public ModelAndView popupDetail(String pop_idx) {
 		ModelAndView mv = new ModelAndView();
 		PopupVO pvo = popupService.getPopDetail(pop_idx);
@@ -67,13 +58,17 @@ public class PopupController {
 	}
 	
 	// 업데이트
-	@PostMapping("/popupdate")
+	@PostMapping("/pop/update")
 	public ModelAndView popupUpdate(HttpServletRequest request ,PopupVO pvo) {
 		ModelAndView mv = new ModelAndView();
 		PopupVO pvodb = popupService.getPopDetail(pvo.getPop_idx());
 		pvo.setOld_pic(pvodb.getPop_pic());
-		fileService.fileUpdate(request, pvo);
 		
+		if(pvo.getPop_file()!=null) {
+			pvo = fileService.popFileUpdate(request, pvo);
+		}else {
+			pvo.setPop_pic(pvo.getOld_pic());
+		}
 		int result = popupService.getPopUpdate(pvo);
 		if(result>0) {
 			request.getSession().setAttribute("updateok", "ok");
@@ -85,7 +80,7 @@ public class PopupController {
 	}
 	
 	// 삭제
-	@PostMapping("/popdelete")
+	@PostMapping("/pop/delete")
 	public ModelAndView popDelete(HttpServletRequest request, PopupVO pvo) {
 		ModelAndView mv = new ModelAndView();
 		int result = popupService.getPopDelete(pvo);

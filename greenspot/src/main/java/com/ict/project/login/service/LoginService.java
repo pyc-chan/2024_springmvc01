@@ -26,7 +26,9 @@ public interface LoginService {
 	
 	public int updatePw(LoginVO lvo);
 	
-	public List<LoginVO> getList();
+	public List<LoginVO> getList(int offset, int limit);
 	
 	public int logindelete(LoginVO lvo);
+	
+	public int userCount();
 }

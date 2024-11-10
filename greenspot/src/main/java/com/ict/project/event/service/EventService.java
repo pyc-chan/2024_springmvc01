@@ -10,5 +10,9 @@ public interface EventService {
 	
 	public List<EventVO> getEventList(int offset, int limit);
 	
-	public List<EventVO> getEventSearch(String str, int offset, int limit);
+	public List<EventVO> getEventSearch(String[] str, int offset, int limit);
+	
+	public List<EventVO> getEventCalender();
+	
+	public List<EventVO> loadEvents();
 }

@@ -13,22 +13,30 @@
 	
 	<typeAliases>
 		<!-- <typeAlias type="VO위치"    alias="축약어"  /> -->
-		<typeAlias type="com.ict.project.searchlist.vo.TreeVO" alias="tvo" />
-		<typeAlias type="com.ict.project.login.vo.LoginVO" alias="lvo" />
-		<typeAlias type="com.ict.project.fna.vo.FnaVO" alias="fvo" />
+		<typeAlias type="com.ict.project.admin.vo.AdminVO" alias="avo" />
 		<typeAlias type="com.ict.project.comment.vo.CommentVO" alias="cvo" />
-		<typeAlias type="com.ict.project.notice.vo.NoticeVO" alias="nvo" />
 		<typeAlias type="com.ict.project.event.vo.EventVO" alias="evvo" />
+		<typeAlias type="com.ict.project.fna.vo.FnaVO" alias="fvo" />
+		<typeAlias type="com.ict.project.inquery.vo.InqueryVO" alias="ivo" />
+		<typeAlias type="com.ict.project.login.vo.LoginVO" alias="lvo" />
+		<typeAlias type="com.ict.project.notice.vo.NoticeVO" alias="nvo" />
 		<typeAlias type="com.ict.project.popup.vo.PopupVO" alias="popvo" />
+		<typeAlias type="com.ict.project.qna.vo.QnaVO" alias="qvo" />
+		<typeAlias type="com.ict.project.searchlist.vo.TreeVO" alias="tvo" />
 		<!--  <typeAlias type="" alias="" /> -->
 	</typeAliases>
 	
 	<mappers>
 		<!-- <mapper resource="매퍼 위치" /> -->
-		<mapper resource="mappers/loginmapper.xml" />
+		<mapper resource="mappers/adminmapper.xml" />
+		<mapper resource="mappers/commentmapper.xml" />
 		<mapper resource="mappers/eventmapper.xml" />
-		<mapper resource="mappers/treemapper.xml" />
-		<mapper resource="mappers/crudmapper.xml" />
+		<mapper resource="mappers/fnamapper.xml" />
+		<mapper resource="mappers/inquerymapper.xml" />
+		<mapper resource="mappers/loginmapper.xml" />
+		<mapper resource="mappers/noticemapper.xml" />
 		<mapper resource="mappers/popupmapper.xml" />
+		<mapper resource="mappers/qnamapper.xml" />
+		<mapper resource="mappers/treemapper.xml" />
 	</mappers>
 </configuration>

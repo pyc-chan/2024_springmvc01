@@ -18,17 +18,32 @@ public class SearchListDAOImpl implements SearchListDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public int getTotalCount() {
-		return sqlSessionTemplate.selectOne("tree.count");
+	public int getAreaCount() {
+		return sqlSessionTemplate.selectOne("tree.areacount");
+	}
+	
+	@Override
+	public int getStatCount() {
+		return sqlSessionTemplate.selectOne("tree.statcount");
 	}
 
 	@Override
-	public List<TreeVO> getTreeList(int offset, int limit) {
+	public List<TreeVO> getAreaList(int offset, int limit) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("limit", limit);
 		map.put("offset", offset);
 		
-		return sqlSessionTemplate.selectList("tree.pagelist", map);
+		return sqlSessionTemplate.selectList("tree.arealist", map);
 	}
 	
+	@Override
+	public List<TreeVO> getStatList(int offset, int limit) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("limit", limit);
+		map.put("offset", offset);
+		
+		return sqlSessionTemplate.selectList("tree.statlist", map);
+	}
+	
+
 }

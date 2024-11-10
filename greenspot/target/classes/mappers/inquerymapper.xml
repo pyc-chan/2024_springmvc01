@@ -4,31 +4,31 @@
  "-//mybatis.org//DTD Mapper 3.0//EN" 
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="fna">
+<mapper namespace="inquery">
 	
-	<select id="fna_list" resultType="fvo" parameterType="Map">
-		select * from fna_db order by f_idx desc limit #{offset}, #{limit} 
+	<select id="inquery_list" resultType="ivo" parameterType="Map">
+		select * from inquery_db order by i_idx desc limit #{offset}, #{limit} 
 	</select>
 	
-	<select id="fna_count" resultType="int">
-		select count(*) from fna_db
+	<select id="inquery_count" resultType="int">
+		select count(*) from inquery_db
 	</select>
 	
-	<select id="fna_detail" parameterType="String" resultType="fvo">
-		select * from fna_db where f_idx = #{f_idx}
+	<select id="inquery_detail" parameterType="String" resultType="ivo">
+		select * from inquery_db where i_idx=#{i_idx}
 	</select>
 	
-	<insert id="fna_insert" parameterType="fvo">
-		insert into fna_db (f_idx, a_idx, f_tle, f_fcon, f_acon, f_dat)
-		values (#{f_idx}, #{a_idx}, #{f_tle}, #{f_fcon}, #{f_acon}, now())
+	<insert id="inquery_insert" parameterType="ivo">
+		insert into inquery_db (i_idx, u_idx, i_tle, i_con, i_dat, i_ans, a_idx, i_acon)
+		values (#{i_idx}, #{u_idx}, #{i_tle}, #{i_con}, now(), #{i_ans}, #{a_idx}, #{i_acon})
 	</insert>
 	
-	<update id="fna_update" parameterType="fvo">
-		update fna_db set a_idx = #{a_idx}, f_tle = #{f_tle}, f_fcon = #{f_fcon}, f_acon = #{f_acon}, f_up = now()
-		where f_idx = #{f_idx}
+	<update id="inquery_update" parameterType="ivo">
+		update inquery_db set i_tle=#{i_tle}, i_con=#{i_con}, i_ans=#{i_ans}, a_idx=#{a_idx}, i_acon=#{i_acon}
+		where i_idx = #{i_idx}
 	</update>
 	
-	<delete id="fna_delete" parameterType="String">
-		delete from fna_db where f_idx=#{f_idx}
+	<delete id="inquery_delete" parameterType="String">
+		delete from inquery_db where i_idx=#{i_idx}
 	</delete>
 </mapper>

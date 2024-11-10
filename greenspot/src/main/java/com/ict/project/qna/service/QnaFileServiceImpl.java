@@ -1,4 +1,4 @@
-package com.ict.project.popup.service;
+package com.ict.project.qna.service;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ict.project.popup.vo.PopupVO;
+import com.ict.project.qna.vo.QnaVO;
 
 @Service
-public class FileServiceImpl implements FileService{
+public class QnaFileServiceImpl implements QnaFileService{
 
 	@Override
-	public void fileUpload(HttpServletRequest request, PopupVO pvo) {
+	public QnaVO qnaFileUpload(HttpServletRequest request, QnaVO qvo) {
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/images");
-			MultipartFile file = pvo.getPop_file();
+			MultipartFile file = qvo.getQ_file();
 			
 			// 현재 날짜와 시간 가져오기
 		    LocalDateTime now = LocalDateTime.now();
@@ -31,21 +31,24 @@ public class FileServiceImpl implements FileService{
 	        // 업로드시간_파일명 의 형태로 저장
 	        String fname = nowstr+"_"+file.getOriginalFilename();
 	        
-	        // pvo에 파일이름 저장
-	        pvo.setPop_pic(fname);
+	        // qvo에 파일이름 저장
+	        qvo.setQ_filename(fname);
 	        
 	        // 실질적인 파일 업로드
 	        file.transferTo(new File(path, fname));
+	        
+	        return qvo;
 		}catch (Exception e) {
 			System.out.println(e);
+			return null;
 		}
 	}
 
 	@Override
-	public void fileUpdate(HttpServletRequest request, PopupVO pvo) {
+	public QnaVO qnaFileUpdate(HttpServletRequest request, QnaVO qvo) {
 		try {
 			// 기존 파일 경로 가져오기
-	        String oldFileName = pvo.getOld_pic();
+	        String oldFileName = qvo.getQ_oldname();
 	        String path = request.getSession().getServletContext().getRealPath("/resources/images");
 			
 	     // 기존 파일 삭제
@@ -60,10 +63,12 @@ public class FileServiceImpl implements FileService{
 	        }
 	        
 	        // 새 파일 업로드
-	        fileUpload(request, pvo); // fileUpload 메서드 호출
+	        qvo = qnaFileUpload(request, qvo); // fileUpload 메서드 호출
 			
+	        return qvo;
 		} catch (Exception e) {
 			System.out.println(e);
+			return null;
 		}
 	}
 	

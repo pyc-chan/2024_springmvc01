@@ -34,8 +34,8 @@ public class AdminServiceImpl implements AdminService{
 	private CommentService commentService;
 	
 	@Override
-	public List<AdminVO> adminList() {
-		return adminDAO.adminList();
+	public List<AdminVO> adminList(int offset, int limit) {
+		return adminDAO.adminList(offset, limit);
 	}
 
 	@Override
@@ -58,6 +58,11 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.adminDetail(u_idx);
 	}
 
+	@Override
+	public int adminCount() {
+		return adminDAO.adminCount();
+	}
+	
 	@Override
 	public LoginService loginService() {
 		return loginService;
@@ -87,6 +92,7 @@ public class AdminServiceImpl implements AdminService{
 	public CommentService commentService() {
 		return commentService;
 	}
+
 
 	
 }

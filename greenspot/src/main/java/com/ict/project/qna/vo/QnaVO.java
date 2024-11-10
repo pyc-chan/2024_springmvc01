@@ -1,9 +1,37 @@
 package com.ict.project.qna.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class QnaVO {
 	
 	// 게시판마다 변수명 확인해서 작성하기
-	private String q_idx, u_idx, q_tle, q_con, q_dat, q_ans, a_idx, q_acon;
+	private String q_idx, u_idx, q_tle, q_con, q_dat, q_ans, a_idx, q_acon, q_filename, q_oldname;
+	private MultipartFile q_file;
+	
+	
+	public String getQ_oldname() {
+		return q_oldname;
+	}
+
+	public void setQ_oldname(String q_oldname) {
+		this.q_oldname = q_oldname;
+	}
+
+	public String getQ_filename() {
+		return q_filename;
+	}
+
+	public void setQ_filename(String q_filename) {
+		this.q_filename = q_filename;
+	}
+
+	public MultipartFile getQ_file() {
+		return q_file;
+	}
+
+	public void setQ_file(MultipartFile q_file) {
+		this.q_file = q_file;
+	}
 
 	public String getQ_idx() {
 		return q_idx;

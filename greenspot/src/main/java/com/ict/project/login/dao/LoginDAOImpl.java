@@ -1,6 +1,8 @@
 package com.ict.project.login.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,13 +70,22 @@ public class LoginDAOImpl implements LoginDAO{
 	}
 
 	@Override
-	public List<LoginVO> loginList() {
-		return sqlSessionTemplate.selectList("login.login_list");
+	public List<LoginVO> loginList(int offset, int limit) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("offset", offset);
+		map.put("limit", limit);
+		
+		return sqlSessionTemplate.selectList("login.login_list", map);
 	}
 
 	@Override
 	public int loginDelete(LoginVO lvo) {
 		return sqlSessionTemplate.update("login.login_delete", lvo);
+	}
+
+	@Override
+	public int userCount() {
+		return sqlSessionTemplate.selectOne("login.login_count");
 	}
 
 	

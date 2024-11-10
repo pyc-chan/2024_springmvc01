@@ -31,11 +31,16 @@ public class EventDAOImpl implements EventDAO{
 	}
 
 	@Override
-	public List<EventVO> getEventSearch(String str, int offset, int limit) {
-		Map<String, String> map = new HashMap<String, String>();
+	public List<EventVO> getEventSearch(String[] str, int offset, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("str", str);
 		map.put("offset", String.valueOf(offset));
 		map.put("limit", String.valueOf(limit));
 		return sqlSessionTemplate.selectList("event.evsearch", map);
+	}
+
+	@Override
+	public List<EventVO> getEventCalender() {
+		return sqlSessionTemplate.selectList("event.evcal");
 	}
 }

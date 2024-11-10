@@ -27,7 +27,7 @@ public class CommentController {
 	private PagingService pagingservice;
 	
 	
-	@PostMapping("comment/list")
+	@PostMapping("/comment/list")
 	public ModelAndView getCommentList(HttpServletRequest request, @ModelAttribute CommentVO cvo){
 		ModelAndView mv = new ModelAndView();
 		
@@ -49,7 +49,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@PostMapping("comment/detail")
+	@PostMapping("/comment/detail")
 	public ModelAndView getCommentDetail(String idx) {
 		ModelAndView mv = new ModelAndView();
 		CommentVO cvo = commentService.getCommentDetail(idx);
@@ -57,21 +57,21 @@ public class CommentController {
 		return mv;
 	}
 	
-	@PostMapping("comment/insert")
+	@PostMapping("/comment/insert")
 	public ModelAndView getCommentInsert(CommentVO cvo) {
 		ModelAndView mv = new ModelAndView();
 		commentService.getCommentInsert(cvo);
 		return mv;
 	}
 	
-	@PostMapping("comment/update")
+	@PostMapping("/comment/update")
 	public ModelAndView getCommentUpdate(CommentVO cvo) {
 		ModelAndView mv = new ModelAndView();
 		commentService.getCommentUpdate(cvo);
 		return mv;
 	}
 	
-	@PostMapping("comment/delete")
+	@PostMapping("/comment/delete")
 	public ModelAndView getCommentDelete(String idx) {
 		ModelAndView mv = new ModelAndView();
 		commentService.getCommentDelete(idx);

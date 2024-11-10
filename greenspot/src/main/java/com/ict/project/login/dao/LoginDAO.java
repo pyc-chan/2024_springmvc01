@@ -27,7 +27,9 @@ public interface LoginDAO {
 	
 	public int loginUpdatePw(LoginVO lvo);
 	
-	public List<LoginVO> loginList();
+	public List<LoginVO> loginList(int offset, int limit);
 	
 	public int loginDelete(LoginVO lvo);	
+	
+	public int userCount();
 }

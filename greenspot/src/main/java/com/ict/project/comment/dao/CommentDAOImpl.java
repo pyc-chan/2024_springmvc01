@@ -23,8 +23,8 @@ public class CommentDAOImpl implements CommentDAO{
 		Map<String , String> map = new HashMap<String, String>();
 		map.put("offset",String.valueOf(offset));
 		map.put("limit", String.valueOf(limit));
-		map.put("ref", cvo.getC_ref());
-		map.put("bor", cvo.getC_bor());
+		map.put("c_ref", cvo.getC_ref());
+		map.put("c_bor", cvo.getC_bor());
 		
 		return sqlSessionTemplate.selectList("Comment.Comment_list",map);
 	}

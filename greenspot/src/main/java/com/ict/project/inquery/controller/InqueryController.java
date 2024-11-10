@@ -25,7 +25,7 @@ public class InqueryController {
 	private PagingService pagingService;
 	
 	
-	@GetMapping("inquery/list")
+	@GetMapping("/inquery/list")
 	public ModelAndView getInqueryList(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
 		
@@ -46,7 +46,7 @@ public class InqueryController {
 		return mv;
 	}
 	
-	@PostMapping("inquery/detail")
+	@PostMapping("/inquery/detail")
 	public ModelAndView getInqueryDetail(String idx) {
 		ModelAndView mv = new ModelAndView();
 		InqueryVO fbvo = inqueryService.getInqueryDetail(idx);
@@ -54,21 +54,21 @@ public class InqueryController {
 		return mv;
 	}
 	
-	@PostMapping("inquery/insert")
+	@PostMapping("/inquery/insert")
 	public ModelAndView getInqueryInsert(InqueryVO fbvo) {
 		ModelAndView mv = new ModelAndView();
 		inqueryService.getInqueryInsert(fbvo);
 		return mv;
 	}
 	
-	@PostMapping("inquery/update")
+	@PostMapping("/inquery/update")
 	public ModelAndView getInqueryUpdate(InqueryVO fbvo) {
 		ModelAndView mv = new ModelAndView();
 		inqueryService.getInqueryUpdate(fbvo);
 		return mv;
 	}
 	
-	@PostMapping("inquery/delete")
+	@PostMapping("/inquery/delete")
 	public ModelAndView getInqueryDelete(String idx) {
 		ModelAndView mv = new ModelAndView();
 		inqueryService.getInqueryDelete(idx);

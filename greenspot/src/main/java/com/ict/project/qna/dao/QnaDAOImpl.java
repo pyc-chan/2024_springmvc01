@@ -28,8 +28,8 @@ public class QnaDAOImpl implements QnaDAO{
 	}
 
 	@Override
-	public QnaVO getQnaDetail(String idx) {
-		return sqlSessionTemplate.selectOne("qna.qna_detail",idx);
+	public QnaVO getQnaDetail(String q_idx) {
+		return sqlSessionTemplate.selectOne("qna.qna_detail",q_idx);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class QnaDAOImpl implements QnaDAO{
 	}
 
 	@Override
-	public int getQnaDelete(String idx) {
-		return sqlSessionTemplate.delete("qna.qna_delete",idx);
+	public int getQnaDelete(String q_idx) {
+		return sqlSessionTemplate.delete("qna.qna_delete",q_idx);
 	}
 
 	@Override

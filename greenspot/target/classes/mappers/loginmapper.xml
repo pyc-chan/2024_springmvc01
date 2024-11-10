@@ -44,6 +44,13 @@
 		where u_id=#{u_id}
 	</update>
 	
+	<select id="user_count" resultType="int">
+		select count(*) from u_db
+	</select>
+	
+	<select id="user_list" resultType="lvo" parameterType="Map">
+		select * from u_db limit #{offset}, #{limit}
+	</select>
 	
 	
 </mapper>

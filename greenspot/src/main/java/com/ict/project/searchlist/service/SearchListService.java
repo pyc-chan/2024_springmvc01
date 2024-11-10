@@ -6,7 +6,11 @@ import com.ict.project.searchlist.vo.TreeVO;
 
 public interface SearchListService {
 	
-	public int getTotalCount();
+	public int getAreaCount();
 	
-	public List<TreeVO> getTreeList(int offset, int limit);
+	public int getStatCount();
+
+	public List<TreeVO> getAreaList(int offset, int limit);
+
+	public List<TreeVO> getStatList(int offset, int limit);
 }

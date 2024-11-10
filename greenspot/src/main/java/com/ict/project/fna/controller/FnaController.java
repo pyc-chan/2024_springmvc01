@@ -25,7 +25,7 @@ public class FnaController {
 	private PagingService pagingService;
 	
 	
-	@GetMapping("fna/list")
+	@GetMapping("/fna/list")
 	public ModelAndView getFnaList(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView();
 		
@@ -46,7 +46,7 @@ public class FnaController {
 		return mv;
 	}
 	
-	@PostMapping("fna/detail")
+	@PostMapping("/fna/detail")
 	public ModelAndView getFnaDetail(String idx) {
 		ModelAndView mv = new ModelAndView();
 		FnaVO fvo = fnaService.getFnaDetail(idx);
@@ -54,21 +54,21 @@ public class FnaController {
 		return mv;
 	}
 	
-	@PostMapping("fna/insert")
+	@PostMapping("/fna/insert")
 	public ModelAndView getFnaInsert(FnaVO fvo) {
 		ModelAndView mv = new ModelAndView();
 		fnaService.getFnaInsert(fvo);
 		return mv;
 	}
 	
-	@PostMapping("fna/update")
+	@PostMapping("/fna/update")
 	public ModelAndView getFnaUpdate(FnaVO fvo) {
 		ModelAndView mv = new ModelAndView();
 		fnaService.getFnaUpdate(fvo);
 		return mv;
 	}
 	
-	@PostMapping("fna/delete")
+	@PostMapping("/fna/delete")
 	public ModelAndView getFnaDelete(String idx) {
 		ModelAndView mv = new ModelAndView();
 		fnaService.getFnaDelete(idx);

@@ -11,12 +11,12 @@ public interface QnaDAO {
 	
 	public List<QnaVO> getQnaList(int offset, int limit);
 	
-	public QnaVO getQnaDetail(String idx);
+	public QnaVO getQnaDetail(String q_idx);
 	
 	public int getQnaInsert(QnaVO qvo);
 	
 	public int getQnaUpdate(QnaVO qvo);
 	
-	public int getQnaDelete(String idx);
+	public int getQnaDelete(String q_idx);
 
 	}

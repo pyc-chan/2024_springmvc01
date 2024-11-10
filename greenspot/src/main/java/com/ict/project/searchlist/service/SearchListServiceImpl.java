@@ -1,6 +1,8 @@
 package com.ict.project.searchlist.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +15,25 @@ public class SearchListServiceImpl implements SearchListService{
 	
 	@Autowired
 	public SearchListDAO searchListDAO;
+
+	@Override
+	public int getAreaCount() {
+		return searchListDAO.getAreaCount();
+	}
 	
 	@Override
-	public int getTotalCount() {
-		return searchListDAO.getTotalCount();
+	public int getStatCount() {
+		return searchListDAO.getStatCount();
 	}
 
 	@Override
-	public List<TreeVO> getTreeList(int offset, int limit) {
-		return searchListDAO.getTreeList(offset, limit);
+	public List<TreeVO> getAreaList(int offset, int limit) {
+		return searchListDAO.getAreaList(offset, limit);
+	}
+	
+	@Override
+	public List<TreeVO> getStatList(int offset, int limit) {
+		return searchListDAO.getStatList(offset, limit);
 	}
 
 }

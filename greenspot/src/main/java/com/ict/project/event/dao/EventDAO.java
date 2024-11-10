@@ -10,5 +10,7 @@ public interface EventDAO {
 	
 	public List<EventVO> getEventList(int offset, int limit);
 	
-	public List<EventVO> getEventSearch(String str, int offset, int limit);
+	public List<EventVO> getEventSearch(String[] str, int offset, int limit);
+	
+	public List<EventVO> getEventCalender();
 }
