@@ -14,6 +14,7 @@ import com.ict.project.inquery.service.InqueryService;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.notice.service.NoticeService;
 import com.ict.project.qna.service.QnaService;
+import com.ict.project.review.service.ReviewService;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -32,6 +33,8 @@ public class AdminServiceImpl implements AdminService{
 	private InqueryService inqueryService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@Override
 	public List<AdminVO> adminList(int offset, int limit) {
@@ -91,6 +94,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public CommentService commentService() {
 		return commentService;
+	}
+
+	@Override
+	public ReviewService reviewService() {
+		return reviewService;
 	}
 
 

@@ -1,10 +1,10 @@
-	<div class="side-bar">
+		<div class="side-bar">
 			<div class="icon-bar"></div>
 			<div class="search-menu">
 				<div class="profile">
-					<img src="resources/images/logo_w.png" alt="logo">
+					<img src="/resources/images/logo_w.png" alt="logo">
 				</div>
-
+				
 				<div class="controller">
 					<div class="menu active">
 						<div class="topmenu">
@@ -62,4 +62,4 @@
 					<i class="fa-solid fa-arrow-right"></i> <a href="">로그아웃</a>
 				</div>
 			</div>
-		</div>
+		</div> 

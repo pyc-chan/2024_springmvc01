@@ -22,6 +22,7 @@
 		<typeAlias type="com.ict.project.notice.vo.NoticeVO" alias="nvo" />
 		<typeAlias type="com.ict.project.popup.vo.PopupVO" alias="popvo" />
 		<typeAlias type="com.ict.project.qna.vo.QnaVO" alias="qvo" />
+		<typeAlias type="com.ict.project.review.vo.ReviewVO" alias="revo" />
 		<typeAlias type="com.ict.project.searchlist.vo.TreeVO" alias="tvo" />
 		<!--  <typeAlias type="" alias="" /> -->
 	</typeAliases>
@@ -37,6 +38,7 @@
 		<mapper resource="mappers/noticemapper.xml" />
 		<mapper resource="mappers/popupmapper.xml" />
 		<mapper resource="mappers/qnamapper.xml" />
+		<mapper resource="mappers/reviewmapper.xml" />
 		<mapper resource="mappers/treemapper.xml" />
 	</mappers>
 </configuration>

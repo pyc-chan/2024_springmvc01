@@ -23,7 +23,6 @@
 	<div class="container">
 
 		<!-- 사이드 바 -->
-		<!-- 
 		<div class="side-bar">
 			<div class="icon-bar"></div>
 			<div class="search-menu">
@@ -88,10 +87,8 @@
 				</div>
 			</div>
 		</div>
-		
-		-->
-		
-		<jsp:include page="adminsidebar.jsp" />
+
+
 
 		<!-- 메인 컨텐트 -->
 		<div class="popuplayer">

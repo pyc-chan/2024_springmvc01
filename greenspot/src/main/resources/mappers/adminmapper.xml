@@ -6,29 +6,29 @@
 
 <mapper namespace="admin">
 	
-	<select id="admin_list" resultType="cvo">
+	<select id="admin_list" resultType="avo">
 		select * from admin_db order by a_idx asc
 	</select>
 	
-	<select id="admin_detail" parameterType="String" resultType="cvo">
-		select * from admin_db where idx = #{idx}
+	<select id="admin_detail" parameterType="String" resultType="avo">
+		select * from admin_db where a_idx = #{a_idx}
 	</select>
 	
 	<select id="admin_count" resultType="int">
 		select count(*) from admin_db
 	</select>
 	
-	<insert id="admin_insert" parameterType="cvo">
-		insert into admin_db (idx, id, tle, con, dat, ans, acon)
-		values (#{idx}, #{id}, #{tle}, #{con}, #{dat}, #{ans}, #{acon})
+	<insert id="admin_insert" parameterType="avo">
+		insert into admin_db (a_idx, a_id, a_pw, a_na, a_pho, a_em, a_stat, a_log)
+		values (#{a_idx}, #{a_id}, #{a_pw}, #{a_na}, #{a_pho}, #{a_em}, #{a_stat}, #{a_log})
 	</insert>
 	
-	<update id="admin_update" parameterType="cvo">
-		update admin_db set id = #{id}, tle = #{tle}, con = #{con}, dat = #{dat}, ans = #{ans}, acon = #{acon}
-		where idx = #{idx}
+	<update id="admin_update" parameterType="avo">
+		update admin_db set a_pw = #{a_pw}, a_na = #{a_na}, a_pho = #{a_pho}, a_em = #{a_em}, a_stat = #{a_stat}, a_log = #{a_log}
+		where a_idx = #{a_idx}
 	</update>
 	
 	<delete id="admin_delete" parameterType="String">
-		delete from admin_db where idx = #{idx}
+		delete from admin_db where a_idx = #{a_idx}
 	</delete>
 </mapper>

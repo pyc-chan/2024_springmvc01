@@ -6,12 +6,10 @@ import com.ict.project.admin.vo.AdminVO;
 import com.ict.project.comment.service.CommentService;
 import com.ict.project.fna.service.FnaService;
 import com.ict.project.inquery.service.InqueryService;
-import com.ict.project.login.dao.LoginDAO;
 import com.ict.project.login.service.LoginService;
-import com.ict.project.login.vo.LoginVO;
 import com.ict.project.notice.service.NoticeService;
-import com.ict.project.popup.vo.PopupVO;
 import com.ict.project.qna.service.QnaService;
+import com.ict.project.review.service.ReviewService;
 
 public interface AdminService {
 	
@@ -28,5 +26,5 @@ public interface AdminService {
 	NoticeService noticeService();
 	InqueryService inqueryService();
 	CommentService commentService();
-	
+	ReviewService reviewService();
 }
