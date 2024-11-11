@@ -75,4 +75,11 @@ public class InqueryController {
 		return mv;
 	}
 	
+	@PostMapping("/inquery/admin")
+	public ModelAndView getAdminUpdate(InqueryVO ivo) {
+		ModelAndView mv = new ModelAndView();
+		inqueryService.getAdminUpdate(ivo);
+		return mv;
+	}
+	
 }

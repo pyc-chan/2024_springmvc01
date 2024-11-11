@@ -20,15 +20,20 @@
 	
 	<insert id="inquery_insert" parameterType="ivo">
 		insert into inquery_db (i_idx, u_idx, i_tle, i_con, i_dat, i_ans, a_idx, i_acon)
-		values (#{i_idx}, #{u_idx}, #{i_tle}, #{i_con}, now(), #{i_ans}, #{a_idx}, #{i_acon})
+		values (#{i_idx}, #{u_idx}, #{i_tle}, #{i_con}, now(), '0', #{a_idx}, #{i_acon})
 	</insert>
 	
 	<update id="inquery_update" parameterType="ivo">
-		update inquery_db set i_tle=#{i_tle}, i_con=#{i_con}, i_ans=#{i_ans}, a_idx=#{a_idx}, i_acon=#{i_acon}
+		update inquery_db set i_tle=#{i_tle}, i_con=#{i_con}
 		where i_idx = #{i_idx}
 	</update>
 	
 	<delete id="inquery_delete" parameterType="String">
 		delete from inquery_db where i_idx=#{i_idx}
 	</delete>
+	
+	<update id="inquery_adminup" parameterType="ivo">
+		update inquery_db set i_ans='1', a_idx=#{a_idx}, i_acon=#{i_acon}
+		where i_idx = #{i_idx}
+	</update>
 </mapper>

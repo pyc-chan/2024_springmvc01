@@ -37,30 +37,6 @@
 		update review_db set where rev_idx = #{rev_idx}
 	</update>
 	
-    <!-- comment -->
-    
-	<select id="reviewclist" parameterType="String" resultType="cvo">
-		select * from comment_db where c_bor = #{c_bor} and c_ref = #{c_ref} 
-	</select>
-	
-	<select id="reviewccount" resultType="int">
-		select count(*) from comment_db  
-	</select>
-	
-	<insert id="reviewcinsert" parameterType="cvo">
-		insert into comment_db(u_idx, c_con, c_dat, c_up, c_out, c_bor, c_ref) 
-			values (#{u_idx}, #{c_con}, now(), '0', '0', #{c_bor}, #{c_ref})
-	</insert>
-    
-	<update id="reviewcdelete" parameterType="String">
-		update comment_db set c_out=1 where c_idx = #{c_idx}
-	</update>
-	
-	<update id="reviewcupdate" parameterType="cvo">
-		update comment_db set c_con=#{c_con}, c_up='1' 
-		where c_idx = #{c_idx}
-	</update>
-    
     
 </mapper>
 

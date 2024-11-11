@@ -18,5 +18,7 @@ public interface InqueryService {
 	public int getInqueryUpdate(InqueryVO ivo);
 	
 	public int getInqueryDelete(String idx);
+	
+	public int getAdminUpdate(InqueryVO ivo);
 }
 

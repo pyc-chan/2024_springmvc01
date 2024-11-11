@@ -51,6 +51,21 @@ public class QnaDAOImpl implements QnaDAO{
 	public int getQnaCount() {
 		return sqlSessionTemplate.selectOne("qna.qna_count");
 	}
+
+	@Override
+	public List<QnaVO> getQnaUserList(String u_idx, int offset, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("u_idx", u_idx);
+		map.put("offset", offset);
+		map.put("limit", limit);
+		
+		return sqlSessionTemplate.selectList("qna.qna_userlist", map);
+	}
+
+	@Override
+	public int getQnaUserCount(String u_idx) {
+		return sqlSessionTemplate.selectOne("qna.qna_usercount", u_idx);
+	}
 	
 	
 	

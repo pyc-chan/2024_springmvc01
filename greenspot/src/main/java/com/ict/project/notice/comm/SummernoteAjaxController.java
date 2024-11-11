@@ -1,6 +1,8 @@
 package com.ict.project.notice.comm;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -30,8 +32,16 @@ public class SummernoteAjaxController {
 			String fname = null;
 			if (file.getSize()>0) {
 				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-				UUID uuid = UUID.randomUUID();
-				fname = uuid.toString()+"_"+file.getOriginalFilename();
+				// 현재 날짜와 시간 가져오기
+			    LocalDateTime now = LocalDateTime.now();
+
+		        // 원하는 형식으로 포맷하기
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+		        String nowstr = now.format(formatter);
+			    
+		        // pic 파일이름 file 실제 파일
+		        // 업로드시간_파일명 의 형태로 저장
+		        fname = nowstr+"_"+file.getOriginalFilename();
 				// 업로드
 				file.transferTo(new File(path, fname));
 			}

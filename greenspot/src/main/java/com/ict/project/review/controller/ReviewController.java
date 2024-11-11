@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.project.comm.Paging;
 import com.ict.project.comm.PagingService;
 import com.ict.project.comm.PerPageConstant;
+import com.ict.project.comment.service.CommentService;
+import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.review.service.ReviewFileService;
 import com.ict.project.review.service.ReviewService;
 import com.ict.project.review.vo.ReviewVO;
@@ -27,8 +30,10 @@ public class ReviewController {
 	private ReviewService reviewService;
 	@Autowired
 	private PagingService pagingService;
+	@Autowired
+	private CommentService commentService;
 	
-	
+	// 리뷰 리스트
 	@GetMapping("/review/list")
 	public ModelAndView getReviewList(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("review/list");
@@ -51,10 +56,12 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/detail")
-	public ModelAndView getReviewDetail(String rev_idx) {
+	public ModelAndView getReviewDetail(CommentVO cvo, String cPage, String rev_idx) {
 		ModelAndView mv = new ModelAndView("review/detail");
-		ReviewVO fvo = reviewService.getReviewDetail(rev_idx);
-		mv.addObject("fvo", fvo);
+		ReviewVO rvo = reviewService.getReviewDetail(rev_idx);
+		List<CommentVO> clist = commentService.getCommentList(cvo);
+		mv.addObject("rvo", rvo);
+		mv.addObject("clist", clist);
 		return mv;
 	}
 	
@@ -91,6 +98,26 @@ public class ReviewController {
 	public ModelAndView getReviewDelete(String rev_idx) {
 		ModelAndView mv = new ModelAndView("redirect:/review/list");
 		reviewService.getReviewDelete(rev_idx);
+		return mv;
+	}
+	
+	// review 댓글 등록
+		@PostMapping("/review/comment_insert")
+		public ModelAndView getCommentInsert(CommentVO cvo, 
+				 @ModelAttribute("rev_idx") String rev_idx,
+				 @ModelAttribute("cPage") String cPage) {
+			
+			ModelAndView mv = new ModelAndView("redirect:/review_detail");
+			commentService.getCommentInsert(cvo);
+			
+			return mv;
+		}
+	
+	
+	@PostMapping("/review/comment_delete")
+	public ModelAndView commentDeleteReview(String c_idx, String rev_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/review/detail?rev_idx="+rev_idx);
+		commentService.getCommentDelete(c_idx);
 		return mv;
 	}
 	

@@ -18,5 +18,9 @@ public interface QnaDAO {
 	public int getQnaUpdate(QnaVO qvo);
 	
 	public int getQnaDelete(String q_idx);
+	
+	public List<QnaVO> getQnaUserList(String u_idx, int offset, int limit);
+	
+	public int getQnaUserCount(String u_idx);
 
 	}

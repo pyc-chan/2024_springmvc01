@@ -8,4 +8,6 @@ public interface PopFileService {
 	public PopupVO popFileUpload(HttpServletRequest request, PopupVO pvo);
 	
 	public PopupVO popFileUpdate(HttpServletRequest request, PopupVO pvo);
+	
+	public void popFileDelete(HttpServletRequest request, PopupVO pvo);
 }

@@ -4,15 +4,15 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="notice">
-	<select id="count" resultType="int">
+	<select id="nt_count" resultType="int">
 		select count(*) from notice_db
 	</select>
 	
-	<select id="list" parameterType="map" resultType="nvo">
+	<select id="nt_list" parameterType="map" resultType="nvo">
 		select * from notice_db order by idxn_idx desc limit #{limit} offset #{offset}
 	</select>
 
-	<insert id="insert" parameterType="nvo">
+	<insert id="nt_insert" parameterType="nvo">
 		insert into notice_db(n_chk, n_opt, a_idx, n_tle, n_con, n_dat, n_out, n_hit, f_name)
 		value (#{n_chk}, #{n_opt}, #{a_idx}, #{n_tle}, #{n_con}, now(), #{n_out}, 0, #{f_name})
 	</insert>
@@ -25,20 +25,7 @@
     	select * from notice_db where idxn_idx = #{idxn_idx}
     </select>
 	
-	<select id="clist" parameterType="String" resultType="cvo">
-		select * from comment_db where c_idx = #{c_idx}
-	</select>
-	
-	<insert id="cinsert" parameterType="cvo">
-		insert into comment_db(u_idx, c_con, c_dat, c_up, c_out, c_bor, c_ref) 
-			values (#{u_idx}, #{c_con}, now(), #{c_up}, #{c_out}, #{c_bor}, #{c_ref})
-	</insert>
-    
-	<update id="cdelete" parameterType="String">
-		update comment_db set c_out = 1 where c_idx = #{c_idx}
-	</update>
-    
-    <update id="update" parameterType="nvo">
+    <update id="nt_update" parameterType="nvo">
     	update notice_db 
     	set n_chk = #{n_chk},
 			n_opt = #{n_opt},
@@ -49,9 +36,11 @@
     		where n_idx = #{n_idx}
     	]]>
     </update>
-    
+    	
 	<update id="delete" parameterType="String">
 		update notice_db set where n_idx = #{n_idx}
 	</update>
+	
+    
 </mapper>
 

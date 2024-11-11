@@ -46,4 +46,9 @@ public class InqueryServiceImpl implements InqueryService{
 		return inqueryDAO.getInqueryCount();
 	}
 
+	@Override
+	public int getAdminUpdate(InqueryVO ivo) {
+		return inqueryDAO.getAdminUpdate(ivo);
+	}
+
 }

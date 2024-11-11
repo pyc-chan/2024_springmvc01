@@ -93,6 +93,7 @@ public class LoginController {
 		return mv;
 	}
 	
+	// 
 	@PostMapping("/pwfindok")
 	public ModelAndView pwFindOK() {
 		ModelAndView mv = new ModelAndView("login/pwfindok");
@@ -229,7 +230,7 @@ public class LoginController {
 	}
 	
 	
-	
+	// 마이페이지 회원정보 변경
 	@PostMapping("/u_update")
 	public ModelAndView updateOK(LoginVO lvo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -271,6 +272,7 @@ public class LoginController {
 		}
 	}
 	
+	// 비밀번호 변경
 	@PostMapping("/pwupdate")
 	public ModelAndView pwUpdate(LoginVO lvo) {
 		ModelAndView mv = new ModelAndView();
@@ -285,6 +287,7 @@ public class LoginController {
 		return mv;
 	}
 	
+	// 로그아웃
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request) {
 		request.getSession().invalidate();

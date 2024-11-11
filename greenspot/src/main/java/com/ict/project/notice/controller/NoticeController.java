@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.project.comm.Paging;
 import com.ict.project.comm.PagingService;
 import com.ict.project.comm.PerPageConstant;
+import com.ict.project.comment.service.CommentService;
 import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.notice.service.NoticeService;
 import com.ict.project.notice.vo.NoticeVO;
@@ -39,6 +40,9 @@ public class NoticeController {
 	
 	@Autowired
 	private PagingService pagingService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	// 메인
 	@RequestMapping("/mainGo")
@@ -56,18 +60,6 @@ public class NoticeController {
 		mv.addObject("search_name", search_name);
 		
 		return mv;
-	}
-	
-	// 로그인
-	@RequestMapping("/loginGo")
-	public ModelAndView getLoginGo() {
-		return new ModelAndView("sub/logingo");
-	}
-	
-	// 회원가입
-	@RequestMapping("/joinGo")
-	public ModelAndView getJoinGo() {
-		return new ModelAndView("sub/joingo");
 	}
 	
 	// 로그아웃
@@ -297,17 +289,16 @@ public class NoticeController {
 	// notice 상세보기
 	@RequestMapping("/notice_detail")
 	public ModelAndView getMoveNoticeDetail(@RequestParam("cPage") String cPage,
-			@RequestParam("idxn_idx") String n_idx) {
+			@RequestParam("idxn_idx") String n_idx,
+			CommentVO cvo) {
 		ModelAndView mv = new ModelAndView("sub/notice_detail");
 		
 		// hit 업데이트
 		noticeService.getBoardHit(n_idx);
-		
 		// 상세보기
 		NoticeVO gvo = noticeService.getBoardDetail(n_idx);
-		
 		// 댓글 가져오기 
-		List<CommentVO> clist = noticeService.getCommentList(n_idx);
+		List<CommentVO> clist = commentService.getCommentList(cvo);
 		mv.addObject("clist", clist);
 		
 		if (gvo != null) {
@@ -346,7 +337,7 @@ public class NoticeController {
 	}
 	
 	// notice 댓글 등록
-	@PostMapping("/comment_insert")
+	@PostMapping("/notice/comment_insert")
 	public ModelAndView getCommentInsert(CommentVO cvo, 
 			 @ModelAttribute("idxn_idx") String idxn_idx,
 			 @ModelAttribute("cPage") String cPage) {
@@ -354,26 +345,37 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView("redirect:/notice_detail");
 		
-		noticeService.getCommentInsert(cvo);
+		commentService.getCommentInsert(cvo);
+		
+		return mv;
+	}
+	
+	// notice 댓글 수정
+	@PostMapping("/notice/comment_update")
+	public ModelAndView getCommentUpdate(CommentVO cvo,
+			@ModelAttribute("idxn_idx") String idxn_idx,
+			@ModelAttribute("cPage") String cPage) {
+		
+		ModelAndView mv = new ModelAndView("redirect:/notice_detail");
+		
+		commentService.getCommentUpdate(cvo);
 		
 		return mv;
 	}
 	
 	// notice 댓글 삭제
-	 @PostMapping("/comment_delete")
+	 @PostMapping("/notice/comment_delete")
 	 public ModelAndView getCommentDelete(@RequestParam("idxc_idx") String idxc_idx,
 			 @ModelAttribute("idxn_idx") String idxn_idx,
-			 @ModelAttribute("c_ref") String c_ref,
 			 @ModelAttribute("cPage") String cPage) {
 		 
 		 System.out.println("idxc_idx : " + idxc_idx);
-		 System.out.println("c_ref : " + c_ref);
 		 System.out.println("cPage : " + cPage);
 		 System.out.println("idxn_idx : " + idxn_idx);
 		 
 		 ModelAndView mv = new ModelAndView("redirect:/notice_detail");
 		 
-		 noticeService.getCommentDelete(idxc_idx);
+		 commentService.getCommentDelete(idxc_idx);
 		 
 		 return mv;
 	 }
@@ -468,24 +470,6 @@ public class NoticeController {
 	}
 	
 	
-	
-	
-	// reivew
-	@RequestMapping("/review")
-	public ModelAndView getMoveReivew() {
-		return new ModelAndView("sub/review_list");
-	}
-	// reivew 글쓰기
-	@RequestMapping("/review_write")
-	public ModelAndView getMoveReivewWrite() {
-		return new ModelAndView("sub/review_write");
-	}
-	// customer 상세보기
-	@RequestMapping("/review_detail")
-	public ModelAndView getMoveReviewDetail() {
-		return new ModelAndView("sub/review_detail");
-	}
-	
 	// customer 리스트
 	@RequestMapping("/customer")
 	public ModelAndView getMoveCustomer() {
@@ -500,38 +484,6 @@ public class NoticeController {
 	@RequestMapping("/customer_detail")
 	public ModelAndView getMoveCustomerDetail() {
 		return new ModelAndView("sub/customer_detail");
-	}
-	
-	// faq
-	@RequestMapping("/faq")
-	public ModelAndView getMoveFaq() {
-		return new ModelAndView("sub/faq_list");
-	}
-	// faq 글쓰기
-	@RequestMapping("/faq_write")
-	public ModelAndView getMoveFaqWrite() {
-		return new ModelAndView("sub/faq_write");
-	}
-	// faq 상세보기
-	@RequestMapping("/faq_detail")
-	public ModelAndView getMoveFaqDetail() {
-		return new ModelAndView("sub/faq_detail");
-	}
-	
-	// qna
-	@RequestMapping("/qna")
-	public ModelAndView getMoveQna() {
-		return new ModelAndView("sub/qna_list");
-	}
-	// qna 글쓰기
-	@RequestMapping("/qna_write")
-	public ModelAndView getMoveQnaWrite() {
-		return new ModelAndView("sub/qna_write");
-	}
-	// qna 상세보기
-	@RequestMapping("/qna_detail")
-	public ModelAndView getMoveQnaDetail() {
-		return new ModelAndView("sub/qna_detail");
 	}
 	
 	

@@ -8,4 +8,6 @@ public interface QnaFileService {
 	public QnaVO qnaFileUpload(HttpServletRequest request, QnaVO qvo);
 	
 	public QnaVO qnaFileUpdate(HttpServletRequest request, QnaVO qvo);
+	
+	public void qnaFileDelete(HttpServletRequest request, QnaVO qvo);
 }

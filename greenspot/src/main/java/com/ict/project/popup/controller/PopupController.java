@@ -83,12 +83,9 @@ public class PopupController {
 	@PostMapping("/pop/delete")
 	public ModelAndView popDelete(HttpServletRequest request, PopupVO pvo) {
 		ModelAndView mv = new ModelAndView();
-		int result = popupService.getPopDelete(pvo);
-		if(result>0) {
-			request.getSession().setAttribute("deleteok", "ok");
-		}else {
-			request.getSession().setAttribute("deleteok", "fail");
-		}
+		fileService.popFileDelete(request, pvo);
+		popupService.getPopDelete(pvo);
+		
 		mv.setViewName("redirect:/poplist");
 		return mv;
 	}

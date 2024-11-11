@@ -27,7 +27,7 @@ public class QnaController {
 	@Autowired
 	private PagingService pagingService;
 	
-	
+	// qna 리스트
 	@GetMapping("/qna/list")
 	public ModelAndView getQnaList(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("qna/list");
@@ -50,10 +50,11 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qna/detail")
-	public ModelAndView getQnaDetail(String q_idx) {
+	public ModelAndView getQnaDetail(String q_idx, String cPage) {
 		ModelAndView mv = new ModelAndView("qna/detail");
 		QnaVO fvo = qnaService.getQnaDetail(q_idx);
 		mv.addObject("fvo", fvo);
+		mv.addObject("cPage", cPage);
 		return mv;
 	}
 	
@@ -87,10 +88,37 @@ public class QnaController {
 	}
 	
 	@PostMapping("/qna/delete")
-	public ModelAndView getQnaDelete(String q_idx) {
+	public ModelAndView getQnaDelete(String q_idx, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/poplist");
+		QnaVO qvo = qnaService.getQnaDetail(q_idx);
+		
+		qnaFileService.qnaFileDelete(request, qvo);
 		qnaService.getQnaDelete(q_idx);
+		
 		return mv;
 	}
+	
+	@PostMapping("/qna/userlist")
+	public ModelAndView getQnaUserList(String u_idx, String cPage) {
+		ModelAndView mv = new ModelAndView("");
+		
+		int count = qnaService.getQnaUserCount(u_idx);
+		if(cPage==null) {
+			cPage = "1";
+		}
+		PerPageConstant perPageConstant = new PerPageConstant();
+		int perPage = perPageConstant.getUserqnapage();
+		Paging paging = pagingService.pagingservice(count, cPage, perPage);
+		int offset = paging.getOffset();
+		int limit = paging.getNumPerPage();
+		
+		List<QnaVO> list = qnaService.getQnaUserList(u_idx, offset, limit);
+		mv.addObject("list", list);
+		mv.addObject("paging", paging);
+		
+		return mv;
+	}
+	
+	
 	
 }

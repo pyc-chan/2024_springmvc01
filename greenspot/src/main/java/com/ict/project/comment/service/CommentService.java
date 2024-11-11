@@ -8,7 +8,7 @@ public interface CommentService {
 
 	public int getCommentCount();
 	
-	public List<CommentVO> getCommentList(int offset, int limit, CommentVO cvo);
+	public List<CommentVO> getCommentList(CommentVO cvo);
 	
 	public CommentVO getCommentDetail(String idx);
 	
@@ -17,4 +17,6 @@ public interface CommentService {
 	public int getCommentUpdate(CommentVO cvo);
 	
 	public int getCommentDelete(String idx);
+	
+	public List<CommentVO> getCommentList(int offset, int limit);
 }

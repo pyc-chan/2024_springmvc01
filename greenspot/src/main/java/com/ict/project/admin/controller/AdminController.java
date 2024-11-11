@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +20,8 @@ import com.ict.project.comment.service.CommentService;
 import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.fna.service.FnaService;
 import com.ict.project.fna.vo.FnaVO;
+import com.ict.project.inquery.service.InqueryService;
+import com.ict.project.inquery.vo.InqueryVO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
 import com.ict.project.notice.service.NoticeService;
@@ -81,7 +82,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("");
 		AdminVO avo = adminService.adminDetail(a_idx);
 		mv.addObject("avo", avo);
-
+		
 		return mv;
 	}
 
@@ -379,7 +380,7 @@ public class AdminController {
 		int offset = paging.getOffset();
 		int limit = paging.getNumPerPage();
 
-		List<CommentVO> list = commentad.getCommentList(offset, limit, cvo);
+		List<CommentVO> list = commentad.getCommentList(offset, limit);
 		mv.addObject("list", list);
 		mv.addObject("paging", paging);
 
@@ -468,6 +469,16 @@ public class AdminController {
 			ReviewService reviewad = adminService.reviewService();
 			reviewad.getReviewInsert(revo);
 
+			return mv;
+		}
+		
+		// inquery 댓글 작성
+		@PostMapping("/admin/inqueryupdate")
+		public ModelAndView inqueryUpdate(InqueryVO ivo) {
+			ModelAndView mv = new ModelAndView();
+			InqueryService inqueryad = adminService.inqueryService();
+			inqueryad.getAdminUpdate(ivo);
+			
 			return mv;
 		}
 		

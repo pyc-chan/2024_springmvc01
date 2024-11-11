@@ -51,7 +51,7 @@ public class QnaFileServiceImpl implements QnaFileService{
 	        String oldFileName = qvo.getQ_oldname();
 	        String path = request.getSession().getServletContext().getRealPath("/resources/images");
 			
-	     // 기존 파일 삭제
+	        // 기존 파일 삭제
 	        File oldFile = new File(path, oldFileName);
 	        if (oldFile.exists()) {
 	            boolean deleted = oldFile.delete();
@@ -69,6 +69,27 @@ public class QnaFileServiceImpl implements QnaFileService{
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
+		}
+	}
+
+	@Override
+	public void qnaFileDelete(HttpServletRequest request, QnaVO qvo) {
+		try {
+			
+			String path = request.getSession().getServletContext().getRealPath("/resources/images");
+			String filename = qvo.getQ_filename();
+			File file = new File(path, filename);
+			if(file.exists()) {
+				boolean deleted = file.delete();
+            	if (!deleted) {
+                	System.out.println("기존 파일 삭제 실패: " + filename);
+            	}
+        	} else {
+        		System.out.println("기존 파일이 존재하지 않습니다: " + filename);
+        	}
+	        
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 	

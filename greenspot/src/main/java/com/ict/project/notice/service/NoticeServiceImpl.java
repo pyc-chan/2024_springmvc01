@@ -42,12 +42,6 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int getAnsInsert(NoticeVO gvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int getBoardDelete(String idxn_idx) {
 		return noticeDAO.getBoardDelete(idxn_idx);
 	}
@@ -57,19 +51,5 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.getBoardUpdate(gvo);
 	}
 
-	@Override
-	public List<CommentVO> getCommentList(String idxn_idx) {
-		return noticeDAO.getCommentList(idxn_idx);
-	}
-
-	@Override
-	public int getCommentInsert(CommentVO cvo) {
-		return noticeDAO.getCommentInsert(cvo);
-	}
-
-	@Override
-	public int getCommentDelete(String idxc_idx) {
-		return noticeDAO.getCommentDelete(idxc_idx);
-	}
 	
 }

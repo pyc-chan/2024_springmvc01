@@ -3,38 +3,46 @@ package com.ict.project.comm;
 public class PerPageConstant {
 	
 	// 메인페이지
-	private final int mainevent = 3;
-	private final int mainnotice = 4;
-	private final int mainreview = 6;
+	private final int mainevent = 3;		// 메인페이지 행사 갯수 
+	private final int mainnotice = 4;		// 메인페이지 공지사항 갯수
+	private final int mainreview = 6;		// 메인페이지 리뷰 갯수
 	
 	// 서브페이지
-	private final int commentpage = 10;
-	private final int qnapage = 10;
-	private final int fnapage = 6;
-	private final int noticepage = 5;
-	private final int inquerypage = 10;
-	private final int freeboardpage = 10;
-	private final int reviewpage = 12;
-	private final int reviewtoppage = 4;
-	private final int eventpage = 6;
-	private final int poppage = 5;
-	private final int treepage = 10;
-	private final int treemappage = 4;
-	private final int roadpage = 3;
-	private final int roadtreepage = 4;
-	private final int parkpage = 4;
+	private final int commentpage = 10;		// 서브페이지 댓글 갯수
+	private final int qnapage = 10;			// 서브페이지 qna 갯수
+	private final int fnapage = 6;			// 서브페이지 fna 갯수
+	private final int noticepage = 5;		// 서브페이지 공지사항 갯수
+	private final int inquerypage = 10;		// 서브페이지 고객의 소리 갯수
+	private final int freeboardpage = 10;	// 서브페이지 자유게시판 갯수
+	private final int reviewpage = 12;		// 서브페이지 리뷰 갯수
+	private final int eventpage = 6;		// 서브페이지 행사 갯수
+	private final int poppage = 5;			// 서브페이지 팝업 갯수
+	private final int treepage = 10;		// 보호수 페이지 갯수
+	private final int treemappage = 4;		// 보호수 + 지도 갯수
+	private final int roadpage = 3;			// 지역별 가로수찾기(지도)
+	private final int roadtreepage = 4;		// 가로수길 수목 조회
+	private final int parkpage = 4;			// 공원 갯수
+	
+	// 마이 페이지
+	private final int userqnapage = 1;		// 추후 변경 // 마이페이지 qna 갯수
+	private final int userreviewpage = 1;	// 추후 변경 // 마이페이지 리뷰 갯수
+	private final int usercommentpage = 1;	// 추후 변경 // 마이페이지 댓글 갯수
+	private final int userinquerypage = 1;	// 추후 변경 // 마이페이지 고객의 소리 갯수
 	
 	// 관리자페이지
-	private final int adminpage = 1;		// 추후 변경
-	private final int adminuserpage = 5;
-	private final int adminqnapage = 5;
-	private final int adminnoticepage = 5;
-	private final int adminuserspage = 10;
-	private final int adminqnaspage = 10;
-	private final int adminnoticespage = 10;
-	private final int adminreviewpage = 10;
+	private final int adminpage = 1;		// 추후 변경 // 관리자페이지 관리자관리
+	private final int adminuserpage = 5;	// 관리자페이지 메인 유저관리수
+	private final int adminqnapage = 5;		// 관리자페이지 메인 qna
+	private final int adminnoticepage = 5;	// 관리자페이지 메인 공지사항
+	private final int adminuserspage = 10;	// 관리자페이지 유저관리 상세
+	private final int adminqnaspage = 10;	// 관리자페이지 qna 상세
+	private final int adminnoticespage = 10;// 관리자페이지 공지사항 상세
+	private final int adminreviewpage = 10;	// 관리자페이지 리뷰 상세
 	
 	
+	public int getUserinquerypage() {
+		return userinquerypage;
+	}
 	public int getMainevent() {
 		return mainevent;
 	}
@@ -43,9 +51,6 @@ public class PerPageConstant {
 	}
 	public int getMainreview() {
 		return mainreview;
-	}
-	public int getReviewtoppage() {
-		return reviewtoppage;
 	}
 	public int getAdminuserpage() {
 		return adminuserpage;
@@ -112,6 +117,15 @@ public class PerPageConstant {
 	}
 	public int getParkpage() {
 		return parkpage;
+	}
+	public int getUserqnapage() {
+		return userqnapage;
+	}
+	public int getUserreviewpage() {
+		return userreviewpage;
+	}
+	public int getUsercommentpage() {
+		return usercommentpage;
 	}
 	
 }

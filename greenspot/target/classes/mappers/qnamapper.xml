@@ -31,4 +31,14 @@
 	<delete id="qna_delete" parameterType="String">
 		delete from qna_db where q_idx=#{q_idx}	
 	</delete>
+	
+	<select id="qna_userlist" resultType="qvo" parameterType="Map">
+		select * from qna_db order by q_idx desc limit #{offset}, #{limit}
+		where u_idx=#{u_idx}
+	</select>
+	
+	<select id="qna_usercount" resultType="int" parameterType="String">
+		select count(*) from qna_db where u_idx=#{u_idx}
+	</select>
+	
 </mapper>

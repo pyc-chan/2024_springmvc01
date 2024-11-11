@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.notice.vo.NoticeVO;
 
 
@@ -21,7 +20,7 @@ public class NoticeImpl implements NoticeDAO {
 
 	@Override
 	public int getTotalCount() {
-		return sqlSessionTemplate.selectOne("notice.count");
+		return sqlSessionTemplate.selectOne("notice.nt_count");
 	}
 
 	@Override
@@ -31,12 +30,12 @@ public class NoticeImpl implements NoticeDAO {
 		map.put("offset", offset);
 		map.put("limit", limit);
 		
-		return sqlSessionTemplate.selectList("notice.list", map);
+		return sqlSessionTemplate.selectList("notice.nt_list", map);
 	}
 
 	@Override
 	public int getBoardInsert(NoticeVO gvo) {
-		return sqlSessionTemplate.insert("notice.insert", gvo);
+		return sqlSessionTemplate.insert("notice.nt_insert", gvo);
 	}
 
 	@Override
@@ -50,15 +49,9 @@ public class NoticeImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int getAnsInsert(NoticeVO gvo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int getBoardDelete(String idxn_idx) {
 		System.out.println("dao idx : " + idxn_idx);
-		return sqlSessionTemplate.update("notice.delete", idxn_idx);
+		return sqlSessionTemplate.update("notice.nt_delete", idxn_idx);
 	}
 
 	@Override
@@ -66,19 +59,5 @@ public class NoticeImpl implements NoticeDAO {
 		return sqlSessionTemplate.update("notice.update", gvo);
 	}
 
-	@Override
-	public List<CommentVO> getCommentList(String n_idx) {
-		return sqlSessionTemplate.selectList("notice.clist", n_idx);
-	}
-
-	@Override
-	public int getCommentInsert(CommentVO cvo) {
-		return sqlSessionTemplate.insert("notice.cinsert", cvo);
-	}
-
-	@Override
-	public int getCommentDelete(String idxc_idx) {
-		return sqlSessionTemplate.update("notice.cdelete", idxc_idx);
-	}
 
 }

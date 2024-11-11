@@ -52,6 +52,11 @@ public class InqueryDAOImpl implements InqueryDAO{
 	public int getInqueryCount() {
 		return sqlSessionTemplate.selectOne("inquery.inquery_count");
 	}
+
+	@Override
+	public int getAdminUpdate(InqueryVO ivo) {
+		return sqlSessionTemplate.update("inquery.inquery_adminup", ivo);
+	}
 	
 	
 	

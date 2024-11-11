@@ -72,6 +72,28 @@ public class PopFileServiceImpl implements PopFileService{
 			return null;
 		}
 	}
+
+	@Override
+	public void popFileDelete(HttpServletRequest request, PopupVO pvo) {
+		try {
+			
+			String path = request.getSession().getServletContext().getRealPath("/resources/images");
+			String filename = pvo.getPop_pic();
+			File file = new File(path, filename);
+			if(file.exists()) {
+				boolean deleted = file.delete();
+            	if (!deleted) {
+                	System.out.println("기존 파일 삭제 실패: " + filename);
+            	}
+        	} else {
+        		System.out.println("기존 파일이 존재하지 않습니다: " + filename);
+        	}
+			
+        	
+		}catch (Exception e){
+			System.out.println(e);
+		}
+	}
 	
 	
 }
