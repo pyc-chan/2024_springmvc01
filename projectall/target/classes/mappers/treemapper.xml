@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC 
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tree">
+	<select id="areacount" resultType="int">
+		select count(*) from tree_db.tree_area_tbl
+	</select>
+	
+	<select id="statcount" resultType="int">
+		select count(*) from tree_db.tree_stat_tbl
+	</select>
+	
+	<select id="arealist" parameterType="Map" resultType="tvo">
+		select * from tree_db.tree_area_tbl order by t_area_idx desc limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="statlist" parameterType="Map" resultType="tvo">
+		select * from tree_db.tree_stat_tbl order by t_stat_idx desc limit #{limit} offset #{offset}
+	</select>
+	
+</mapper>

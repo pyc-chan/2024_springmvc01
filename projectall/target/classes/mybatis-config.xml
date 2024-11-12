@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- MyBatis가 해당 값의 타입을 명시적으로 알지 못하면 null 취급하게 된다. -->
+	<!-- 매번 쿼리를 실행할 때마다 데이터베이스에 요청이 가고, 결과를 새로 받아옵니다. -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	
+	<typeAliases>
+		<!-- <typeAlias type="VO위치"    alias="축약어"  /> -->
+		<typeAlias type="com.ict.project.admin.vo.AdminVO" alias="avo" />
+		<typeAlias type="com.ict.project.comment.vo.CommentVO" alias="cvo" />
+		<typeAlias type="com.ict.project.event.vo.EventVO" alias="evvo" />
+		<typeAlias type="com.ict.project.fna.vo.FnaVO" alias="fvo" />
+		<typeAlias type="com.ict.project.inquery.vo.InqueryVO" alias="ivo" />
+		<typeAlias type="com.ict.project.login.vo.LoginVO" alias="lvo" />
+		<typeAlias type="com.ict.project.notice.vo.NoticeVO" alias="nvo" />
+		<typeAlias type="com.ict.project.popup.vo.PopupVO" alias="popvo" />
+		<typeAlias type="com.ict.project.qna.vo.QnaVO" alias="qvo" />
+		<typeAlias type="com.ict.project.review.vo.ReviewVO" alias="revo" />
+		<typeAlias type="com.ict.project.searchlist.vo.TreeVO" alias="tvo" />
+		<!--  <typeAlias type="" alias="" /> -->
+	</typeAliases>
+	
+	<mappers>
+		<!-- <mapper resource="매퍼 위치" /> -->
+		<mapper resource="mappers/adminmapper.xml" />
+		<mapper resource="mappers/commentmapper.xml" />
+		<mapper resource="mappers/eventmapper.xml" />
+		<mapper resource="mappers/fnamapper.xml" />
+		<mapper resource="mappers/inquerymapper.xml" />
+		<mapper resource="mappers/loginmapper.xml" />
+		<mapper resource="mappers/noticemapper.xml" />
+		<mapper resource="mappers/popupmapper.xml" />
+		<mapper resource="mappers/qnamapper.xml" />
+		<mapper resource="mappers/reviewmapper.xml" />
+		<mapper resource="mappers/treemapper.xml" />
+	</mappers>
+</configuration>
