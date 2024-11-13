@@ -52,13 +52,13 @@ public class InqueryServiceImpl implements InqueryService{
 	}
 
 	@Override
-	public int getInqueryUserCount(String u_idx) {
-		return inqueryDAO.getInqueryUserCount(u_idx);
+	public int getInqueryUserCount(String u_id) {
+		return inqueryDAO.getInqueryUserCount(u_id);
 	}
 
 	@Override
-	public List<InqueryVO> getInqueryUserList(String u_idx, int offset, int limit) {
-		return inqueryDAO.getInqueryUserList(u_idx, offset, limit);
+	public List<InqueryVO> getInqueryUserList(String u_id, int offset, int limit) {
+		return inqueryDAO.getInqueryUserList(u_id, offset, limit);
 	}
 
 }

@@ -38,107 +38,36 @@
 
 
                         <div class="search-bar">
-                    <div class="search-text">전체 <span>${paging.totalRecored}</span>건</div>
-                    <div class="search-box">
-	                    <!-- <form method="get">
-	                        <input type="text" name="" value="" placeholder="검색어를 입력해주세요">
-	                        <button class="material-icons" type="submit">search</button>
-						</form> -->
-                    </div>
-                </div>
+		                    <div class="search-text">전체 <span>${paging.totalRecored}</span>건</div>
+		                </div>
 
-                <div class="contents">
-                    <ul>
-                        <li class="notice_check">
-                            <span class="category">공지</span>
-                            <p class="notice_title">공지사항 게시글 입니다. 1</p>
-                        </li>
-                        <li class="notice_check">
-                            <span class="category">공지</span>
-                            <p class="notice_title">공지사항 게시글 입니다. 2</p>
-                        </li>
-                        <li class="notice_check">
-                            <span class="category">공지</span>
-                            <p class="notice_title">공지사항 게시글 입니다. 3</p>
-                        </li>
-                    	<c:choose>
-                    		<c:when test="${empty list}">
-		                        <li>
-		                            게시물이 존재하지 않습니다.
-		                        </li>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<c:forEach var="k" items="${list}" varStatus="c">
-                    				 <li onclick="move_notice_detail(${k.idxn_idx}, ${paging.nowPage})">
-			                            <span>${k.n_opt}</span>
-			                            <p class="title">${k.n_tle}</p>
-			                            <em>${k.n_dat}</em>
-                    				 </li>
-                    			</c:forEach>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </ul>
-                    <div class="button_box">
-                        <div>
-                        	<button onclick="move_notice_write()">글쓰기</button>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <ul class="paging_num_ul">
-                            <li class="material-icons prev">
-                                keyboard_double_arrow_left
-                            </li>
-                        	<c:choose>
-                        		<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-		                            <li class="material-icons prev">
-		                                chevron_left
-		                            </li>
-                        		</c:when>
-                        		<c:otherwise>
-		                            <li class="material-icons prev">
-		                            	<a href="/notice?cPage=${paging.beginBlock - paging.pagePerBlock}">
-		                                	chevron_left
-		                                </a>
-		                            </li>
-                        		</c:otherwise>
-                        	</c:choose>
-                        	
-                        	<!-- 페이지 번호 -->
-                        	<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="k">
-                        		<c:choose>
-									<c:when test="${k == paging.nowPage }">
-										<li class="active">${k}</li>
-									</c:when>
-								    <c:otherwise>
-								    	<li><a href="/notice?cPage=${k}">${k}</a></li>
-								    </c:otherwise>
-								</c:choose>
-                        	</c:forEach>
-							
-							<!-- 다음 버튼 -->
-							<c:choose>
-								<c:when test="${paging.beginBlock >= paging.pagePerBlock}">
-									<li class="material-icons next">
-		                                chevron_right
-		                            </li>
-								</c:when>
-								<c:otherwise>
-									<li class="material-icons next">
-		                                <a href="/notice?cPage=${paging.beginBlock + paging.pagePerBlock}">
-		                                	chevron_right
-		                                </a>
-		                            </li>
-								</c:otherwise>
-							</c:choose>
-							
-                            
-                            <li class="material-icons next">
-                                keyboard_double_arrow_right
-                            </li>
-                        </ul>
-                    </div>
-                </div>         
+		                <div class="contents">
+		                    <ul>
+		                    	<c:choose>
+		                    		<c:when test="${empty list}">
+				                        <li>
+				                            게시물이 존재하지 않습니다.
+				                        </li>
+		                    		</c:when>
+		                    		<c:otherwise>
+		                    			<c:forEach var="k" items="${list}" varStatus="c">
+		                    				 <li onclick="move_notice_detail(${k.n_idx}, ${paging.nowPage})">
+					                            <span>${k.n_opt}</span>
+					                            <p class="title">${k.n_tle}</p>
+					                            <em>${k.n_dat}</em>
+		                    				 </li>
+		                    			</c:forEach>
+		                    		</c:otherwise>
+		                    	</c:choose>
+		                    </ul>
+		                    <div class="button_box">
+		                        <div>
+		                        	<button onclick="move_notice_write()">글쓰기</button>
+		                        </div>
+		                    </div>
+		                </div>
+		                    
+                    	<jsp:include page="../common/every_paging.jsp"/>
                     </li>
                 </ul>
             </div>
@@ -153,10 +82,9 @@
         <jsp:include page="../common/sub_m_menu.jsp"></jsp:include>
     </div>
     
-    
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
     
-
+    <jsp:include page="../common/arrow.jsp"></jsp:include>
     
     <script>
     

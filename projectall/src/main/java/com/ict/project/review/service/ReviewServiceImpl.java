@@ -46,8 +46,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<ReviewVO> getReviewUserList(String u_idx, int offset, int limit) {
-		return reviewDAO.getReviewUserList(u_idx, offset, limit);
+	public List<ReviewVO> getReviewUserList(String u_id, int offset, int limit) {
+		return reviewDAO.getReviewUserList(u_id, offset, limit);
 	}
 
 	@Override

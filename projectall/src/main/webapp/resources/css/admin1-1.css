@@ -10,6 +10,28 @@
 	box-sizing: border-box;
 }
 
+.unprocessed {
+	display: inline-block;	
+	width: 74px;
+	height: 26px;
+	line-height: 26px;
+	font-size:  12px;
+	border-radius: 13px;
+	border: 1px solid #555555;
+	color: #555555;
+}
+
+.completed {
+	display: inline-block;	
+	width: 74px;
+	height: 26px;
+	line-height: 26px;
+	font-size:  12px;
+	border-radius: 13px;
+	border: 1px solid #09BA00;
+	color: #09BA00;
+}
+
 /* 전체 박스 설정 */
 body {
 	font-family: "Noto Sans KR", sans-serif;
@@ -99,10 +121,11 @@ body {
 }
 
 .topmenu p {
-	color: white;
-	background-color: #2f5aff;
-	/* padding: 10px; */
-	display: inline-block;
+    color: white;
+    background-color: #2f5aff;
+    /* padding: 10px; */
+    display: inline-block;
+    margin-left: 6px;
 }
 
 i {
@@ -135,6 +158,10 @@ i {
 	overflow: hidden;
 	padding: 20px;
 	cursor: pointer;
+}
+
+.menu.active .menubtn i {
+	background: #1D44F7;
 }
 
 .menubtn {
@@ -189,41 +216,93 @@ i {
 	color: #fff;
 }
 /* 메뉴 아이콘 추가 끝 */
-.logout {
+
+.menu_btn_cont {
 	margin-top: auto;
-	background-color: #002AC9;
-	vertical-align: bottom;
-	cursor: pointer;
 }
 
+
 /* 추가 시작 */
+.logout {
+	background-color: #084391;
+	vertical-align: bottom;
+	cursor: pointer;
+	color: #fff;
+	line-height: 56px;
+}
+
 .logout:hover {
-	background-color: #001f8f;
+	background-color: #5c83c4;
 	transition: all 0.3s;
 }
 
 .logout:hover i {
-	background-color: #001f8f;
+	background-color: #5c83c4;
 	transition: all 0.3s;
 }
 
 .logout i {
-	background-color: #002AC9;
+	background-color: #084391;
 	padding: 10px;
 	margin-left: 0.8rem;
 	color: white;
 }
 
-/* 추가 끝 */
-.logout a {
-	text-align: left;
-	padding: 20px 20px 20px 5px;
-	display: inline-block
+.admin_account {
+	background-color: #1a3b70;
+	vertical-align: bottom;
+	cursor: pointer;
+	color: #fff;
+	line-height: 56px;
 }
+
+.admin_account:hover {
+	background-color: #5c83c4;
+	transition: all 0.3s;
+}
+
+.admin_account:hover i {
+	background-color: #5c83c4;
+	transition: all 0.3s;
+}
+
+.admin_account i {
+	background-color: #1a3b70;
+	padding: 10px;
+	margin-left: 0.8rem;
+	color: white;
+}
+
+.homepage {
+	background-color: #2c599d;
+	vertical-align: bottom;
+	cursor: pointer;
+	color: #fff;
+	line-height: 56px;
+}
+
+.homepage:hover {
+	background-color: #5c83c4;
+	transition: all 0.3s;
+}
+
+.homepage:hover i {
+	background-color: #5c83c4;
+	transition: all 0.3s;
+}
+
+.homepage i {
+	background-color: #2c599d;
+	padding: 10px;
+	margin-left: 0.8rem;
+	color: white;
+}
+
+
+/* 추가 끝 */
 
 .logout a:visited, a:active, a:link {
 	text-decoration: none;
-	color: white;
 }
 
 /* 메인컨텐츠 영역 */

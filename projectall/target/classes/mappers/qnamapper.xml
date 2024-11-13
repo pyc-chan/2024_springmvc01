@@ -19,8 +19,8 @@
 	</select>
 	
 	<insert id="qna_insert" parameterType="qvo">
-		insert into qna_db (u_idx, q_tle, q_con, q_dat, q_ans, a_idx, q_acon)
-		values (#{u_idx}, #{q_tle}, #{q_con}, now(), '0', #{a_idx}, #{q_acon})
+		insert into qna_db (u_id, q_tle, q_con, q_dat, q_ans, a_idx, q_acon)
+		values (#{u_id}, #{q_tle}, #{q_con}, now(), '0', #{a_idx}, #{q_acon})
 	</insert>
 	
 	<update id="qna_update" parameterType="qvo">
@@ -34,11 +34,11 @@
 	
 	<select id="qna_userlist" resultType="qvo" parameterType="Map">
 		select * from qna_db order by q_idx desc limit #{offset}, #{limit}
-		where u_idx=#{u_idx}
+		where u_id=#{u_id}
 	</select>
 	
 	<select id="qna_usercount" resultType="int" parameterType="String">
-		select count(*) from qna_db where u_idx=#{u_idx}
+		select count(*) from qna_db where u_id=#{u_id}
 	</select>
 	
 </mapper>

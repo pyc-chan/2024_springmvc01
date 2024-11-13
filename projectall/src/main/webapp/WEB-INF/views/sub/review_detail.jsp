@@ -91,47 +91,48 @@
 						<%-- 댓글 출력 창 --%>
 						<c:forEach var="k" items="${clist}">
 								
-          				 		<c:choose>
-								    <c:when test="${k.c_out == 1}">
-								        <div class="comment_list_del">
-										 	<ul>
-										 		<li>
-													<p class="cmt_content">삭제된 댓글 입니다.</p>
-										 		</li>
-										 	</ul>
-										</div>
-								    </c:when>
-								    <c:otherwise>
-										<form method="post">
-								        <div class="comment_list">
-										 	<ul>
-										 		<li>
-										 			<img src="/resources/images/profile.png" alt="profile">
-										 		</li>
-										 		<li>
-													<p class="cmt_id">아이디 <span class="cmt_update">(수정됨)</span> <span class="cmt_name">작성자</span></p>
-													<p class="cmt_content">${k.c_con}</p>
-													<p class="cmt_date">${k.c_dat}</p>
-													
-													<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
-													<div class="btn_contents">
-														<button class="update_btn">수정</button>
-														<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
-													</div>
-										 		</li>
-										 	</ul>
-											<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
-											<input type="hidden" name="idxc_idx" value="${k.c_idx}">
-											<input type="hidden" name="c_ref" value="${k.c_ref}">
-											<input type="hidden" name="idxn_idx" value="${k.u_idx}">
-											<input type="hidden" name="cPage" value="${cPage}">
-										</div>
-										</form>
-								    </c:otherwise>
-								</c:choose>
-							
-								
-							
+          			 		<c:choose>
+							    <c:when test="${k.c_out == 1}">
+							        <div class="comment_list_del">
+									 	<ul>
+									 		<li>
+												<p class="cmt_content">삭제된 댓글 입니다.</p>
+									 		</li>
+									 	</ul>
+									</div>
+							    </c:when>
+							    <c:otherwise>
+									<form method="post">
+							        <div class="comment_list">
+									 	<ul>
+									 		<li>
+									 			<img src="/resources/images/profile.png" alt="profile">
+									 		</li>
+									 		<li>
+												<p class="cmt_id">${k.c_id} 
+													<c:if test="${k.c_up == 1}">
+													<span class="cmt_update">(수정됨)</span>
+													</c:if>
+												<span class="cmt_name">${k.c_na}</span></p>
+												<p class="cmt_content">${k.c_con}</p>
+												<p class="cmt_date">${k.c_dat}</p>
+												
+												<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
+												<div class="btn_contents">
+													<button class="update_btn">수정</button>
+													<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
+												</div>
+									 		</li>
+									 	</ul>
+										<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
+										<input type="hidden" name="idxc_idx" value="${k.c_idx}">
+										<input type="hidden" name="c_ref" value="${k.c_ref}">
+										<input type="hidden" name="idxn_idx" value="${k.u_id}">
+										<input type="hidden" name="cPage" value="${cPage}">
+									</div>
+									</form>
+							    </c:otherwise>
+							</c:choose>
 						</c:forEach>
 		                
 		                <%-- 댓글 입력 창 --%>
@@ -139,7 +140,7 @@
 							<form action="/comment_insert" method="post">
 								<fieldset>
 									<!-- 아이디 number -->
-									<input type="hidden" name="u_idx" value="1">
+									<input type="hidden" name="u_id" value="1">
 									
 									<p class="cmt_id">아이디 불러오기</p>
 									<div class="insert_comment">
@@ -163,7 +164,7 @@
 			                    <form method="post">  
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
 				                	<input type="hidden" name="rev_idx" value="${rvo.rev_idx}" /> 
-				                	<input type="hidden" name="u_idx" value="${rvo.u_idx}" /> 
+				                	<input type="hidden" name="u_id" value="${rvo.u_id}" /> 
 				                	 
 				                	<span>
 					                    <button class="write" onclick="move_notice_update(this.form)">수정</button>   
@@ -193,21 +194,23 @@
     
     <script>
     function move_comment_delete(f){
-    	removechk();
-    	f.action("/review/delete);
-    	submit();
+    	if(${clist.u_id == sessionScope.u_id}){ 
+	    	if(removeCheck()){
+		    	f.action="/comment/commentdelete";
+		    	f.submit();
+	    	}
+    	}else{
+    		alert("작성자만 삭제할 수 있습니다.");
+    	}
     }
     
     function removeCheck() {
-    	 if (confirm("정말 삭제하시겠습니까??") == true){
-    	     document.removefrm.submit();
-    	 }else{   
-    	     return false;
-    	 }
+    	return confirm("정말 삭제하시겠습니까??");
     }
     
     function move_notice_update(f) {
-		
+		f.action="/review/update";
+		f.submit();
 	}
     	
     

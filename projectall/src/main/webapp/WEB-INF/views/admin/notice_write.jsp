@@ -4,21 +4,24 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>관리자 페이지</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
-	<link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
-		rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+	
 	<link rel="stylesheet" href="/resources/css/common.css">
 	<link rel="stylesheet" href="/resources/css/admin1-3.css">
+    
 	<link rel="stylesheet" href="/resources/css/summernote-lite.css">
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+	
+	
 </head>
 
 <body>
@@ -28,7 +31,7 @@
 		<div class="popuplayer">
 			<p class="write_title">공지사항 게시판 글쓰기</p>
 			
-			<form method="post">
+			<form method="post" encType="multipart/form-data">
 				<table class="popuptable">
 					<tr>
 						<td>옵션</td>
@@ -61,6 +64,7 @@
 							<textarea id="content" name="n_con" rows="20"></textarea>
 						</td>
 					</tr>
+					<!-- 여기가 첨부파일 입니다. -->
 					<tr>
 						<td>첨부파일</td>
 						<td>
@@ -71,24 +75,21 @@
 							</div>
 						</td>
 					</tr>
+					<!-- 여기가 첨부파일 입니다. -->
 				</table>
 				<div class="btns">
                 	<input type="hidden" name="cPage" value="${cPage}" /> 
                 	<input type="hidden" name="a_idx" value="admin" /> 
 					<button onclick="notice_write_ok(this.form)">저장</button>
-					<button type="reset">취소</button>
+					<button onclick="notice_list()">목록</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	<!-- container div -->
-	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+	<jsp:include page="../common/admin_footer.jsp"></jsp:include>  
 	
-		
-	
-	
-    
-    
+	<script src="/resources/js/common.js"></script>
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
 	
@@ -124,6 +125,10 @@
 				success : function(data) {
 					const path = data.path;
 					const fname = data.fname;
+					
+					console.log(path);
+					console.log(fname);
+					
 					$("#content").summernote("editor.insertImage", path+"/"+fname);
 				},
 				error : function() {
@@ -132,5 +137,7 @@
 			});	
 		}
 	</script>
+	
+	
 </body>
 </html>

@@ -1,94 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<link rel="stylesheet" href="resources/css/admin1-3.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/resources/images/favicon.png">
+	<link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/css/admin1-3.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <title>관리자 페이지</title>
 </head>
 
 <body>
 	<div class="container">
-		<!-- 사이드 바 -->
-		<div class="side-bar">
-			<div class="icon-bar"></div>
-			<div class="search-menu">
-				<div class="profile">
-					<img src="resources/images/logo_w.png" alt="logo">
-				</div>
-
-				<div class="controller">
-					<div class="menu active">
-						<div class="topmenu">
-							<i class="fa-solid fa-user"></i>
-							<p>고객센터</p>
-						</div>
-						<div>
-							<div class="submenu" onclick="notice_list()">
-								공지사항 게시판
-							</div>
-							<div class="submenu" onclick="inquiry_list()">
-								1:1 문의
-							</div>
-							<div class="submenu" onclick="complaints_list()">
-								신고 및 불편사항
-							</div>
-							<div class="submenu" onclick="faq_list()">
-								자주하는 질문
-							</div>
-						</div>
-						<button class="menubtn">
-							<i class="fa-solid fa-chevron-up icon open"></i> 
-							<i class="fa-solid fa-chevron-down icon close"></i>
-						</button>
-					</div>
-					<div class="menu">
-						<div class="topmenu">
-							<i class="fa-solid fa-comment"></i>
-							<p>회원 관리</p>
-						</div>
-						<div>
-							<div class="submenu" onclick="member_list()">회원 관리</div>
-							<div class="submenu" onclick="popup_list()">회원 휴몇 및 삭제 관리</div>
-							<button class="menubtn">
-								<i class="fa-solid fa-chevron-up icon open"></i> 
-								<i class="fa-solid fa-chevron-down icon close"></i>
-							</button>
-						</div>
-					</div>
-					<div class="menu">
-						<div class="topmenu">
-							<i class="fa-solid fa-clipboard-list"></i>
-							<p>게시판 관리</p>
-						</div>
-						<div>
-							<div class="submenu" onclick="green_event_list()">녹지 행사 관리</div>
-							<div class="submenu" onclick="boaard_comment_list()">게시판 댓글 관리</div>
-							<div class="submenu" onclick="review_list()">리뷰 관리</div>
-							<div class="submenu" onclick="popup_list()">팝업 관리</div>
-							<button class="menubtn">
-								<i class="fa-solid fa-chevron-up icon open"></i> 
-								<i class="fa-solid fa-chevron-down icon close"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="logout">
-					<i class="fa-solid fa-arrow-right"></i> <a href="">로그아웃</a>
-				</div>
-			</div>
-		</div>
+        <jsp:include page="../common/admin_menu1.jsp"></jsp:include>
 		<!-- 메인컨텐츠 -->
 	
 	
@@ -96,41 +31,156 @@
 			<p class="write_title">공지사항 게시판 상세보기</p>
 
 			<table class="popuptable">
-				<tr>
-					<td>작성자</td>
-					<td>
-						${fvo.a_idx}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						제목
-					</td>
-					<td>
-						${fvo.n_tle}
-					</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>
-						${fvo.n_con}
-					</td>
-				</tr>
+					<tr>
+						<td>옵션</td>
+						<td>
+	                        <c:choose>
+	                        	<c:when test="${nvo.n_chk == 'check'}">
+		                        	<label>
+		                        		공지
+		                        	</label>
+	                        	</c:when>
+	                        	<c:otherwise>
+		                        	<label>
+		                        		옵션이 없습니다.
+		                        	</label>
+	                        	</c:otherwise>
+	                        </c:choose>
+						</td>
+					</tr>
+					<tr>
+						<td>카테고리</td>
+						<td>
+		                    ${nvo.n_opt}
+						</td>
+					</tr>
+					<tr>
+						<td>제목</td>
+						<td>
+		                    ${nvo.n_tle}
+						</td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td>
+		                    ${nvo.n_con}
+						</td>
+					</tr>
+					<tr>
+						<td>첨부파일</td>
+						<td>
+                        	<c:choose>
+								<c:when test="${empty nvo.f_name}">
+									<span>등록된 첨부파일이 없습니다.</span>
+								</c:when>
+								<c:otherwise>
+									<p class="attachment_name">첨부파일</p>
+									<ul class="attachment">
+										<li class="img_box">
+											<a href="/board_down?f_name=${nvo.f_name}">
+												<img src="/resources/upload/${nvo.f_name}">
+											</a>
+										</li>
+										<li>
+											<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
+											<p>
+												<a class="img_down" href="/notice_down?f_name=${nvo.f_name}">다운로드</a>
+											</p>
+										</li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
 			</table>
+			
+		                
+			<%-- 댓글 출력 창 --%>
+			<c:forEach var="k" items="${clist}">
+					
+       				 		<c:choose>
+					    <c:when test="${k.c_out == 1}">
+					        <div class="comment_list_del">
+							 	<ul>
+							 		<li>
+										<p class="cmt_content">삭제된 댓글 입니다.</p>
+							 		</li>
+							 	</ul>
+							</div>
+					    </c:when>
+					    <c:otherwise>
+							<form method="post">
+					        <div class="comment_list">
+							 	<ul>
+							 		<li>
+							 			<img src="/resources/images/profile.png" alt="profile">
+							 		</li>
+							 		<li>
+										<p class="cmt_id">아이디 <span class="cmt_update">(수정됨)</span> <span class="cmt_name">작성자</span></p>
+										<p class="cmt_content">${k.c_con}</p>
+										<p class="cmt_date">${k.c_dat}</p>
+										
+										<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
+										<div class="btn_contents">
+											<button class="update_btn">수정</button>
+											<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
+										</div>
+							 		</li>
+							 	</ul>
+								<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
+								<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
+								<input type="hidden" name="c_ref" value="${k.c_ref}">
+								<input type="hidden" name="idxn_idx" value="${k.c_ref}">
+								<input type="hidden" name="cPage" value="${cPage}">
+							</div>
+							</form>
+					    </c:otherwise>
+					</c:choose>
+				
+					
+				
+			</c:forEach>
+               
+               <%-- 댓글 입력 창 --%>
+			<div class="comment_conteainer">
+				<form action="/comment_insert" method="post">
+					<fieldset>
+						<!-- 아이디 number -->
+						<input type="hidden" name="u_idx" value="1">
+						
+						<p class="cmt_id">아이디 불러오기</p>
+						<div class="insert_comment">
+							<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 남겨보세요." required></textarea>
+							<!-- 댓글 저장 시 어떤 댓글이 원글인지 저장해야 한다. -->
+							<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}">
+							<input type="hidden" name="cPage" value="${cPage}">
+							<input type="hidden" name="c_out" value="0">
+							<input type="hidden" name="c_bor" value="notice">
+							<input type="submit" class="insert_btn" value="등록">
+						</div>
+					</fieldset>
+				</form>
+			</div>
 			<div>
 				<ul class="but_layout">
 					<li>
-						<input type="hidden" name="fna_idx" value="${fvo.fna_idx}">
-						<input type="button" value="수정" onclick="update_go()">
-						<input type="button" value="삭제" onclick="delete_go()">
+	                    <form method="post">  
+		                	<input type="hidden" name="cPage" value="${cPage}" /> 
+		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
+		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	
+							<input type="button" value="목록" onclick="notice_list()">
+							<input type="button" value="수정" onclick="notice_update(this.form)">
+							<input type="button" value="삭제" onclick="notice_delete(this.form)"> 
+               			</form>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<!-- container div -->
 	</div>
-
-	<script defer src="resources/js/admincommon.js"></script>
+	<!-- container div -->
+	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
 
 	<script>
 	

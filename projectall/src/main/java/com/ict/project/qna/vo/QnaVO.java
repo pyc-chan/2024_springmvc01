@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class QnaVO {
 	
 	// 게시판마다 변수명 확인해서 작성하기
-	private String q_idx, u_idx, q_tle, q_con, q_dat, q_ans, a_idx, q_acon, q_filename, q_oldname;
+	private String q_idx, u_id, q_tle, q_con, q_dat, q_ans, a_idx, q_acon, q_filename, q_oldname;
 	private MultipartFile q_file;
 	
 	
@@ -42,11 +42,11 @@ public class QnaVO {
 	}
 
 	public String getU_idx() {
-		return u_idx;
+		return u_id;
 	}
 
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setU_idx(String u_id) {
+		this.u_id = u_id;
 	}
 
 	public String getQ_tle() {

@@ -101,6 +101,11 @@ public class AdminServiceImpl implements AdminService{
 		return reviewService;
 	}
 
+	@Override
+	public AdminVO adminLogin(String a_id) {
+		return adminDAO.adminLogin(a_id);
+	}
+
 
 	
 }

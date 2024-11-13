@@ -22,7 +22,7 @@ public interface ReviewService {
 	
 	public int getReviewDelete(String idx);
 	
-	public List<ReviewVO> getReviewUserList(String u_idx, int offset, int limit);
+	public List<ReviewVO> getReviewUserList(String u_id, int offset, int limit);
 	
 	public int getReviewUserCount(String idx);
 }

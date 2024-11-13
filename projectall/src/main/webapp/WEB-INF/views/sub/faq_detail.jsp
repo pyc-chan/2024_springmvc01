@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
+
 	<h1>공지사항 상세보기</h1>
 </body>
 </html>

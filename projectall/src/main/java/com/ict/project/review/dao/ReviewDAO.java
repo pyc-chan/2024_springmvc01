@@ -22,7 +22,7 @@ public interface ReviewDAO {
 	
 	public int getReviewDelete(String rev_idx);
 	
-	public List<ReviewVO> getReviewUserList(String u_idx, int offset, int limit);
+	public List<ReviewVO> getReviewUserList(String u_id, int offset, int limit);
 	
 	public int getReviewUserCount(String idx);
 	}

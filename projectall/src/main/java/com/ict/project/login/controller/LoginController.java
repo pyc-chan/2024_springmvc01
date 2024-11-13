@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.project.admin.service.AdminService;
+import com.ict.project.admin.vo.AdminVO;
 import com.ict.project.login.service.LoginService;
 import com.ict.project.login.vo.LoginVO;
 
@@ -29,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	// 로그인 화면 이동
 	@GetMapping("/loginGo")
@@ -97,7 +102,6 @@ public class LoginController {
 	@PostMapping("/pwfindok")
 	public ModelAndView pwFindOK() {
 		ModelAndView mv = new ModelAndView("login/pwfindok");
-		
 		return mv;
 	}
 	
@@ -200,6 +204,17 @@ public class LoginController {
 	@PostMapping("/loginok")
 	public ModelAndView loginOK(LoginVO lvo ,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		AdminVO avo = adminService.adminLogin(lvo.getU_id());
+		if(avo!=null) {
+			if(passwordEncoder.matches(lvo.getU_pw(), avo.getA_pw())){
+				session.setAttribute("loginok", "ok");
+				session.setAttribute("u_id", avo.getA_id());
+				session.setAttribute("a_id", avo.getA_id());
+				session.setAttribute("adminok", "ok");
+			}
+		}
+		
+		
 		// DB에서 로그인 정보 가져옴
 		LoginVO lvo2 = loginService.getDetail(lvo.getU_id());
 		// 아이디가 DB에 없을때
@@ -293,4 +308,6 @@ public class LoginController {
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/mainGo");
 	}
+	
+	
 }

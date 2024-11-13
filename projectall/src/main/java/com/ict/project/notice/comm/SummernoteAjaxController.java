@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +28,7 @@ public class SummernoteAjaxController {
 		try {
 			Map<String, String> map = new HashMap<String, String>();
 			MultipartFile file = imgVO.getS_file();
-			String fname = null;
+			String n_pic = null;
 			if (file.getSize()>0) {
 				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
 				// 현재 날짜와 시간 가져오기
@@ -41,13 +40,13 @@ public class SummernoteAjaxController {
 			    
 		        // pic 파일이름 file 실제 파일
 		        // 업로드시간_파일명 의 형태로 저장
-		        fname = nowstr+"_"+file.getOriginalFilename();
+		        n_pic = nowstr+"_"+file.getOriginalFilename();
 				// 업로드
-				file.transferTo(new File(path, fname));
+				file.transferTo(new File(path, n_pic));
 			}
 			
-			map.put("path", "resources/upload");
-			map.put("fname", fname);
+			map.put("path", "/resources/upload");
+			map.put("n_pic", n_pic);
 			return map;
 		} catch (Exception e) {
 			System.out.println(e);

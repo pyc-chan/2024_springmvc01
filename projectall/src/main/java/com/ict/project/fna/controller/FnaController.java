@@ -56,7 +56,7 @@ public class FnaController {
 		ModelAndView mv = new ModelAndView();
 		FnaVO fvo = fnaService.getFnaDetail(idx);
 		AdminVO avo = adminService.adminDetail(fvo.getA_idx());
-		mv.addObject("u_idx", avo.getA_na());
+		mv.addObject("u_id", avo.getA_na());
 		mv.addObject("fvo", fvo);
 		return mv;
 	}

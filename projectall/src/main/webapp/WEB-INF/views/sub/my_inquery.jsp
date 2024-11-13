@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>마이 페이지 - 캘린더</title>
+	<title>마이 페이지 - 1 : 1 문의 내역</title>
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     
@@ -13,12 +14,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     
-    <link rel="stylesheet" href="/resources/css/menu.css" />
-    <link rel="stylesheet" href="/resources/css/mypage_main.css" />
+    <link rel="stylesheet" href="resources/css/menu.css" />
+    <link rel="stylesheet" href="resources/css/mypage_main.css" />
+    <link rel="stylesheet" href="resources/css/my_qna.css" />
     <link rel="stylesheet" href="/resources/css/weather.css"><!-- 날씨 위젯 추가 -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/resources/js/menu.js"></script>
+    <script src="resources/js/menu.js"></script>
     <script src="/resources/js/weather.js"></script><!-- 날씨 위젯 추가 -->
 </head>
 <body>
@@ -32,19 +34,41 @@
                 <ul class="contents_box">
                     <li class="textcenter">
                         <h2 class="great_title">마이페이지</h2>
-                        <p class="subheading_title_my">캘린더</p>
+                        <p class="subheading_title_my">1 : 1 문의 내역</p>
                         
                         <!-- 마이 페이지 메뉴 -->
                         <jsp:include page="../common/mypage_menu.jsp"></jsp:include>
                         
                         <!-- 마이 페이지 프로필 -->
                         <jsp:include page="../common/mypage_profile.jsp"></jsp:include>
-                        
-                        <!-- 마이 페이지 내용 시작 -->
-                        <div class="my_calendar" style="width: 100%; height: 750px; background: #ddd;">
-                        
-                        </div>
-                        
+
+                        <div class="search-text">전체 ${count}건</div>
+
+			            <ul class="list">
+			                <li class="list_header">
+			                    <div class="item t_num">No</div>
+			                    <div class="item t_tit">제목</div>
+			                    <div class="item t_stt">문의처리상태</div>
+			                    <div class="item t_dt">등록일</div>
+			                </li>
+			                <c:forEach items="list" var="k" varStatus="num">
+			                <li class="list_row">
+			                    <div class="item l_num">${num+1+((paging.cPage-1)*10) }</div>
+			                    <div class="item l_tit">${list.q_tle}</div>
+			                    <div class="item l_stt"><span class="status pending"><c:choose>
+					                    <c:when test="${not empty k.i_ans}">
+					                        ${k.i_ans}
+					                    </c:when>
+					                    <c:otherwise>
+					                        미답변	
+					                    </c:otherwise>
+					                </c:choose></span></div>
+			                    <div class="item l_dt">${k.q_dat }</div>
+			                </li>
+			                </c:forEach>
+			            </ul>
+			
+			            <jsp:include page="../common/every_paging.jsp"/>
                     </li>
                 </ul>
             </div>
@@ -59,6 +83,7 @@
         <jsp:include page="../common/sub_m_menu.jsp"></jsp:include>
     </div>
     
+    <jsp:include page="../common/arrow.jsp"></jsp:include>
     
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
     

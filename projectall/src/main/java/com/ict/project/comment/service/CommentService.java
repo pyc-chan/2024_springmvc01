@@ -10,9 +10,9 @@ public interface CommentService {
 	
 	public int getCommentSubCount(CommentVO cvo);
 	
-	public int getCommentUserCount(String u_idx);
+	public int getCommentUserCount(String u_id);
 	
-	public List<CommentVO> getCommentUserList(String u_idx, int offset, int limit);
+	public List<CommentVO> getCommentUserList(String u_id, int offset, int limit);
 	
 	public List<CommentVO> getCommentList(CommentVO cvo, int offset, int limit);
 	

@@ -36,38 +36,53 @@
 					</div>
 				</div>
 				<table>
+					<colgroup>
+						<col width="5%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
 					<tr>
 						<th>No</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>작성일</th>
+						<th>행사 이름</th>
+						<th>경도</th>
+						<th>위도</th>
+						<th>시작날짜</th>
+						<th>종료날짜</th>
+					</tr>
+					<tr class="hover_back" onclick="event_detail()">
+						<td>No</td>
+						<td>행사 이름</td>
+						<td>경도</td>
+						<td>위도</td>
+						<td>시작날짜</td>
+						<td>종료날짜</td>
 					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list }">
+						<c:when test="${empty fvo_list}">
 							<tr>
-								<td colspan="3"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="6"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
-								<tr>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_tle}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_con}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_dat}</a>
-									</td>
+								<tr class="hover_back"  onclick="event_detail()">
+									<td>No</td>
+									<td>행사 이름 ${k.ev_na}</td>
+									<td>경도 ${k.ev_lat}</td>
+									<td>위도 ${k.ev_lon}</td>
+									<td>시작날짜 ${k.ev_sdat}</td>
+									<td>종료날짜 ${k.ev_edat}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 					<tfoot>
 						<tr>
-							<td colspan="3">
-								<button onclick="write_page()">글쓰기</button>
+							<td colspan="6">
+								<button onclick="event_write()">글쓰기</button>
 							</td>
 						</tr>
 					</tfoot>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공원 이야기</title>
+	<title>공지사항 수정</title>
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     
@@ -45,7 +45,7 @@
 				                        <div class="label">옵션</div>
 				                        <div class="input">
 					                        <c:choose>
-					                        	<c:when test="${gvo.n_chk == 'check'}">
+					                        	<c:when test="${nvo.n_chk == 'check'}">
 						                        	<label>
 						                        		<input type="checkbox" name="n_chk" value="check" checked> 공지
 						                        	</label>
@@ -67,20 +67,20 @@
 				                        		<option value="보호수">보호수</option>
 				                        		<option value="녹지행사">녹지행사</option>
 				                        	</select>
-				                        	<div class="choose_category"><span>현재 카테고리 :</span> ${gvo.n_opt}</div>
+				                        	<div class="choose_category"><span>현재 카테고리 :</span> ${nvo.n_opt}</div>
 				                        </div>
 				                    </li>
 				                    <li class="row">
 				                        <div class="label">제목</div>
 				                        <div class="input">
-				                        	<input type="text" name="n_tle" class="in_title" value="${gvo.n_tle}" placeholder="제목을 입력해주세요." required>
+				                        	<input type="text" name="n_tle" class="in_title" value="${nvo.n_tle}" placeholder="제목을 입력해주세요." required>
 				                        </div>
 				                    </li>
 				                    <li class="top">
 				                        <div class="label">내용</div>
 				                        <div class="input">
 				                        	<textarea id="content" name="n_con" rows="20" placeholder="내용을 입력해주세요.">
-				                        		${gvo.n_con}
+				                        		${nvo.n_con}
 				                        	</textarea>
 				                        </div>
 				                    </li>
@@ -88,7 +88,7 @@
 				                        <div class="label">첨부파일</div>
 				                        <div class="input">
 											<c:choose>
-												<c:when test="${empty gvo.f_name}">
+												<c:when test="${empty nvo.f_name}">
 													<div class="filebox">
 													    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
 													    <label for="file">파일찾기</label> 
@@ -99,13 +99,13 @@
 												</c:when>
 												<c:otherwise>
 													<div class="filebox">
-													    <input class="upload-name" value="${gvo.f_name}" placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
+													    <input class="upload-name" value="${nvo.f_name}" placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
 													    <label for="file">파일찾기</label> 
 													    <input type="file" id="file" name="file_name">
 													</div>
 											
 						                            <div class="file_lst">
-						                                <label><span>다운로드 : </span> <a href="">${gvo.f_name}</a></label>
+						                                <label><span>다운로드 : </span> <a href="/notice_down?f_name=${nvo.f_name}">${nvo.f_name}</a></label>
 						                            </div>
 												</c:otherwise>
 											</c:choose>
@@ -119,7 +119,7 @@
 				            <div class="button_box">    
 				                <div>
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
-									<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}" /> 
+									<input type="hidden" name="n_idx" value="${nvo.n_idx}" /> 
 				                    <button class="write" onclick="move_notice_update_ok(this.form)">작성완료</button>    
 				                    <input type="button" class="cancle" value="목록" onclick="move_notice()">
 				                </div> 

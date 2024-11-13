@@ -152,7 +152,7 @@
 	});
 	
 	
-	// 회원가입 버튼 활성화
+	// 수정 버튼 활성화
 	function enabled() {
 		console.log(pwtestok+","+pwchkok)
 		// 비밀번호 정규식, 비밀번호 확인, 필수 체크박스 체크시 
@@ -165,7 +165,7 @@
 	}
     
     
-	    $(document).ready(function () {
+	    	$(document).ready(function () {
 	        function toggleSidebar() {
 	            $(".button").toggleClass("active");
 	            $("main").toggleClass("move-to-left");

@@ -46,13 +46,13 @@ public class QnaServiceImpl implements QnaService{
 	}
 
 	@Override
-	public List<QnaVO> getQnaUserList(String u_idx, int offset, int limit) {
-		return qnaDAO.getQnaUserList(u_idx, offset, limit);
+	public List<QnaVO> getQnaUserList(String u_id, int offset, int limit) {
+		return qnaDAO.getQnaUserList(u_id, offset, limit);
 	}
 
 	@Override
-	public int getQnaUserCount(String u_idx) {
-		return qnaDAO.getQnaUserCount(u_idx);
+	public int getQnaUserCount(String u_id) {
+		return qnaDAO.getQnaUserCount(u_id);
 	}
 
 }

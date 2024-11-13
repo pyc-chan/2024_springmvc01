@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,35 +40,7 @@
                         <!-- 마이 페이지 프로필 -->
                         <jsp:include page="../common/mypage_profile.jsp"></jsp:include>
                         
-                        
-
                         <!-- 나의 녹지 스크랩 -->
-                        <div class="my_greenery_scraps">
-                            <div class="title">
-                                <p>나의 녹지 스크랩</p>
-
-                                <span onclick="my_scraps()">
-                                    <p>더보기</p> <i class="material-icons">chevron_right</i>
-                                </span>
-                            </div>
-                            <ul class="my_scraps_ul">
-                                <li onclick="my_scraps()">
-                                    <div class="scraps_img"></div>
-                                    <p>공원</p>
-                                    <span>도심 공원에서 만나는  자연과 지속가능성</span>
-                                </li>
-                                <li onclick="my_scraps()">
-                                    <div class="scraps_img"></div>
-                                    <p>가로수길</p>
-                                    <span>도심을 푸르게 만드는 가로수길</span>
-                                </li>
-                                <li onclick="my_scraps()">
-                                    <div class="scraps_img"></div>
-                                    <p>보호수</p>
-                                    <span>생태계의 기록자, 보호수 </span>
-                                </li>
-                            </ul>
-                        </div>
 
                         <!-- 나의 리뷰 -->
                         <div class="my_review_list">
@@ -82,73 +55,12 @@
                             <ul class="photo_list_ul">
                                 <li onclick="my_review()">
                                     <div class="photo_list_img box">
-                                        <img src="resources/images/rewiew_3.jpg" alt="" class="content">
+                                        <img src="resources/images/${list.rev_filename }" alt="" class="content">
                                     </div>
                                     <div class="contents">
-                                        <p class="review_stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </p>
-                                        <p class="place_name">장소명</p>
+                                        <p class="place_name">조회수</p>
                                         <p class="place_content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo odio nostrum at neque vel, itaque unde quibusdam doloribus, ut eum ea deleniti reprehenderit, temporibus deserunt illo maxime molestiae ratione. Reprehenderit.                        
-                                        </p>
-                                    </div>
-                                </li>
-                                <li onclick="my_review()">
-                                    <div class="photo_list_img box">
-                                        <img src="resources/images/rewiew_3.jpg" alt="" class="content">
-                                    </div>
-                                    <div class="contents">
-                                        <p class="review_stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </p>
-                                        <p class="place_name">장소명</p>
-                                        <p class="place_content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo odio nostrum at neque vel, itaque unde quibusdam doloribus, ut eum ea deleniti reprehenderit, temporibus deserunt illo maxime molestiae ratione. Reprehenderit.                        
-                                        </p>
-                                    </div>
-                                </li>
-                                <li onclick="my_review()">
-                                    <div class="photo_list_img box">
-                                        <img src="resources/images/rewiew_3.jpg" alt="" class="content">
-                                    </div>
-                                    <div class="contents">
-                                        <p class="review_stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </p>
-                                        <p class="place_name">장소명</p>
-                                        <p class="place_content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo odio nostrum at neque vel, itaque unde quibusdam doloribus, ut eum ea deleniti reprehenderit, temporibus deserunt illo maxime molestiae ratione. Reprehenderit.                        
-                                        </p>
-                                    </div>
-                                </li>
-                                <li onclick="my_review()">
-                                    <div class="photo_list_img box">
-                                        <img src="resources/images/rewiew_3.jpg" alt="" class="content">
-                                    </div>
-                                    <div class="contents">
-                                        <p class="review_stars">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </p>
-                                        <p class="place_name">장소명</p>
-                                        <p class="place_content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo odio nostrum at neque vel, itaque unde quibusdam doloribus, ut eum ea deleniti reprehenderit, temporibus deserunt illo maxime molestiae ratione. Reprehenderit.                        
+                                            ${list.rev_hit }                        
                                         </p>
                                     </div>
                                 </li>
@@ -161,32 +73,17 @@
                             <li>
                                 <div class="title">
                                     <p>1 : 1 문의 내역</p>
-
                                     <span onclick="my_qna()">
                                         <p>더보기</p> <i class="material-icons">chevron_right</i>
                                     </span>
                                 </div>
                                 <ul class="list">
+                                    <c:forEach items="">
                                     <li onclick="my_qna()">
                                         <p>1: 1 문의 타이틀 입니다.</p>
                                         <span>2024.00.00</span>
                                     </li>
-                                    <li onclick="my_qna()">
-                                        <p>1: 1 문의 타이틀 입니다.</p>
-                                        <span>2024.00.00</span>
-                                    </li>
-                                    <li onclick="my_qna()">
-                                        <p>1: 1 문의 타이틀 입니다.</p>
-                                        <span>2024.00.00</span>
-                                    </li>
-                                    <li onclick="my_qna()">
-                                        <p>1: 1 문의 타이틀 입니다.</p>
-                                        <span>2024.00.00</span>
-                                    </li>
-                                    <li onclick="my_qna()">
-                                        <p>1: 1 문의 타이틀 입니다.</p>
-                                        <span>2024.00.00</span>
-                                    </li>
+                                    </c:forEach>
                                 </ul>
                             </li>
                             <li>

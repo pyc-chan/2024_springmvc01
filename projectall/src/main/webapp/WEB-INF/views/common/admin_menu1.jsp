@@ -23,7 +23,7 @@
 						1:1 문의
 					</div>
 					<div class="submenu" onclick="inquery_list()">
-						신고 및 불편사항
+						고객의 소리
 					</div>
 					<div class="submenu" onclick="fna_list()">
 						자주하는 질문
@@ -40,8 +40,7 @@
 					<p>회원 관리</p>
 				</div>
 				<div>
-					<div class="submenu" onclick="member_list()">회원 관리</div>
-					<div class="submenu" onclick="popup_list()">회원 휴몇 및 삭제 관리</div>
+					<div class="submenu" onclick="user_list()">회원 관리</div>
 					<button class="menubtn">
 						<i class="fa-solid fa-chevron-up icon open"></i> 
 						<i class="fa-solid fa-chevron-down icon close"></i>
@@ -65,8 +64,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="logout">
-			<i class="fa-solid fa-arrow-right"></i> <a href="">로그아웃</a>
+		<div class="menu_btn_cont">
+			<ul>
+				<li class="homepage" onclick="move_main()">
+					<i class="fa-solid fa-house"></i> 홈페이지
+				</li>
+				<li class="admin_account" onclick="admin_list()">
+					<i class="fa-solid fa-gear"></i> 관리자 계정
+				</li>
+				<li class="logout">
+					<i class="fa-solid fa-arrow-right"></i> 로그아웃
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>

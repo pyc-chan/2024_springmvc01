@@ -36,38 +36,49 @@
 					</div>
 				</div>
 				<table>
+					<colgroup>
+						<col width="5%">
+						<col width="35%">
+						<col width="15%">
+						<col width="35%">
+						<col width="15%">
+					</colgroup>
 					<tr>
 						<th>No</th>
 						<th>제목</th>
-						<th>내용</th>
-						<th>작성일</th>
+						<th>생성일</th>
+						<th>링크</th>
+						<th>활성화 여부</th>
+					</tr>
+					<tr class="hover_back" onclick="popup_detail()">
+						<td>No</td>
+						<td>제목</td>
+						<td>생성일</td>
+						<td>링크</td>
+						<td>활성화 여부</td>
 					</tr>
 					<c:choose>
 						<c:when test="${empty fvo_list }">
 							<tr>
-								<td colspan="3"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="5"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
-								<tr>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_tle}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_con}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_dat}</a>
-									</td>
+								<tr class="hover_back" onclick="popup_detail()">
+									<td>No ${k.n_idx}</td>
+									<td>제목 ${k.pop_tle}</td>
+									<td>생성일 ${k.pop_con}</td>
+									<td>링크 ${k.pop_link}</td>
+									<td>활성화 여부 ${k.pop_act}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 					<tfoot>
 						<tr>
-							<td colspan="3">
-								<button onclick="write_page()">글쓰기</button>
+							<td colspan="5">
+								<button onclick="popup_write()">글쓰기</button>
 							</td>
 						</tr>
 					</tfoot>

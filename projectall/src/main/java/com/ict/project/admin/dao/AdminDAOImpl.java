@@ -49,6 +49,11 @@ public class AdminDAOImpl implements AdminDAO{
 	public int adminCount() {
 		return sqlSessionTemplate.selectOne("admin.admin_count");
 	}
+
+	@Override
+	public AdminVO adminLogin(String a_id) {
+		return sqlSessionTemplate.selectOne("admin.admin_login", a_id);
+	}
 	
 	
 	

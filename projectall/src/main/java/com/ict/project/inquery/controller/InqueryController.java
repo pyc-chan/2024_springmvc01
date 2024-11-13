@@ -17,7 +17,6 @@ import com.ict.project.comm.PagingService;
 import com.ict.project.comm.PerPageConstant;
 import com.ict.project.inquery.service.InqueryService;
 import com.ict.project.inquery.vo.InqueryVO;
-import com.ict.project.login.service.LoginService;
 
 @Controller
 public class InqueryController {
@@ -57,7 +56,7 @@ public class InqueryController {
 		ModelAndView mv = new ModelAndView();
 		InqueryVO fbvo = inqueryService.getInqueryDetail(idx);
 		AdminVO avo = adminService.adminDetail(fbvo.getA_idx());
-		mv.addObject("u_idx", avo.getA_na());
+		mv.addObject("u_id", avo.getA_na());
 		mv.addObject("fbvo", fbvo);
 		return mv;
 	}

@@ -39,19 +39,19 @@ public class NoticeImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int getBoardHit(String idxn_idx) {
-		return sqlSessionTemplate.update("notice.nt_hit", idxn_idx);
+	public int getBoardHit(String n_idx) {
+		return sqlSessionTemplate.update("notice.nt_hit", n_idx);
 	}
 
 	@Override
-	public NoticeVO getBoardDetail(String idxn_idx) {
-		return sqlSessionTemplate.selectOne("notice.nt_detail", idxn_idx);
+	public NoticeVO getBoardDetail(String n_idx) {
+		return sqlSessionTemplate.selectOne("notice.nt_detail", n_idx);
 	}
 
 	@Override
-	public int getBoardDelete(String idxn_idx) {
-		System.out.println("dao idx : " + idxn_idx);
-		return sqlSessionTemplate.update("notice.nt_delete", idxn_idx);
+	public int getBoardDelete(String n_idx) {
+		System.out.println("dao idx : " + n_idx);
+		return sqlSessionTemplate.update("notice.nt_delete", n_idx);
 	}
 
 	@Override

@@ -26,13 +26,16 @@ public class PerPageConstant {
 	private final int parkpage = 4;			// 공원 갯수
 	
 	// 마이 페이지
-	private final int userqnapage = 1;		// 추후 변경 // 마이페이지 qna 갯수
-	private final int userreviewpage = 1;	// 추후 변경 // 마이페이지 리뷰 갯수
-	private final int usercommentpage = 1;	// 추후 변경 // 마이페이지 댓글 갯수
-	private final int userinquerypage = 1;	// 추후 변경 // 마이페이지 고객의 소리 갯수
+	private final int userqnapage = 10;		// 추후 변경 // 마이페이지 qna 갯수
+	private final int userreviewpage = 10;	// 추후 변경 // 마이페이지 리뷰 갯수
+	private final int usercommentpage = 10;	// 추후 변경 // 마이페이지 댓글 갯수
+	private final int userinquerypage = 10;	// 추후 변경 // 마이페이지 고객의 소리 갯수
+	private final int userqnahome = 3;		// 마이페이지 메인 qna
+	private final int userreviewhome = 3;	// 마이페이지 메인 review
+	private final int userinqueryhome = 3;	// 마이페이지 메인 inquery
 	
 	// 관리자페이지
-	private final int adminpage = 1;		// 추후 변경 // 관리자페이지 관리자관리
+	private final int adminpage = 10;		// 추후 변경 // 관리자페이지 관리자관리
 	private final int adminuserpage = 5;	// 관리자페이지 메인 유저관리수
 	private final int adminqnapage = 5;		// 관리자페이지 메인 qna
 	private final int adminnoticepage = 5;	// 관리자페이지 메인 공지사항
@@ -43,6 +46,15 @@ public class PerPageConstant {
 
 	
 	
+	public int getUserqnahome() {
+		return userqnahome;
+	}
+	public int getUserreviewhome() {
+		return userreviewhome;
+	}
+	public int getUserinqueryhome() {
+		return userinqueryhome;
+	}
 	public int getNoticecommpage() {
 		return noticecommpage;
 	}

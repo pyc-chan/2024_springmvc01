@@ -13,7 +13,7 @@
 	
 	<select id="Comment_userlist" resultType="cvo" parameterType="Map">
 		select * from comment_db order by c_idx desc
-		where u_idx = #{u_idx} limit #{offset}, #{limit}
+		where u_id = #{u_id} limit #{offset}, #{limit}
 	</select>
 	
 	<select id="Comment_listall" resultType="cvo" parameterType="Map">
@@ -31,12 +31,12 @@
 	</select>
 	
 	<select id="Comment_usercount" resultType="int" parameterType="String">
-		select count(*) from comment_db where u_idx=#{u_idx}
+		select count(*) from comment_db where u_id=#{u_id}
 	</select>
 	
 	<insert id="Comment_insert" parameterType="cvo">	
-		insert into comment_db (c_idx, u_idx, c_con, c_dat, c_up, c_out, c_bor, c_ref)
-		values (#{c_idx}, #{u_idx}, #{c_con}, now(), '0', '0', #{c_bor}, #{c_ref})
+		insert into comment_db (c_idx, u_id, c_con, c_dat, c_up, c_out, c_bor, c_ref)
+		values (#{c_idx}, #{u_id}, #{c_con}, now(), '0', '0', #{c_bor}, #{c_ref})
 	</insert>
 	
 	<update id="Comment_update" parameterType="cvo">

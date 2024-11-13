@@ -38,20 +38,20 @@
                         <div class="content">
 		                    <ul>
 		                        <li>
-		                            <h2 class="title">${gvo.n_tle}</h2>
+		                            <h2 class="title">${nvo.n_tle}</h2>
 		                            <div class="tt">
 		                                <ul>
 		                                    <li>
 		                                        <span class="title">작성자</span>
-		                                        <span class="cont">${gvo.a_idx}</span>
+		                                        <span class="cont">${nvo.a_idx}</span>
 		                                    </li>
 		                                    <li>
 		                                        <span class="title">작성일</span>
-		                                        <span class="cont">${gvo.n_dat}</span>
+		                                        <span class="cont">${nvo.n_dat}</span>
 		                                    </li>
 		                                    <li>
 		                                        <span class="title">조회수</span>
-		                                        <span class="cont">${gvo.n_hit}</span>
+		                                        <span class="cont">${nvo.n_hit}</span>
 		                                    </li>
 		                                </ul>
 		                            </div>
@@ -59,27 +59,27 @@
 		                    </ul>
 		                    <ul>
 		                        <li class="bodyCont">
-		                        	${gvo.n_con}
+		                        	${nvo.n_con}
 		                        </li>
 		                    </ul>
 		                    <ul>
 		                        <li>
 		                        	<c:choose>
-										<c:when test="${empty gvo.f_name}">
+										<c:when test="${empty nvo.f_name}">
 											<span>등록된 첨부파일이 없습니다.</span>
 										</c:when>
 										<c:otherwise>
 											<p class="attachment_name">첨부파일</p>
 											<ul class="attachment">
 												<li class="img_box">
-													<a href="/board_down?f_name=${gvo.f_name}">
-														<img src="/resources/upload/${gvo.f_name}">
+													<a href="/board_down?f_name=${nvo.f_name}">
+														<img src="/resources/upload/${nvo.f_name}">
 													</a>
 												</li>
 												<li>
-													<p class="img_name"><span>파일명</span> ${gvo.f_name}</p>
+													<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
 													<p>
-														<a class="img_down" href="/notice_down?f_name=${gvo.f_name}">다운로드</a>
+														<a class="img_down" href="/notice_down?f_name=${nvo.f_name}">다운로드</a>
 													</p>
 												</li>
 											</ul>
@@ -111,22 +111,33 @@
 										 			<img src="/resources/images/profile.png" alt="profile">
 										 		</li>
 										 		<li>
-													<p class="cmt_id">아이디 <span class="cmt_update">(수정됨)</span> <span class="cmt_name">작성자</span></p>
+													<p class="cmt_id">${k.c_id}  
+													<c:if test="${k.c_up == 1}">
+														<span class="cmt_update">(수정됨)</span>
+													</c:if>
+													<span class="cmt_name">${k.c_na}</span></p>
 													<p class="cmt_content">${k.c_con}</p>
 													<p class="cmt_date">${k.c_dat}</p>
 													
 													<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
 													<div class="btn_contents">
-														<button class="update_btn">수정</button>
+														<button class="update_btn" onclick="move_comment_update(this.form)">수정</button>
 														<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
 													</div>
+														<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
+														<input type="hidden" name="c_bor" value="notice">
+														<input type="hidden" name="n_idx" value="${k.n_idx}">
+														<input type="hidden" name="cPage" value="${cPage}">
+													<div id="update_form">
+														<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 수정하세요." required>${k.c_con}
+														</textarea>
+														<input type="submit" class="update_btn" value="저장">
+													</div>
+													
 										 		</li>
 										 	</ul>
 											<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
-											<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
-											<input type="hidden" name="c_ref" value="${k.c_ref}">
-											<input type="hidden" name="idxn_idx" value="${k.c_ref}">
-											<input type="hidden" name="cPage" value="${cPage}">
+											
 										</div>
 										</form>
 								    </c:otherwise>
@@ -147,7 +158,7 @@
 									<div class="insert_comment">
 										<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 남겨보세요." required></textarea>
 										<!-- 댓글 저장 시 어떤 댓글이 원글인지 저장해야 한다. -->
-										<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}">
+										<input type="hidden" name="n_idx" value="${nvo.n_idx}">
 										<input type="hidden" name="cPage" value="${cPage}">
 										<input type="hidden" name="c_out" value="0">
 										<input type="hidden" name="c_bor" value="notice">
@@ -163,8 +174,8 @@
 			                    <button class="cancle" onclick="move_notice()">목록</button>  
 			                    <form method="post">  
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
-				                	<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}" /> 
-				                	<input type="hidden" name="a_idx" value="${gvo.a_idx}" /> 
+				                	<input type="hidden" name="n_idx" value="${nvo.n_idx}" /> 
+				                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
 				                	 
 				                	<span>
 					                    <button class="write" onclick="move_notice_update(this.form)">수정</button>   
@@ -193,6 +204,44 @@
 
     
     <script>
+    function move_comment_update(f){
+   	    // 수정 폼을 포함하는 div를 찾습니다.
+   	    f.action="/notice/comment_update"
+   	    var updateForm = document.getElementById("update_form");
+   	    
+   	    // 수정 폼의 표시 상태를 토글합니다.
+   	    if (updateForm.style.display === "none" || updateForm.style.display === "") {
+   	        updateForm.style.display = "block";
+   	    } else {
+   	        updateForm.style.display = "none";
+   	    }
+    }
+    
+    function move_comment_delete(f){
+    	if(${clist.u_id == sessionScope.u_id}){ 
+	    	if(removeCheck()){
+		    	f.action="/comment/commentdelete";
+		    	f.submit();
+	    	}
+    	}else{
+    		alert("작성자만 삭제할 수 있습니다.");
+    	}
+    }
+    
+    function removeCheck() {
+    	return confirm("정말 삭제하시겠습니까??");
+    }
+    
+    function move_notice_delete(f){
+    	f.action="/review/delete";
+    	f.submit();
+    }
+    
+    function move_notice_update(f) {
+		f.action="/review/update";
+		f.submit();
+	}
+    
         $(document).ready(function () {
             function toggleSidebar() {
                 $(".button").toggleClass("active");

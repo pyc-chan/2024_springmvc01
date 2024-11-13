@@ -3,7 +3,7 @@ package com.ict.project.inquery.vo;
 public class InqueryVO {
 	
 	// 게시판마다 변수명 확인해서 작성하기
-	private String i_idx, u_idx, i_tle, i_con, i_dat, i_ans, a_idx, i_acon;
+	private String i_idx, u_id, i_tle, i_con, i_dat, i_ans, a_idx, i_acon;
 
 	public String getI_idx() {
 		return i_idx;
@@ -14,11 +14,11 @@ public class InqueryVO {
 	}
 
 	public String getU_idx() {
-		return u_idx;
+		return u_id;
 	}
 
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setU_idx(String u_id) {
+		this.u_id = u_id;
 	}
 
 	public String getI_tle() {

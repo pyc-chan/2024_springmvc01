@@ -3,6 +3,7 @@ package com.ict.project.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,24 +42,11 @@ public class AdminController {
 	@Autowired
 	private PagingService pagingService;
 
-	@GetMapping("/admin1")
-	public ModelAndView adminGo1() {
-		return new ModelAndView("admin/admin1");
-	}
-
-	@GetMapping("/admin2")
-	public ModelAndView adminGo2() {
-		return new ModelAndView("admin/admin1-2");
-	}
-
-	@GetMapping("/admin3")
-	public ModelAndView adminGo3() {
-		return new ModelAndView("admin/admin1-3");
-	}
-	
 	@GetMapping("/admin/index")
-	public ModelAndView adminIndex() {
-		ModelAndView mv = new ModelAndView("admin/index");
+	public ModelAndView adminIndex(HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
+		
+		ModelAndView mv = new ModelAndView("admin/admin_index");
 		// login
 		LoginService loginad = adminService.loginService();
 		PerPageConstant perPageConstant = new PerPageConstant();
@@ -75,15 +63,19 @@ public class AdminController {
 		NoticeService noticead = adminService.noticeService();
 		List<NoticeVO> noticelist = noticead.getBoardList(0, perPage);
 		mv.addObject("noticelist", noticelist);
-		
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// 관리자 목록
-	@GetMapping("/admin/adminlist")
-	public ModelAndView adminList(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("");
-
+	@RequestMapping("/admin/adminlist")
+	public ModelAndView adminList(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
+		ModelAndView mv = new ModelAndView("admin/admin_list");
+		
+		if(request.getAttribute("a_id").equals("root")) {
+			
 		int count = adminService.adminCount();
 		String cPage = request.getParameter("cPage");
 		PerPageConstant constant = new PerPageConstant();
@@ -98,12 +90,18 @@ public class AdminController {
 		mv.addObject("paging", paging);
 		mv.addObject("cmd", "/admin/adminlist");
 		return mv;
+		}
+		else {
+			return new ModelAndView("redirect:/admin/index");
+		}
+		}
+		return new ModelAndView("index");
 	}
 
 	// 관리자 정보
 	@PostMapping("/admin/admindetail")
 	public ModelAndView adminDetail(String a_idx, String cPage) {
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("admin/admin_detail");
 		AdminVO avo = adminService.adminDetail(a_idx);
 		mv.addObject("avo", avo);
 		mv.addObject("cPage", cPage);
@@ -139,7 +137,8 @@ public class AdminController {
 
 	// 회원 목록
 	@GetMapping("/admin/userlist")
-	public ModelAndView userList(HttpServletRequest request) {
+	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
 		ModelAndView mv = new ModelAndView("");
 		LoginService loginad = adminService.loginService();
 
@@ -158,14 +157,16 @@ public class AdminController {
 		mv.addObject("cmd", "/admin/userlist");
 
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// 회원 정보
 	@PostMapping("/admin/userdetail")
-	public ModelAndView userDetail(String u_idx, String cPage) {
+	public ModelAndView userDetail(String u_id, String cPage) {
 		ModelAndView mv = new ModelAndView("");
 		LoginService loginad = adminService.loginService();
-		LoginVO lvo = loginad.getDetail(u_idx);
+		LoginVO lvo = loginad.getDetail(u_id);
 		mv.addObject("lvo", lvo);
 		mv.addObject("cPage", cPage);
 		return mv;
@@ -202,8 +203,9 @@ public class AdminController {
 
 	// qna 목록
 	@GetMapping("/admin/qnalist")
-	public ModelAndView qnaList(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("");
+	public ModelAndView qnaList(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
+		ModelAndView mv = new ModelAndView("admin/qna_list");
 		QnaService qnaad = adminService.qnaService();
 
 		int count = qnaad.getQnaCount();
@@ -221,6 +223,8 @@ public class AdminController {
 		mv.addObject("cmd", "/admin/qnalist");
 
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// qna 상세페이지
@@ -266,7 +270,8 @@ public class AdminController {
 
 	// fna 목록
 	@GetMapping("/admin/fnalist")
-	public ModelAndView fnaList(HttpServletRequest request) {
+	public ModelAndView fnaList(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
 		ModelAndView mv = new ModelAndView("");
 		FnaService fnaad = adminService.fnaService();
 
@@ -285,6 +290,8 @@ public class AdminController {
 		mv.addObject("cmd", "/admin/fnalist");
 
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// fna 상세페이지
@@ -330,8 +337,9 @@ public class AdminController {
 
 	// 공지사항 리스트
 	@GetMapping("/admin/noticelist")
-	public ModelAndView noticeList(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("");
+	public ModelAndView noticeList(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
+		ModelAndView mv = new ModelAndView("admin/notice_list");
 		NoticeService noticead = adminService.noticeService();
 
 		int count = noticead.getTotalCount();
@@ -349,12 +357,14 @@ public class AdminController {
 		mv.addObject("cmd", "/admin/noticelist");
 
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// 공지사항 상세
 	@PostMapping("/admin/noticedetail")
 	public ModelAndView noticeDetail(String n_idx, String cPage) {
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("admin/notice_detail");
 		NoticeService noticead = adminService.noticeService();
 		NoticeVO nvo = noticead.getBoardDetail(n_idx);
 		mv.addObject("nvo", nvo);
@@ -395,7 +405,9 @@ public class AdminController {
 	
 	// 댓글 목록
 	@RequestMapping("/admin/commentlist")
-	public ModelAndView commentList(HttpServletRequest request, CommentVO cvo) {
+	public ModelAndView commentList(HttpServletRequest request, CommentVO cvo, HttpSession session) {
+		if(session.getAttribute("a_id")!=null) {
+		
 		ModelAndView mv = new ModelAndView("");
 		CommentService commentad = adminService.commentService();
 
@@ -415,6 +427,8 @@ public class AdminController {
 		mv.addObject("cmd", "/admin/commentlist");
 
 		return mv;
+		}
+		return new ModelAndView("index");
 	}
 
 	// comment 삭제
@@ -450,7 +464,8 @@ public class AdminController {
 	
 	// 리뷰 목록
 		@RequestMapping("/admin/reviewlist")
-		public ModelAndView reviewList(HttpServletRequest request) {
+		public ModelAndView reviewList(HttpServletRequest request, HttpSession session) {
+			if(session.getAttribute("a_id")!=null) {
 			ModelAndView mv = new ModelAndView("");
 			ReviewService reviewad = adminService.reviewService();
 
@@ -470,6 +485,8 @@ public class AdminController {
 			mv.addObject("cmd", "/admin/reviewlist");
 
 			return mv;
+			}
+			return new ModelAndView("index");
 		}
 
 		// review 삭제
@@ -505,7 +522,8 @@ public class AdminController {
 		
 		// inquery 목록
 		@RequestMapping("/admin/inquerylist")
-		public ModelAndView inqueryList(HttpServletRequest request) {
+		public ModelAndView inqueryList(HttpServletRequest request, HttpSession session) {
+			if(session.getAttribute("a_id")!=null) {
 			ModelAndView mv = new ModelAndView("");
 			ReviewService reviewad = adminService.reviewService();
 
@@ -525,6 +543,8 @@ public class AdminController {
 			mv.addObject("cmd", "/admin/inquerylist");
 
 			return mv;
+			}
+			return new ModelAndView("index");
 		}
 		// inquery 작성
 		@PostMapping("/admin/inqueryinsert")

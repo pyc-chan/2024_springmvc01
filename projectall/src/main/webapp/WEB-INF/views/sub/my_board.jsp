@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
                 <ul class="contents_box">
                     <li class="textcenter">
                         <h2 class="great_title">마이페이지</h2>
-                        <p class="subheading_title_my">내가 쓴 게시판</p>
+                        <p class="subheading_title_my">내가 쓴 댓글</p>
                         
                         <!-- 마이 페이지 메뉴 -->
                         <jsp:include page="../common/mypage_menu.jsp"></jsp:include>
@@ -41,7 +42,34 @@
                         <jsp:include page="../common/mypage_profile.jsp"></jsp:include>
                         
                         <!-- 마이 페이지 내용 시작 -->
-                        
+                        <c:forEach var="k" items="${clist}">
+								
+          			 		<c:choose>
+							    <c:if test="${k.c_out == 0}">
+							        <div class="comment_list">
+									 	<ul>
+									 		<li>
+									 			<img src="/resources/images/profile.png" alt="profile">
+									 		</li>
+									 		<li>
+												<p class="cmt_id">${k.c_id} 
+													<c:if test="${k.c_up == 1}">
+														<span class="cmt_update">(수정됨)</span>
+													</c:if>
+												<span class="cmt_name">${k.c_na}</span></p>
+												<p class="cmt_content">${k.c_con}</p>
+												<p class="cmt_date">${k.c_dat}</p>
+												
+												<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
+												<div class="btn_contents">
+													<button class="update_btn" onclick="">수정</button>
+												</div>
+									 		</li>
+									 	</ul>
+									</div>
+								</c:if>
+							</c:choose>
+						</c:forEach>
                         
                     </li>
                 </ul>

@@ -59,14 +59,14 @@ public class InqueryDAOImpl implements InqueryDAO{
 	}
 
 	@Override
-	public int getInqueryUserCount(String u_idx) {
-		return sqlSessionTemplate.selectOne("inquery.inquery_usercount", u_idx);
+	public int getInqueryUserCount(String u_id) {
+		return sqlSessionTemplate.selectOne("inquery.inquery_usercount", u_id);
 	}
 
 	@Override
-	public List<InqueryVO> getInqueryUserList(String u_idx, int offset, int limit) {
+	public List<InqueryVO> getInqueryUserList(String u_id, int offset, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("u_idx", u_idx);
+		map.put("u_id", u_id);
 		map.put("offset", offset);
 		map.put("limit", limit);
 		return sqlSessionTemplate.selectList("inquery.inquery_userlist", map);

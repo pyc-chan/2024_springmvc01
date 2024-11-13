@@ -48,7 +48,7 @@ public class ReviewController {
 		String cPage = request.getParameter("cPage");
 		PerPageConstant pageConstant = new PerPageConstant();
 		int perpage = pageConstant.getReviewpage();
-				
+		
 		// 페이징 기법 설정
 		Paging paging = pagingService.pagingservice(count, cPage, perpage);
 		// DB 갔다가 오기 
@@ -61,8 +61,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/detail")
-	public ModelAndView getReviewDetail(CommentVO cvo, String cPage, String rev_idx) {
+	public ModelAndView getReviewDetail(CommentVO cvo, String cPage) {
 		ModelAndView mv = new ModelAndView("review/detail");
+		String rev_idx = cvo.getC_ref();
 		reviewService.getReviewHit(rev_idx);
 		
 		
@@ -94,6 +95,15 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	@PostMapping("/review/updateok")
+	public ModelAndView getReviewUpdateGo(@ModelAttribute String rev_idx) {
+		ModelAndView mv = new ModelAndView();
+		ReviewVO rvo = reviewService.getReviewDetail(rev_idx);
+		mv.addObject("rvo", rvo);
+		return mv;
+	}
+	
 	
 	@PostMapping("/review/update")
 	public ModelAndView getReviewUpdate(ReviewVO rvo, HttpServletRequest request) {

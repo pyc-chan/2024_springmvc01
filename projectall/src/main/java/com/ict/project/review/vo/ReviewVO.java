@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ReviewVO {
 	
 	// 게시판마다 변수명 확인해서 작성하기
-	private String rev_idx, rev_tle, rev_con, u_idx, rev_dat, rev_up, rev_bor, rev_ref, rev_filename, rev_oldname;
+	private String rev_idx, rev_tle, rev_con, u_id, rev_dat, rev_up, rev_bor, rev_ref, rev_filename, rev_oldname;
 	private int rev_hit;
 	private MultipartFile rev_file;
 	
@@ -35,10 +35,10 @@ public class ReviewVO {
 		this.rev_con = rev_con;
 	}
 	public String getU_idx() {
-		return u_idx;
+		return u_id;
 	}
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setU_idx(String u_id) {
+		this.u_id = u_id;
 	}
 	public String getRev_dat() {
 		return rev_dat;

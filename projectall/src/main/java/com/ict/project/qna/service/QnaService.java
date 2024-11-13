@@ -20,7 +20,7 @@ public interface QnaService {
 	
 	public int getQnaDelete(String idx);
 	
-	public List<QnaVO> getQnaUserList(String u_idx, int offset, int limit);
+	public List<QnaVO> getQnaUserList(String u_id, int offset, int limit);
 	
-	public int getQnaUserCount(String u_idx);
+	public int getQnaUserCount(String u_id);
 }

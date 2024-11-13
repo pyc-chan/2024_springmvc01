@@ -31,6 +31,7 @@ import com.ict.project.comm.PerPageConstant;
 import com.ict.project.comment.service.CommentService;
 import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.login.service.LoginService;
+import com.ict.project.login.vo.LoginVO;
 import com.ict.project.notice.service.NoticeService;
 import com.ict.project.notice.vo.NoticeVO;
 
@@ -83,40 +84,14 @@ public class NoticeController {
 		return new ModelAndView("sub/mypage_main");
 	}
 	
-	// 마이 페이지 : 히스토리 -> 캘린더
-	@RequestMapping("/my_calendar")
-	public ModelAndView getMyCalendarGo() {
-		return new ModelAndView("sub/my_calendar");
-	}
-	
-	// 마이 페이지 : 히스토리 -> 스크랩
-	@RequestMapping("/my_scraps")
-	public ModelAndView getMyScrapsGo() {
-		return new ModelAndView("sub/my_scraps");
-	}
-	
-	// 마이 페이지 : 히스토리 -> 리뷰
-	@RequestMapping("/my_review")
-	public ModelAndView getMyReviewGo() {
-		return new ModelAndView("sub/my_review");
-	}
-	
-	// 마이 페이지 : 히스토리 -> 내가 쓴 게시판
-	@RequestMapping("/my_board")
-	public ModelAndView getMyBoardGo() {
-		return new ModelAndView("sub/my_board");
-	}
-	
-	// 마이 페이지 : 내 정보 보기 -> 내 프로필
-	@RequestMapping("/my_info_check")
-	public ModelAndView getMyInfoCheckGo() {
-		return new ModelAndView("sub/my_info_check");
-	}
-	
 	// 마이 페이지 : 내 정보 보기 -> 회원정보 수정
 	@RequestMapping("/my_info_mody")
-	public ModelAndView getMyInfoModyGo() {
-		return new ModelAndView("sub/my_info_mody");
+	public ModelAndView getMyInfoModyGo(@ModelAttribute String u_id) {
+		ModelAndView mv = new ModelAndView("sub/my_info_mody");
+		LoginVO lvo = loginService.getDetail(u_id);
+		mv.addObject("lvo", lvo);
+		
+		return mv;
 	}
 	
 	// 마이 페이지 : 내 정보 보기 -> 회원정보 삭제
@@ -125,17 +100,6 @@ public class NoticeController {
 		return new ModelAndView("sub/my_info_delete");
 	}
 	
-	// 마이 페이지 : 문의 내역 -> 1 : 1 문의 내역
-	@RequestMapping("/my_qna")
-	public ModelAndView getMyQnaGo() {
-		return new ModelAndView("sub/my_qna");
-	}
-	
-	// 마이 페이지 : 문의 내역 -> 불편사항 신고 내역
-	@RequestMapping("/my_report")
-	public ModelAndView getMyReportGo() {
-		return new ModelAndView("sub/my_report");
-	}
 	
 	// 1. 공원 찾기
 	// sub1-1
@@ -214,7 +178,7 @@ public class NoticeController {
 	
 	// 5. 커뮤니티
 	// notice
-	@RequestMapping("/notice")
+	@RequestMapping("/notice_list")
 	public ModelAndView getMoveNotice(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("sub/notice_list");
 		
@@ -248,7 +212,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/notice_write_ok")
-	public ModelAndView getMoveNoticeWriteOk(NoticeVO gvo, HttpServletRequest request) {
+	public ModelAndView getMoveNoticeWriteOk(NoticeVO nvo, HttpServletRequest request) {
 		try {
 			ModelAndView mv = new ModelAndView("redirect:/notice");
 			
@@ -258,10 +222,10 @@ public class NoticeController {
 			System.out.println("controller 입니다.");
 			
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-			MultipartFile file = gvo.getFile_name();
+			MultipartFile file = nvo.getFile_name();
 			
 			if (file.isEmpty()) {
-				gvo.setF_name("");
+				nvo.setF_name("");
 			} else {
 				// 현재 날짜와 시간 가져오기
 		        LocalDateTime now = LocalDateTime.now();
@@ -273,14 +237,14 @@ public class NoticeController {
 		        // pic 파일이름 file 실제 파일
 		        // 업로드시간_파일명 의 형태로 저장
 		        String fname = nowstr+"_"+file.getOriginalFilename();
-		        gvo.setF_name(fname);
+		        nvo.setF_name(fname);
 		        
 		        // 실질적인 파일 업로드
 		        file.transferTo(new File(path, fname));
 				
 			}
 			
-			int result = noticeService.getBoardInsert(gvo);
+			int result = noticeService.getBoardInsert(nvo);
 			
 			System.out.println("result : " + result);
 			
@@ -306,14 +270,14 @@ public class NoticeController {
 		// hit 업데이트
 		noticeService.getBoardHit(n_idx);
 		// 상세보기
-		NoticeVO gvo = noticeService.getBoardDetail(n_idx);
+		NoticeVO nvo = noticeService.getBoardDetail(n_idx);
 		// 댓글 전체 카운트
 		int count = commentService.getCommentSubCount(cvo);
 		// 페이지 댓글수
 		PerPageConstant perPageConstant = new PerPageConstant();
 		int perPage = perPageConstant.getNoticecommpage();
 		
-		AdminVO avo = adminService.adminDetail(gvo.getA_idx());
+		AdminVO avo = adminService.adminDetail(nvo.getA_idx());
 		
 		// 페이징 처리
 		Paging paging = pagingService.pagingservice(count, cPage, perPage);
@@ -323,9 +287,9 @@ public class NoticeController {
 		mv.addObject("clist", clist);
 		mv.addObject("paging", paging);
 		
-		if (gvo != null) {
+		if (nvo != null) {
 			mv.addObject("u_id", avo.getA_na());
-			mv.addObject("gvo", gvo);
+			mv.addObject("nvo", nvo);
 			mv.addObject("cPage", cPage);
 			mv.addObject("cmd", "/notice_detail");
 			
@@ -343,7 +307,7 @@ public class NoticeController {
 			
 			System.out.println(f_name);
 			
-			String path = request.getSession().getServletContext().getRealPath("resources/upload/"+f_name);
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/"+f_name);
 			String r_path = URLEncoder.encode(path, "UTF-8");
 			
 			response.setContentType("application/x-msdownload");
@@ -409,17 +373,17 @@ public class NoticeController {
 	@PostMapping("/notice_update")
 	public ModelAndView getMoveNoticeUpdate(
 			@ModelAttribute("cPage") String cPage,
-			@ModelAttribute("idxn_idx") String idxn_idx) {
+			@ModelAttribute("n_idx") String n_idx) {
 		
 		System.out.println("cPage1 : " + cPage);
-		System.out.println("idxn_idx1 : " + idxn_idx);
+		System.out.println("n_idx1 : " + n_idx);
 		
 		ModelAndView mv = new ModelAndView("sub/notice_update");
-		NoticeVO gvo = noticeService.getBoardDetail(idxn_idx);
-		System.out.println("gvo1 : " + gvo);
+		NoticeVO nvo = noticeService.getBoardDetail(n_idx);
+		System.out.println("nvo1 : " + nvo);
 		
-		if (gvo != null) {
-			mv.addObject("gvo", gvo);
+		if (nvo != null) {
+			mv.addObject("nvo", nvo);
 			
 			return mv;
 		}
@@ -431,22 +395,22 @@ public class NoticeController {
 	public ModelAndView getMoveNoticeUpdateOk(
 			@ModelAttribute("cPage") String cPage,
 			@ModelAttribute("idxn_idx") String idxn_idx,
-			NoticeVO gvo, HttpServletRequest request) {
+			NoticeVO nvo, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		NoticeVO gvo2 = noticeService.getBoardDetail(idxn_idx);
+		NoticeVO nvo2 = noticeService.getBoardDetail(idxn_idx);
 		
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
-			MultipartFile file = gvo.getFile_name();
-			String old_f_name = gvo2.getF_name();
+			MultipartFile file = nvo.getFile_name();
+			String old_f_name = nvo2.getF_name();
 			
 			System.out.println("file2 : " + file);		
 			System.out.println("old_f_name2 : " + old_f_name);				
 			
 			if (file.isEmpty()) {
-				gvo.setF_name("");
+				nvo.setF_name("");
 			} else {
 				// 현재 날짜와 시간 가져오기
 		        LocalDateTime now = LocalDateTime.now();
@@ -458,14 +422,14 @@ public class NoticeController {
 		        // pic 파일이름 file 실제 파일
 		        // 업로드시간_파일명 의 형태로 저장
 		        String fname = nowstr+"_"+file.getOriginalFilename();
-		        gvo.setF_name(fname);
+		        nvo.setF_name(fname);
 		        
 		        // 실질적인 파일 업로드
 		        file.transferTo(new File(path, fname));
 				
 			}
 			
-			int result = noticeService.getBoardUpdate(gvo);
+			int result = noticeService.getBoardUpdate(nvo);
 			
 			System.out.println("result2 : " + result);
 			

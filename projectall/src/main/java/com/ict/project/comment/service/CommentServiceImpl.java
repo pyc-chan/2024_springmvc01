@@ -21,8 +21,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
-	public List<CommentVO> getCommentUserList(String u_idx, int offset, int limit) {
-		return CommentDAO.getCommentUserList(u_idx, offset, limit);
+	public List<CommentVO> getCommentUserList(String u_id, int offset, int limit) {
+		return CommentDAO.getCommentUserList(u_id, offset, limit);
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
-	public int getCommentUserCount(String u_idx) {
-		return CommentDAO.getCommentUserCount(u_idx);
+	public int getCommentUserCount(String u_id) {
+		return CommentDAO.getCommentUserCount(u_id);
 	}
 
 	@Override

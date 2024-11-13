@@ -1,25 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>고객의 소리</title>
-	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
+	<title>비밀번호 변경</title>
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="resources/css/menu.css" />
-    <link rel="stylesheet" href="resources/css/sub1-3.css" />
+    <link rel="stylesheet" href="/resources/css/menu.css" />
+    <link rel="stylesheet" href="/resources/css/pwsuccess.css" />
     <link rel="stylesheet" href="/resources/css/weather.css"><!-- 날씨 위젯 추가 -->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="resources/js/menu.js"></script>
+    <script src="/resources/js/menu.js"></script>
     <script src="/resources/js/weather.js"></script><!-- 날씨 위젯 추가 -->
 </head>
 <body>
@@ -31,25 +30,20 @@
         <main>
             <div id="sub_container">
                 <ul class="contents_box">
-                    <li class="textcenter">
-                        <!-- 제목은 변경 후 주석은 지워주세요 -->
-                        <h2 class="great_title">고객의 소리</h2>
-                        <p class="subheading_title">도심 공원에서 만나는 자연과 지속가능성</p>
-                        <!-- 제목은 변경 후 주석은 지워주세요 -->
-
-
-                        <!-- 이 내용은 삭제 하세요 -->
-                        <p class="content_text">
-                            대한민국의 도심공원은 도시 내에서 자연환경을 조성하고 시민들에게 녹지 공간을 제공하기 위한 목적으로 만들어졌습니다. 도심공원의 역사는 20세기 초 일제강점기 시절까지 거슬러 올라가며, 당시 서구식 공원의 개념이 도입되어 공공 휴식 공간이 조성되기 시작했습니다. 해방 후 대한민국의 경제 성장과 도시화가 
-                            가속화되면서, 공원의 역할은 단순한 휴식 공간에서 벗어나 도시 내 환경 보전, 생태계 보호, 그리고 시민들의 건강 증진과 여가 활동을 위한 필수적 요소로 
-                            자리잡게 되었습니다.
-                        </p>
-
-                        <!-- 이 내용은 삭제 하세요 -->
-                        <p style="font-size: 30px; padding: 30px 0; border-top: 1px solid #000; border-bottom: 1px solid #aaa; margin: 30px auto;" >
-                            여기서 작업하세요
-                        </p>
-                        <!-- 이 내용은 삭제 하세요 -->
+                    <li class="textleft">
+						<div id="suc_container">
+							<div id="check">
+								<i class="fa-regular fa-circle-check"></i>
+							</div>
+							<div id="success">
+								<p>비밀번호 변경 완료</p>
+							</div>
+							<p id="username">${u_name}님 비밀번호 변경이 완료되었습니다.
+							<div id="twobtn">
+								<button id="login" class="btn_success" onclick="location.href='/loginGo'">로그인	</button>
+								<button id="menu" class="btn_success" onclick="location.href='/mainGo'">메인 바로가기</button>
+							</div>
+						</div>
                     </li>
                 </ul>
             </div>
@@ -168,6 +162,6 @@
 
         };
         basicScrollTop();
-    </script>
+    </script>	
 </body>
 </html>

@@ -42,7 +42,7 @@
 		            <!-- photo list 영역 start -->
 		            <div id="sub_container">
 		                <ul class="photo_list_ul">
-		                	<c:forEach var="k" items="'${k.rev_bor}', '${k.rev_ref}', '${k.rev_idx }')">
+		                	<c:forEach var="k" items="${list }">
 		                    <li onclick="movepage('${k}')">
 		                        <div class="photo_list_img box">
 		                            <img src="/resources/images/${k.rev_filename}" alt="이미지가 없습니다" class="content">
@@ -80,8 +80,8 @@
     
     <script>
     	
-    function moveToPage(bor, ref, idx) {
-        window.location.href = "/review/detail?c_bor="+bor+"&c_ref="+ref+"&cPage="+${cPage}+"&rev_idx="+idx;
+    function moveToPage(k) {
+        window.location.href = "/review/detail?c_bor=review&c_ref="+k.rev_idx+"&cPage="+cPage;
     }
     
     

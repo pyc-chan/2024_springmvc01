@@ -36,38 +36,57 @@
 					</div>
 				</div>
 				<table>
+					<colgroup>
+						<col width="10%">
+						<col width="15%">
+						<col width="15%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
 					<tr>
 						<th>No</th>
 						<th>제목</th>
 						<th>내용</th>
+						<th>작성자</th>
+						<th>내용</th>
 						<th>작성일</th>
+						<th>수정 여부</th>
+					</tr>
+					<tr class="hover_back" onclick="review_detail()">
+						<td>No</td>
+						<td>제목</td>
+						<td>내용</td>
+						<td>작성자</td>
+						<td>내용</td>
+						<td>작성일</td>
+						<td>수정 여부</td>
 					</tr>
 					<c:choose>
 						<c:when test="${empty fvo_list }">
 							<tr>
-								<td colspan="3"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="7"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
-								<tr>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_tle}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_con}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_dat}</a>
-									</td>
+								<tr onclick="review_detail()">
+									<td>No</td>
+									<td>작성자 ${k.u_idx}</td>
+									<td>내용 ${k.n_idx}</td>
+									<td>작성일 ${k.rev_dat}</td>
+									<td>수정 여부 ${k.rev_up}</td>
+									<td>작성 게시판 ${k.rev_bor}</td>
+									<td>작성 게시물 ${k.rev_ref}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 					<tfoot>
 						<tr>
-							<td colspan="3">
-								<button onclick="write_page()">글쓰기</button>
+							<td colspan="7">
+								<button onclick="review_write()">글쓰기</button>
 							</td>
 						</tr>
 					</tfoot>

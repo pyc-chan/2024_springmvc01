@@ -46,23 +46,19 @@
 			                <h1 class="title">나의 회원정보</h1>
 			                <div class="info-group">
 			                    <label class="label">아이디</label>
-			                    <p class="info">사용자 아이디 출력란</p>
-			                </div>
-			                <div class="info-group">
-			                    <label class="label">비밀번호</label>
-			                    <p class="info masked">사용자 비밀번호 출력란 (마스킹표시)</p>
+			                    <p class="info">${lvo.u_id }</p>
 			                </div>
 			                <div class="info-group">
 			                    <label class="label">이름</label>
-			                    <p class="info">사용자 이름 출력란</p>
+			                    <p class="info">${lvo.u_na }</p>
 			                </div>
 			                <div class="info-group">
 			                    <label class="label">휴대전화</label>
-			                    <p class="info">사용자 휴대전화 번호 출력란</p>
+			                    <p class="info">${lvo.u_pho }</p>
 			                </div>
 			                <div class="info-group">
 			                    <label class="label">이메일</label>
-			                    <p class="info">사용자 이메일 출력란</p>
+			                    <p class="info">${lvo.u_em }</p>
 			                </div>
 			            </div>
 			            
@@ -88,6 +84,12 @@
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
     
     <script>
+	  	function my_info_mody(){
+	    	document.location.href="/my_info_mody?u_id="${u_id};
+	  	}
+    
+    
+    
 	    $(document).ready(function () {
 	        function toggleSidebar() {
 	            $(".button").toggleClass("active");

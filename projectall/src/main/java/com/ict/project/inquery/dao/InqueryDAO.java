@@ -9,11 +9,11 @@ public interface InqueryDAO {
 	
 	public int getInqueryCount();
 	
-	public int getInqueryUserCount(String u_idx);
+	public int getInqueryUserCount(String u_id);
 	
 	public List<InqueryVO> getInqueryList(int offset, int limit);
 	
-	public List<InqueryVO> getInqueryUserList(String u_idx, int offset, int limit);
+	public List<InqueryVO> getInqueryUserList(String u_id, int offset, int limit);
 	
 	public InqueryVO getInqueryDetail(String idx);
 	

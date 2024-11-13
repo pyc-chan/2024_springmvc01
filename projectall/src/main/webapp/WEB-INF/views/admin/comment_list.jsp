@@ -36,29 +36,60 @@
 					</div>
 				</div>
 				<table>
+					<colgroup>
+						<col width="10%">
+						<col width="10%">
+						<col width="15%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+					</colgroup>
 					<tr>
 						<th>No</th>
-						<th>제목</th>
+						<th>작성자</th>
 						<th>내용</th>
 						<th>작성일</th>
+						<th>수정 여부</th>
+						<th>삭제 여부</th>
+						<th>작성 게시판</th>
+						<th>작성 게시물</th>
+						<th>삭제</th>
+					</tr>
+					<tr class="hover_back">
+						<td>No</td>
+						<td>작성자</td>
+						<td>내용</td>
+						<td>작성일</td>
+						<td>수정 여부</td>
+						<td>삭제 여부</td>
+						<td>작성 게시판</td>
+						<td>작성 게시물</td>
+						<td>
+							<button class="delete_btn" onclick="comment_delete()">삭제</button>
+						</td>
 					</tr>
 					<c:choose>
 						<c:when test="${empty fvo_list }">
 							<tr>
-								<td colspan="3"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="9"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
 								<tr>
+									<td>No</td>
+									<td>작성자 ${k.n_idx}</td>
+									<td>내용 ${k.n_idx}</td>
+									<td>작성일 ${k.n_idx}</td>
+									<td>수정 여부 ${k.n_idx}</td>
+									<td>삭제 여부 ${k.n_idx}</td>
+									<td>작성 게시판 ${k.n_idx}</td>
+									<td>작성 게시물 ${k.n_idx}</td>
 									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_tle}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_con}</a>
-									</td>
-									<td>
-										<a href="/notice_detail?n_idx=${k.n_idx}">${k.n_dat}</a>
+										<button class="delete_btn" onclick="comment_delete()">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -66,8 +97,8 @@
 					</c:choose>
 					<tfoot>
 						<tr>
-							<td colspan="3">
-								<button onclick="write_page()">글쓰기</button>
+							<td colspan="9">
+								<!-- <button onclick="write_page()">글쓰기</button> -->
 							</td>
 						</tr>
 					</tfoot>

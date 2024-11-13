@@ -29,9 +29,9 @@ public class CommentDAOImpl implements CommentDAO{
 	}
 	
 	@Override
-	public List<CommentVO> getCommentUserList(String u_idx, int offset, int limit) {
+	public List<CommentVO> getCommentUserList(String u_id, int offset, int limit) {
 		Map<String , Object> map = new HashMap<String, Object>();
-		map.put("u_idx", u_idx);
+		map.put("u_id", u_id);
 		map.put("offset", offset);
 		map.put("limit", limit);
 		return sqlSessionTemplate.selectList("Comment.Comment_userlist",map);
@@ -71,8 +71,8 @@ public class CommentDAOImpl implements CommentDAO{
 	}
 
 	@Override
-	public int getCommentUserCount(String u_idx) {
-		return sqlSessionTemplate.selectOne("Comment.Comment_usercount", u_idx);
+	public int getCommentUserCount(String u_id) {
+		return sqlSessionTemplate.selectOne("Comment.Comment_usercount", u_id);
 	}
 
 	@Override
