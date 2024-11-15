@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="evcal" parameterType="Map" resultType="evvo">
-		select * from event_db
+		select * from event_db  
 	</select>
 	
 </mapper>

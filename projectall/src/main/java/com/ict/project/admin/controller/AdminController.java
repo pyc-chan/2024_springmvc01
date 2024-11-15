@@ -555,7 +555,7 @@ public class AdminController {
 			
 			return mv;
 		}
-		// inquery 댓글 작성
+		// inquery 삭제
 		@PostMapping("/admin/inquerydelete")
 		public ModelAndView inqueryDelete(String i_idx) {
 			ModelAndView mv = new ModelAndView();
@@ -566,16 +566,19 @@ public class AdminController {
 		}
 		// inquery 댓글 작성
 		@PostMapping("/admin/inquerydetail")
-		public ModelAndView inqueryDetail(String i_idx, String cPage) {
+		public ModelAndView inqueryDetail(String i_idx, String cPage, HttpSession session) {
 			ModelAndView mv = new ModelAndView();
 			InqueryService inqueryad = adminService.
 					inqueryService();
 			InqueryVO ivo = inqueryad.getInqueryDetail(i_idx);
+			
+			mv.addObject("a_idx", session.getAttribute("a_idx"));
 			mv.addObject("ivo", ivo);
 			mv.addObject("cPage", cPage);
 			
 			return mv;
 		}
+		
 		// inquery 댓글 작성
 		@PostMapping("/admin/inqueryupdate")
 		public ModelAndView inqueryUpdate(InqueryVO ivo) {

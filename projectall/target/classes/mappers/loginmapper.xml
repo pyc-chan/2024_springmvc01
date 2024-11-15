@@ -7,7 +7,7 @@
 <mapper namespace="login">
 	<insert id="login_insert" parameterType="lvo">
 		insert into u_db (u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_reg, u_out, a_idx, u_outr, u_kakao, u_naver, u_pic)
-		values (#{u_id}, #{u_pw}, #{u_na}, #{u_phone}, #{u_gen}, #{u_bir}, #{u_em}, DATE(NOW()), #{u_out}, #{a_idx}, #{u_outr}, #{u_kakao}, #{u_naver}, #{u_pic}) 
+		value (#{u_id}, #{u_pw}, #{u_na}, #{u_phone}, #{u_gen}, #{u_bir}, #{u_em}, DATE(NOW()), #{u_out}, #{a_idx}, #{u_outr}, #{u_kakao}, #{u_naver}, #{u_pic}) 
 	</insert>
 	
 	<select id="id_chk" parameterType="String" resultType="String">
@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="user_list" resultType="lvo" parameterType="Map">
-		select * from u_db limit #{offset}, #{limit} order by u_idx desc
+		select * from u_db limit #{offset}, #{limit}
 	</select>
 	
 	

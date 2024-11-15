@@ -61,7 +61,7 @@
 						<td>작성일</td>
 					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list}">
+						<c:when test="${empty list}">
 							<tr>
 								<td colspan="5"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
@@ -69,11 +69,11 @@
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
 								<tr class="hover_back"  onclick="fna_detail()">
-									<td>No ${k.n_idx}</td>
-									<td>카테고리 ${k.n_idx}</td>
-									<td>제목 ${k.n_idx}</td>
-									<td>내용 ${k.n_idx}</td>
-									<td>작성일 ${k.n_idx}</td>
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>${k.f_tle }</td>
+									<td>${k.f_fcon }</td>
+									<td>${k.f_acon }</td>
+									<td>${k.f_dat }</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -88,66 +88,15 @@
 				</table>
 				
 				
-                    
-                <ul class="paging_num_ul">
-                    <li class="material-icons prev">
-                        keyboard_double_arrow_left
-                    </li>
-                	<c:choose>
-                		<c:when test="${paging.beginBlock <= paging.pagePerBlock}">
-                      <li class="material-icons prev">
-                          chevron_left
-                      </li>
-                		</c:when>
-                		<c:otherwise>
-                      <li class="material-icons prev">
-                      	<a href="/fna?cPage=${paging.beginBlock - paging.pagePerBlock}">
-                          	chevron_left
-                          </a>
-                      </li>
-                		</c:otherwise>
-                	</c:choose>
-                	
-                	<!-- 페이지 번호 -->
-                	<c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="k">
-                		<c:choose>
-							<c:when test="${k == paging.nowPage }">
-								<li class="active">${k}</li>
-							</c:when>
-						    <c:otherwise>
-						    	<li><a href="/fna?cPage=${k}">${k}</a></li>
-						    </c:otherwise>
-						</c:choose>
-			                   	</c:forEach>
-					
-					<!-- 다음 버튼 -->
-					<c:choose>
-						<c:when test="${paging.beginBlock >= paging.pagePerBlock}">
-							<li class="material-icons next">
-			                             chevron_right
-								</li>
-						</c:when>
-						<c:otherwise>
-							<li class="material-icons next">
-			                             <a href="/fna?cPage=${paging.beginBlock + paging.pagePerBlock}">
-			                             	chevron_right
-			                             </a>
-			                         </li>
-						</c:otherwise>
-					</c:choose>
-
-                    
-                    <li class="material-icons next">
-                        keyboard_double_arrow_right
-                    </li>
-                </ul>
+                    <jsp:include page="../common/every_paging.jsp"/>
+               
 			</div>
 
 
 		</div>
 	</div>
-		
+		<jsp:include page="../common/arrow.jsp"/>
     	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-	</div>
+    	<script src="/resources/js/admin_common.js"></script>
 </body>
 </html>

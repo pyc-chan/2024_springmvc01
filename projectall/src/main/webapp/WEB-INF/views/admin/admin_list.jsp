@@ -40,14 +40,11 @@
 				</div>
 				<table>
 					<colgroup>
-						<col width="5%">
 						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
-						<col width="10%">
+						<col width="20%">
+						<col width="15%">
+						<col width="20%">
+						<col width="20%">
 						<col width="10%">
 					</colgroup>
 					<tr>
@@ -55,41 +52,24 @@
 						<th>아이디</th>
 						<th>이름</th>
 						<th>전화번호</th>
-						<th>성별</th>
-						<th>생년월일</th>
 						<th>이메일</th>
-						<th>생성일자</th>
-						<th>탈퇴일자</th>
-					</tr>
-					<tr class="hover_back" onclick="admin_detail()">
-						<td>No</td>
-						<td>아이디</td>
-						<td>이름</td>
-						<td>전화번호</td>
-						<td>성별</td>
-						<td>생년월일</td>
-						<td>이메일</td>
-						<td>생성일자</td>
-						<td>탈퇴일자</td>
+						<th>활동여부</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list}">
+						<c:when test="${empty list}">
 							<tr>
-								<td colspan="9"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="6"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${fvo_list}" var="k" varStatus="c">
-								<tr class="hover_back"  onclick="admin_detail()">
-									<td>${(paging.nowblock-1)*paging.pagePerBlock+c } </td>
-									<td>${k.u_id}</td>
-									<td>${k.u_na}</td>
-									<td>${k.u_pho}</td>
-									<td>${k.u_gen}</td>
-									<td>${k.u_bir}</td>
-									<td>${k.u_em}</td>
-									<td>${k.u_reg}</td>
-									<td>${k.u_out}</td>
+							<c:forEach items="${list}" var="k" varStatus="c">
+								<tr class="hover_back"  onclick="admin_detail(k)">
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>${k.a_id}</td>
+									<td>${k.a_na}</td>
+									<td>${k.a_pho}</td>
+									<td>${k.a_em}</td>
+									<td>${k.a_stat}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -97,11 +77,19 @@
 				</table>
 				
 				<jsp:include page="../common/every_paging.jsp"/>
-                
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../common/arrow.jsp"></jsp:include>
-    <jsp:include page="../common/admin_footer.jsp"></jsp:include>
+    	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+    	<jsp:include page="../common/arrow.jsp"/>
+    	<script src="/resources/js/admin_common.js"></script>
+    	
+		<script src="/resources/js/common.js"></script>
+    	<script type="text/javascript">
+    		function admin_detail(f){
+    			document.location.href="/admin/adminlist?a_idx="+f.a_idx+"&cPage="+paging.nowPage
+    		}
+    		
+    	</script>
 </body>
 </html>

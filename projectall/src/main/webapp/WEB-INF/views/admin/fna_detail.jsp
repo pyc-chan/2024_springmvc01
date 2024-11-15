@@ -32,146 +32,37 @@
 
 			<table class="popuptable">
 					<tr>
-						<td>옵션</td>
-						<td>
-	                        <c:choose>
-	                        	<c:when test="${nvo.n_chk == 'check'}">
-		                        	<label>
-		                        		공지
-		                        	</label>
-	                        	</c:when>
-	                        	<c:otherwise>
-		                        	<label>
-		                        		옵션이 없습니다.
-		                        	</label>
-	                        	</c:otherwise>
-	                        </c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td>카테고리</td>
-						<td>
-		                    ${nvo.n_opt}
-						</td>
-					</tr>
-					<tr>
 						<td>제목</td>
 						<td>
-		                    ${nvo.n_tle}
+		                    ${fvo.f_tle}
 						</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>
-		                    ${nvo.n_con}
+		                    ${fvo.f_fcon}
 						</td>
 					</tr>
 					<tr>
-						<td>첨부파일</td>
-						<td>
-                        	<c:choose>
-								<c:when test="${empty nvo.f_name}">
-									<span>등록된 첨부파일이 없습니다.</span>
-								</c:when>
-								<c:otherwise>
-									<p class="attachment_name">첨부파일</p>
-									<ul class="attachment">
-										<li class="img_box">
-											<a href="/board_down?f_name=${nvo.f_name}">
-												<img src="/resources/upload/${nvo.f_name}">
-											</a>
-										</li>
-										<li>
-											<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
-											<p>
-												<a class="img_down" href="/fna_down?f_name=${nvo.f_name}">다운로드</a>
-											</p>
-										</li>
-									</ul>
-								</c:otherwise>
-							</c:choose>
-						</td>
+						<td>답변</td>
+						<td>${fvo.f_acon}</td>
+					</tr>
+					<tr>
+						<td>작성일</td>
+						<td>${fvo.f_dat}</td>
 					</tr>
 			</table>
 			
-		                
-			<%-- 댓글 출력 창 --%>
-			<c:forEach var="k" items="${clist}">
-					
-       				 		<c:choose>
-					    <c:when test="${k.c_out == 1}">
-					        <div class="comment_list_del">
-							 	<ul>
-							 		<li>
-										<p class="cmt_content">삭제된 댓글 입니다.</p>
-							 		</li>
-							 	</ul>
-							</div>
-					    </c:when>
-					    <c:otherwise>
-							<form method="post">
-					        <div class="comment_list">
-							 	<ul>
-							 		<li>
-							 			<img src="/resources/images/profile.png" alt="profile">
-							 		</li>
-							 		<li>
-										<p class="cmt_id">아이디 <span class="cmt_update">(수정됨)</span> <span class="cmt_name">작성자</span></p>
-										<p class="cmt_content">${k.c_con}</p>
-										<p class="cmt_date">${k.c_dat}</p>
-										
-										<%-- 실제는 로그인 성공 후 관리자이거나 글쓴 본인인 경우만 삭제 가능 --%>
-										<div class="btn_contents">
-											<button class="update_btn">수정</button>
-											<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
-										</div>
-							 		</li>
-							 	</ul>
-								<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
-								<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
-								<input type="hidden" name="c_ref" value="${k.c_ref}">
-								<input type="hidden" name="idxn_idx" value="${k.c_ref}">
-								<input type="hidden" name="cPage" value="${cPage}">
-							</div>
-							</form>
-					    </c:otherwise>
-					</c:choose>
-				
-					
-				
-			</c:forEach>
-               
-               <%-- 댓글 입력 창 --%>
-			<div class="comment_conteainer">
-				<form action="/comment_insert" method="post">
-					<fieldset>
-						<!-- 아이디 number -->
-						<input type="hidden" name="u_idx" value="1">
-						
-						<p class="cmt_id">아이디 불러오기</p>
-						<div class="insert_comment">
-							<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 남겨보세요." required></textarea>
-							<!-- 댓글 저장 시 어떤 댓글이 원글인지 저장해야 한다. -->
-							<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}">
-							<input type="hidden" name="cPage" value="${cPage}">
-							<input type="hidden" name="c_out" value="0">
-							<input type="hidden" name="c_bor" value="fna">
-							<input type="submit" class="insert_btn" value="등록">
-						</div>
-					</fieldset>
-				</form>
-			</div>
-			<div>
+		    <div>
 				<ul class="but_layout">
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
-		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	<input type="hidden" name="f_idx" value="${fvo.f_idx}" /> 
 		                	
-							<input type="button" value="목록" onclick="fna_list()">
-							<input type="button" value="수정" onclick="fna_update(this.form)">
-							<input type="button" value="삭제" onclick="fna_delete(this.form)"> 
+							<input type="button" value="목록" onclick="fna_list(this.form)">
+							<input type="button" value="회원 수정" onclick="fna_update(this.form)">
+							<input type="button" value="회원 삭제" onclick="fna_delete(this.form)"> 
                			</form>
 					</li>
 				</ul>
@@ -180,9 +71,12 @@
 		<!-- container div -->
 	</div>
 	<!-- container div -->
+	<script src="/resources/js/admin_common.js"></script>
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+	
 
 	<script>
+	
 	
     const btns = document.querySelectorAll(".topmenu, .menubtn");
         function removeActiveClasses() {

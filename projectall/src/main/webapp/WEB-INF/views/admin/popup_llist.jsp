@@ -50,15 +50,8 @@
 						<th>링크</th>
 						<th>활성화 여부</th>
 					</tr>
-					<tr class="hover_back" onclick="popup_detail()">
-						<td>No</td>
-						<td>제목</td>
-						<td>생성일</td>
-						<td>링크</td>
-						<td>활성화 여부</td>
-					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list }">
+						<c:when test="${empty list }">
 							<tr>
 								<td colspan="5"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
@@ -66,11 +59,11 @@
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
 								<tr class="hover_back" onclick="popup_detail()">
-									<td>No ${k.n_idx}</td>
-									<td>제목 ${k.pop_tle}</td>
-									<td>생성일 ${k.pop_con}</td>
-									<td>링크 ${k.pop_link}</td>
-									<td>활성화 여부 ${k.pop_act}</td>
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>${k.pop_tle}</td>
+									<td>${k.pop_rdat}</td>
+									<td>${k.pop_link}</td>
+									<td>${k.pop_act}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -83,13 +76,13 @@
 						</tr>
 					</tfoot>
 				</table>
+				<jsp:include page="../common/arrow.jsp"/>
 			</div>
-
-
 		</div>
 	</div>
-		
+		<jsp:include page="../common/every_paging.jsp"/>
     <jsp:include page="../common/admin_footer.jsp"></jsp:include>
+    <script src="/resources/js/admin_common.js"></script>
 	<script>
 
 

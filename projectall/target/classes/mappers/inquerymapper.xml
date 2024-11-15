@@ -15,12 +15,12 @@
 	</select>
 	
 	<select id="inquery_userlist" resultType="ivo" parameterType="Map">
-		select * from inquery_db where u_id=#{u_id} 
+		select * from inquery_db where u_idx=#{u_idx} 
 		order by i_idx desc limit #{offset}, #{limit} 
 	</select>
 	
 	<select id="inquery_usercount" resultType="int" parameterType="String">
-		select count(*) from inquery_db where u_id=#{u_id}
+		select count(*) from inquery_db where u_idx=#{u_idx}
 	</select>
 	
 	<select id="inquery_detail" parameterType="String" resultType="ivo">
@@ -28,8 +28,8 @@
 	</select>
 	
 	<insert id="inquery_insert" parameterType="ivo">
-		insert into inquery_db (i_idx, u_id, i_tle, i_con, i_dat, i_ans, a_idx, i_acon)
-		values (#{i_idx}, #{u_id}, #{i_tle}, #{i_con}, now(), '0', #{a_idx}, #{i_acon})
+		insert into inquery_db (i_idx, u_idx, i_tle, i_con, i_dat, i_ans, a_idx, i_acon)
+		values (#{i_idx}, #{u_idx}, #{i_tle}, #{i_con}, now(), '0', #{a_idx}, #{i_acon})
 	</insert>
 	
 	<update id="inquery_update" parameterType="ivo">

@@ -36,19 +36,19 @@
 					<tr>
 						<td>제목</td>
 						<td>
-				            <input type="text" name="n_tle" class="in_title" placeholder="제목을 입력해주세요." required>
+				            <input type="text" name="q_tle" class="in_title" placeholder="제목을 입력해주세요." required>
 						</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>
-							<textarea id="content" name="n_con" rows="20"></textarea>
+							<textarea id="content" name="q_con" rows="20"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td>답변여부</td>
 						<td>
-	                       	<select name="n_opt" class="board_select" required>
+	                       	<select name="q_ans" class="board_select" required>
 	                       		<option value="미처리" selected>미처리</option>
 	                       		<option value="처리완료">처리완료</option>
 	                       	</select>
@@ -61,7 +61,7 @@
                         	<div class="filebox">
 							    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
 							    <label for="file">파일찾기</label> 
-							    <input type="file" id="file" name="file_name">
+							    <input type="file" id="file" name="q_file">
 							</div>
 						</td>
 					</tr>
@@ -69,7 +69,7 @@
 				</table>
 				<div class="btns">
                 	<input type="hidden" name="cPage" value="${cPage}" /> 
-                	<input type="hidden" name="a_idx" value="admin" /> 
+                	<input type="hidden" name="a_idx" value="${qvo.a_idx }" /> 
 					<button onclick="qna_write_ok(this.form)">저장</button>
 					<button onclick="qna_list()">목록</button>
 				</div>
@@ -79,7 +79,7 @@
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>  
 	
-	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/admin_common.js"></script>
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
 	

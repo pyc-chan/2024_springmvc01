@@ -62,6 +62,7 @@
 					</td>
 				</tr>
 			</table>
+			
 			<div>
 				<ul class="but_layout">
 					<li>
@@ -70,8 +71,8 @@
 		                	<input type="hidden" name="a_idx" value="${avo.a_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="admin_list(this.form)">
-							<input type="button" value="관리자 수정" onclick="admin_update(this.form)">
-							<input type="button" value="관리자 삭제" onclick="admin_delete(this.form)"> 
+							<input type="button" value="회원 수정" onclick="admin_update(this.form)">
+							<input type="button" value="회원 삭제" onclick="admin_delete(this.form)"> 
                			</form>
 					</li>
 				</ul>
@@ -81,20 +82,22 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-
+	<script src="/resources/js/admin_common.js"></script>
 	<script>
 	function admin_list(f) {
-		f.location.href("/admin/adminlist");
+		f.action="/admin/adminlist";
+		f.submit();
 	}
 	
 	function admin_update(f) {
-		f.location.href("/admin/adminupdate");
-	}
+		f.action="/admin/adminupdate";
+		f.submit();
+	} 
 	
 	function admin_delete(f) {
-		f.location.href("/admin/admindelete")
+		f.action="/admin/admindelete";
+		f.submit();
 	}
-	
 	
     const btns = document.querySelectorAll(".topmenu, .menubtn");
         function removeActiveClasses() {

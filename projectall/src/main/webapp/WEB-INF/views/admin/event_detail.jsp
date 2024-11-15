@@ -34,82 +34,82 @@
 					<tr>
 						<td>행사 이름</td>
 						<td>
-							${nvo.ev_na}
+							${evvo.ev_na}
 						</td>
 					</tr>
 					<tr>
 						<td>경도</td>
 						<td>
-							${nvo.ev_lat}
+							${evvo.ev_lat}
 						</td>
 					</tr>
 					<tr>
 						<td>위도</td>
 						<td>
-							${nvo.ev_lon}
+							${evvo.ev_lon}
 						</td>
 					</tr>
 					<tr>
 						<td>시작날짜</td>
 						<td>
-							${nvo.ev_sdat}
+							${evvo.ev_sdat}
 						</td>
 					</tr>
 					<tr>
 						<td>종료날짜</td>
 						<td>
-							${nvo.ev_edat}
+							${evvo.ev_edat}
 						</td>
 					</tr>
 					<tr>
 						<td>제목</td>
 						<td>
-							${nvo.ev_tle}
+							${evvo.ev_tle}
 						</td>
 					</tr>
 					<tr>
 						<td>구분</td>
 						<td>
-							${nvo.ev_ty}
+							${evvo.ev_ty}
 						</td>
 					</tr>
 					<tr>
 						<td>관리기관명</td>
 						<td>
-							${nvo.ev_ce_na}
+							${evvo.ev_ce_na}
 						</td>
 					</tr>
 					<tr>
 						<td>관계자 전화번호</td>
 						<td>
-							${nvo.ev_pho}
+							${evvo.ev_pho}
 						</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>
-							${nvo.ev_etc}
+							${evvo.ev_etc}
 						</td>
 					</tr>
 					<tr>
 						<td>첨부파일</td>
 						<td>
                         	<c:choose>
-								<c:when test="${empty nvo.f_name}">
+								<c:when test="${empty evvo.f_name}">
 									<span>등록된 첨부파일이 없습니다.</span>
 								</c:when>
 								<c:otherwise>
 									<p class="attachment_name">첨부파일</p>
 									<ul class="attachment">
 										<li class="img_box">
-											<a href="/board_down?f_name=${nvo.f_name}">
-												<img src="/resources/upload/${nvo.f_name}">
+											<a href="/board_down?f_name=${evvo.f_name}">
+												<img src="/resources/upload/${evvo.f_name}">
 											</a>
 										</li>
 										<li>
-											<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
+											<p class="img_name"><span>파일명</span> ${evvo.f_name}</p>
 											<p>
-												<a class="img_down" href="/event_down?f_name=${nvo.f_name}">다운로드</a>
+												<a class="img_down" href="/event_down?f_name=${evvo.f_name}">다운로드</a>
 											</p>
 										</li>
 									</ul>
@@ -191,8 +191,8 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
-		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	<input type="hidden" name="idxn_idx" value="${evvo.idxn_idx}" /> 
+		                	<input type="hidden" name="a_idx" value="${evvo.a_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="event_list()">
 							<input type="button" value="수정" onclick="event_update(this.form)">
@@ -206,7 +206,7 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-
+	<script src="/resources/js/admin_common.js"></script>
 	<script>
 	
     const btns = document.querySelectorAll(".topmenu, .menubtn");

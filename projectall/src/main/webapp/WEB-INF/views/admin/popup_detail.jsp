@@ -34,13 +34,13 @@
 				<tr>
 					<td>제목</td>
 					<td>
-						${nvo.pop_tle}
+						${pvo.pop_tle}
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td>
-						${nvo.pop_con}
+						${pvo.pop_con}
 					</td>
 				</tr>
 				<!-- 여기가 첨부파일 입니다. -->
@@ -48,21 +48,21 @@
 					<td>팝업 이미지</td>
 					<td>
                        	<c:choose>
-							<c:when test="${empty gvo.f_name}">
+							<c:when test="${empty pvo.f_name}">
 								<span>등록된 첨부파일이 없습니다.</span>
 							</c:when>
 							<c:otherwise>
 								<p class="attachment_name">첨부파일</p>
 								<ul class="attachment">
 									<li class="img_box">
-										<a href="/board_down?f_name=${gvo.f_name}">
-											<img src="/resources/upload/${gvo.f_name}">
+										<a href="/board_down?f_name=${pvo.f_name}">
+											<img src="/resources/upload/${pvo.f_name}">
 										</a>
 									</li>
 									<li>
-										<p class="img_name"><span>파일명</span> ${gvo.f_name}</p>
+										<p class="img_name"><span>파일명</span> ${pvo.f_name}</p>
 										<p>
-											<a class="img_down" href="/notice_down?f_name=${gvo.f_name}">다운로드</a>
+											<a class="img_down" href="/notice_down?q_name=${qvo.q_name}">다운로드</a>
 										</p>
 									</li>
 								</ul>
@@ -74,26 +74,26 @@
 				<tr>
 					<td>생성일</td>
 					<td>
-						${nvo.pop_rdat}
+						${pvo.pop_rdat}
 					</td>
 				</tr>
 				<tr>
 					<td>삭제일</td>
 					<td>
-						${nvo.pop_odat}
+						${pvo.pop_odat}
 					</td>
 				</tr>
 				<tr>
 					<td>링크</td>
 					<td>
-						${nvo.pop_link}
+						${pvo.pop_link}
 					</td>
 				</tr>
 				<tr>
 					<td>활성화 여부</td>
 					<td>
                         <c:choose>
-                        	<c:when test="${gvo.pop_act == 'on'}">
+                        	<c:when test="${pvo.pop_act == 'on'}">
 								활성
                         	</c:when>
                         	<c:otherwise>
@@ -108,8 +108,8 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
-		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	<input type="hidden" name="idxn_idx" value="${pvo.idxn_idx}" /> 
+		                	<input type="hidden" name="a_idx" value="${pvo.a_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="popup_list()">
 							<input type="button" value="수정" onclick="popup_update(this.form)">
@@ -123,6 +123,7 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+	<script src="/resources/js/admin_common.js"></script>
 
 	<script>
 	

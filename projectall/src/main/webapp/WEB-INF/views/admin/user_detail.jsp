@@ -53,21 +53,21 @@
 					<td>프로필 이미지</td>
 					<td>
                        	<c:choose>
-							<c:when test="${empty nvo.f_name}">
+							<c:when test="${empty nvo.u_pic}">
 								<span>등록된 첨부파일이 없습니다.</span>
 							</c:when>
 							<c:otherwise>
 								<p class="attachment_name">첨부파일</p>
 								<ul class="attachment">
 									<li class="img_box">
-										<a href="/board_down?f_name=${nvo.f_name}">
-											<img src="/resources/upload/${nvo.f_name}">
+										<a href="/board_down?f_name=${nvo.u_pic}">
+											<img src="/resources/upload/${nvo.u_pic}">
 										</a>
 									</li>
 									<li>
-										<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
+										<p class="img_name"><span>파일명</span> ${nvo.u_pic}</p>
 										<p>
-											<a class="img_down" href="/user_down?f_name=${nvo.f_name}">다운로드</a>
+											<a class="img_down" href="/user_down?f_name=${nvo.u_pic}">다운로드</a>
 										</p>
 									</li>
 								</ul>
@@ -130,7 +130,7 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
+		                	<input type="hidden" name="n_idx" value="${nvo.n_idx}" /> 
 		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="user_list()">

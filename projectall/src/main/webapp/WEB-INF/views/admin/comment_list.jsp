@@ -39,9 +39,7 @@
 					<colgroup>
 						<col width="10%">
 						<col width="10%">
-						<col width="15%">
-						<col width="10%">
-						<col width="10%">
+						<col width="40%">
 						<col width="10%">
 						<col width="10%">
 						<col width="10%">
@@ -52,10 +50,7 @@
 						<th>작성자</th>
 						<th>내용</th>
 						<th>작성일</th>
-						<th>수정 여부</th>
-						<th>삭제 여부</th>
 						<th>작성 게시판</th>
-						<th>작성 게시물</th>
 						<th>삭제</th>
 					</tr>
 					<tr class="hover_back">
@@ -63,31 +58,25 @@
 						<td>작성자</td>
 						<td>내용</td>
 						<td>작성일</td>
-						<td>수정 여부</td>
-						<td>삭제 여부</td>
 						<td>작성 게시판</td>
-						<td>작성 게시물</td>
 						<td>
 							<button class="delete_btn" onclick="comment_delete()">삭제</button>
 						</td>
 					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list }">
+						<c:when test="${empty list }">
 							<tr>
-								<td colspan="9"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="6"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${fvo_list}" var="k" varStatus="c">
+							<c:forEach items="${list}" var="k" varStatus="c">
 								<tr>
-									<td>No</td>
-									<td>작성자 ${k.n_idx}</td>
-									<td>내용 ${k.n_idx}</td>
-									<td>작성일 ${k.n_idx}</td>
-									<td>수정 여부 ${k.n_idx}</td>
-									<td>삭제 여부 ${k.n_idx}</td>
-									<td>작성 게시판 ${k.n_idx}</td>
-									<td>작성 게시물 ${k.n_idx}</td>
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>${k.u_id}</td>
+									<td>${k.c_con}</td>
+									<td>${k.c_dat}</td>
+									<td>${k.c_bor}</td>
 									<td>
 										<button class="delete_btn" onclick="comment_delete()">삭제</button>
 									</td>
@@ -95,13 +84,6 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<tfoot>
-						<tr>
-							<td colspan="9">
-								<!-- <button onclick="write_page()">글쓰기</button> -->
-							</td>
-						</tr>
-					</tfoot>
 				</table>
 			</div>
 
@@ -110,6 +92,7 @@
 	</div>
 		
     <jsp:include page="../common/admin_footer.jsp"></jsp:include>
+    <script src="/resources/js/admin_common.js"></script>
 	<script>
 
 

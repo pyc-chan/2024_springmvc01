@@ -151,6 +151,16 @@ function fna_list() {
 	location.href = "/admin/fnalist";
 }
 
+function admin_inquery_list(f) {
+	f.action = "/admin/inquerylist";
+	f.submit();
+}
+
+function admin_inquery_delete(f){
+	f.action = "/admin/inquerydelete";
+	f.submit();
+}
+
 function fna_detail() {
 	location.href = "/admin/fnadetail";
 }
@@ -259,7 +269,7 @@ function admin_update(f) {
 }
 
 function admin_update_ok(f) {
-	f.action = "/admin/adminupdateok";
+	f.action = "/admin/admindetail";
 	f.submit();
 }
 

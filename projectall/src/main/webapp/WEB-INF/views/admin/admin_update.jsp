@@ -33,11 +33,18 @@
 			<form method="post" encType="multipart/form-data">
 				<table class="popuptable">
 					<tr>
+						<td>아이디</td>
+						<td>
+							<input type="text" name="a_id" value="${avo.a_id}">
+						</td>
+					</tr>
+					<tr>
 						<td>이름</td>
 						<td>
 							<input type="text" name="a_na" value="${avo.a_na}">
 						</td>
 					</tr>
+					
 					<tr>
 						<td>전화번호</td>
 						<td>
@@ -60,8 +67,8 @@
 				<div class="btns">
 					<input type="hidden" name="a_idx" value="${avo.a_idx }">
 					<button onclick="admin_update_ok(this.form)">수정완료</button>
-					<button onclick="admin_list()">목록</button>
-				</div>
+					<button onclick="getAdminGo()">메인화면</button>
+				</div>	
 			</form>
 		</div>
 		<!-- container div -->
@@ -70,15 +77,11 @@
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
     
 	
-	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/admin_common.js"></script>
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
 	
 	<script type="text/javascript">
-	function admin_list(){
-		document.location.href("/");
-	}
-	
 		$(function() {
 			$("#content").summernote({
 				lang : 'ko-KR',

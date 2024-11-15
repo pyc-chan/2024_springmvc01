@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +16,16 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-  	<link rel="stylesheet" href="resources/css/admin1-1.css">
+  	<link rel="stylesheet" href="/resources/css/admin1-1.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<!-- ECharts CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
+	
+  	<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+	<style>
+	    
+	</style>
 </head>
 
 <body>
@@ -33,7 +40,7 @@
 				<div class="usertable">
 					<div class=title>
 						<p>회원관리</p>
-						<button onclick="admin_list()">
+						<button onclick="user_list()">
 							더보기
 							<i class="material-icons see_more">chevron_right</i>
 						</button>
@@ -42,19 +49,19 @@
 						<tr>
 							<th>아이디</th>
 							<th>이름</th>
+							<th>휴대폰</th>
 							<th>이메일</th>
 							<th>가입일</th>
 						</tr>
-						
-						<c:forEach items="${userlist }" var="k">
+						<c:forEach items="userlist" var="k">
 							<tr>
-								<th>${k.u_id }</th>
-								<th>${k.u_na }</th>
-								<th>${k.u_em }</th>
-								<th>${k.u_reg }</th>
+								<td>${k.u_id }</td>
+								<td>${k.u_na }</td>
+								<td>${k.u_phone }</td>
+								<td>${k.u_em }</td>
+								<td>${k.u_reg }</td>
 							</tr>
 						</c:forEach>
-
 					</table>
 				</div>
 				<div class="inquirytable">
@@ -67,8 +74,8 @@
 					</div>
 					<table>
 						<colgroup>
-							<col width="30%">
 							<col width="25%">
+							<col width="30%">
 							<col width="15%">
 							<col width="15%">
 							<col width="15%">
@@ -80,25 +87,24 @@
 							<th>답변여부</th>
 							<th>답변자</th>
 						</tr>
-						<!-- qna 목록 -->
-						<c:forEach items="${qnalist }" var="k">
+						<c:forEach items="qnalist" var="c">
 						<tr>
 							<td>${k.q_tle }</td>
 							<td>${k.q_con }</td>
 							<td>${k.q_dat }</td>
-								<c:choose>
-									<c:when test="${k.q_ans == 0 }">
-										<td colspan="2">
-											<span class="unprocessed">미처리</span>
-										</td>
-									</c:when>
-									<c:otherwise>
-										<td>
-											<span class="unprocessed">답변 완료</span>
-										</td>
-										<td>${k.a_idx }</td>
-									</c:otherwise>
-								</c:choose>
+							<c:choose>
+							<c:when test="${k.q_ans==0 }">
+							<td colspan="2">
+								<span class="unprocessed">미처리</span>
+							</td>
+							</c:when>
+							<c:otherwise>
+							<td>
+								<span class="completed">처리완료</span>
+							</td>
+							<td>${k.a_idx }</td>
+							</c:otherwise>
+							</c:choose>
 						</tr>
 						</c:forEach>
 					</table>
@@ -123,13 +129,15 @@
 							<th>제목</th>
 							<th>내용</th>
 							<th>작성일</th>
+							<th>조회수</th>
 						</tr>
-						<c:forEach items="${noticelist }" var="k">
-							<tr>
-								<td>${k.n_tle }</td>
-								<td>${k.n_con }</td>
-								<td>${k.n_dat }</td>
-							</tr>
+						<c:forEach items="noticelist" var="k">
+						<tr>
+							<td>${k.n_tle }</td>
+							<td>${k.n_con }</td>
+							<td>${k.n_dat }</td>
+							<td>${k.n_hit }</td>
+						</tr>
 						</c:forEach>
 					</table>
 					<!-- 차트 -->
@@ -162,34 +170,17 @@
 			</div>
 			
 		</div>
-		
-<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+	</div>
+        <jsp:include page="../common/admin_footer.jsp"></jsp:include>
 
 <!-- 회원가입자 수 월별 분석 -->
 <script src="/resources/js/signup_mock.js" defer></script>
 
 <!-- 카테고리별 일별 클릭률 분석 -->
 <script src="/resources/js/category_click_mock.js" defer></script>
-		
+<script src="/resources/js/admin_common.js"></script>
+
+
 </body>
-<script type="text/javascript">
-	function admin_list(){
-		document.location.href("/admin/userlist");
-	}
-	
-	function qna_list(){
-		document.location.href("/admin/qnalist");
-	}
-	
-	function notice_list(){
-		document.location.href("/admin/noticelist");
-	}
-
-
-</script>
-
-
-
-
 
 </html>

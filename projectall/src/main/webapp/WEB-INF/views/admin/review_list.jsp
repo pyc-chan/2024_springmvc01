@@ -48,55 +48,49 @@
 					<tr>
 						<th>No</th>
 						<th>제목</th>
-						<th>내용</th>
 						<th>작성자</th>
-						<th>내용</th>
 						<th>작성일</th>
-						<th>수정 여부</th>
+						<th>조회수</th>
+						
 					</tr>
 					<tr class="hover_back" onclick="review_detail()">
 						<td>No</td>
 						<td>제목</td>
-						<td>내용</td>
 						<td>작성자</td>
-						<td>내용</td>
 						<td>작성일</td>
-						<td>수정 여부</td>
+						<td>조회수</td>
 					</tr>
 					<c:choose>
-						<c:when test="${empty fvo_list }">
+						<c:when test="${empty list }">
 							<tr>
-								<td colspan="7"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
+								<td colspan="5"><h3>원하는 정보가 존재하지 않습니다.</h3></td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${fvo_list}" var="k" varStatus="c">
+							<c:forEach items="${list}" var="k" varStatus="c">
 								<tr onclick="review_detail()">
-									<td>No</td>
-									<td>작성자 ${k.u_idx}</td>
-									<td>내용 ${k.n_idx}</td>
-									<td>작성일 ${k.rev_dat}</td>
-									<td>수정 여부 ${k.rev_up}</td>
-									<td>작성 게시판 ${k.rev_bor}</td>
-									<td>작성 게시물 ${k.rev_ref}</td>
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>제목 ${k.rev_tle}</td>
+									<td>${k.u_id}</td>
+									<td>${k.rev_dat}</td>
+									<td>${k.rev_hit}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<tfoot>
-						<tr>
-							<td colspan="7">
-								<button onclick="review_write()">글쓰기</button>
-							</td>
-						</tr>
-					</tfoot>
 				</table>
+				
+				
+			<jsp:include page="../common/every_paging.jsp"/>
+				
+				
 			</div>
 
 
 		</div>
 	</div>
-		
+	<jsp:include page="../common/arrow.jsp"/>
+	<script src="/resources/js/admin_common.js"></script>
     <jsp:include page="../common/admin_footer.jsp"></jsp:include>
 	<script>
 

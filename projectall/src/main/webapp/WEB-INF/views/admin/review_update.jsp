@@ -35,37 +35,13 @@
 					<tr>
 						<td>제목</td>
 						<td>
-				            <input type="text" name="rev_tle" value="${gvo.rev_tle}" class="in_title" placeholder="제목을 입력해주세요." required>
+				            <input type="text" name="rev_tle" value="${rvo.rev_tle}" class="in_title" placeholder="제목을 입력해주세요." required>
 						</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>
-							<textarea id="content" name="rev_con" value="${gvo.rev_con}" rows="20"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>수정 여부</td>
-						<td>
-				            <input type="text" name="rev_up" value="${gvo.rev_up}" class="in_title" required>
-						</td>
-					</tr>
-					<tr>
-						<td>작성 게시판</td>
-						<td>
-	                       	<select name="rev_bor" class="board_select" required>
-	                       		<option value="공원" selected>공원</option>
-	                       		<option value="가로수길">가로수길</option>
-	                       		<option value="보호수">보호수</option>
-	                       		<option value="녹지행사">녹지행사</option>
-	                       	</select>
-				            <div class="choose_category"><span>현재 카테고리 :</span> ${gvo.rev_bor}</div>
-						</td>
-					</tr>
-					<tr>
-						<td>작성 게시물</td>
-						<td>
-				            <input type="text" name="rev_ref" value="${gvo.rev_ref}" class="in_title" required>
+							<textarea id="content" name="rev_con" rows="20">${rvo.rev_con} </textarea>
 						</td>
 					</tr>
 					<!-- 여기가 첨부파일 입니다. -->
@@ -73,16 +49,17 @@
 						<td>첨부파일</td>
 						<td>
                         	<div class="filebox">
+                        		<p>${rvo.rev_filename }</p>
 							    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
 							    <label for="file">파일찾기</label> 
-							    <input type="file" id="file" name="file_name">
+							    <input type="file" id="file" name="rev_file">
 							</div>
 						</td>
 					</tr>
 					<!-- 여기가 첨부파일 입니다. -->
 				</table>
 				<div class="btns">
-					<input type="hidden" name="fna_idx" value="${fvo.fna_idx }">
+					<input type="hidden" name="fna_idx" value="${rvo.rev_idx }">
 					<button onclick="review_update_ok(this.form)">수정완료</button>
 					<button onclick="review_list()">목록</button>
 				</div>
@@ -92,7 +69,7 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-    
+    <script src="/resources/js/admin_common.js"></script>
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
 	

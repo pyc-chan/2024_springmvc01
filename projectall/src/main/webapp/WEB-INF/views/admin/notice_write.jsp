@@ -71,7 +71,7 @@
                         	<div class="filebox">
 							    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
 							    <label for="file">파일찾기</label> 
-							    <input type="file" id="file" name="file_name">
+							    <input type="file" id="file" name="n_pic">
 							</div>
 						</td>
 					</tr>
@@ -79,7 +79,7 @@
 				</table>
 				<div class="btns">
                 	<input type="hidden" name="cPage" value="${cPage}" /> 
-                	<input type="hidden" name="a_idx" value="admin" /> 
+                	<input type="hidden" name="c_bor" value="admin" /> 
 					<button onclick="notice_write_ok(this.form)">저장</button>
 					<button onclick="notice_list()">목록</button>
 				</div>
@@ -89,7 +89,7 @@
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>  
 	
-	<script src="/resources/js/common.js"></script>
+	<script src="/resources/js/admin_common.js"></script>
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
 	

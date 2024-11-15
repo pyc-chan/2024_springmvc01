@@ -34,64 +34,46 @@
 					<tr>
 						<td>제목</td>
 						<td>
-		                    ${nvo.rev_tle}
+		                    ${rvo.rev_tle}
 						</td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>
-		                    ${nvo.rev_con}
+		                    ${rvo.rev_con}
 						</td>
 					</tr>
 					<tr>
 						<td>작성자</td>
 						<td>
-		                    ${nvo.u_idx}
+		                    ${rvo.u_idx}
 						</td>
 					</tr>
 					<tr>
 						<td>작성일</td>
 						<td>
-		                    ${nvo.rev_dat}
-						</td>
-					</tr>
-					<tr>
-						<td>수정 여부</td>
-						<td>
-		                    ${nvo.rev_up}
-						</td>
-					</tr>
-					<tr>
-						<td>작성 게시판</td>
-						<td>
-		                    ${nvo.rev_bor}
-						</td>
-					</tr>
-					<tr>
-						<td>작성 게시물</td>
-						<td>
-		                    ${nvo.rev_ref}
+		                    ${rvo.rev_dat}
 						</td>
 					</tr>
 					<tr>
 						<td>첨부파일</td>
 						<td>
                         	<c:choose>
-								<c:when test="${empty gvo.f_name}">
+								<c:when test="${empty rvo.rev_file}">
 									<span>등록된 첨부파일이 없습니다.</span>
 								</c:when>
 								<c:otherwise>
 									<p class="attachment_name">첨부파일</p>
 									<ul class="attachment">
 										<li class="img_box">
-											<a href="/board_down?f_name=${gvo.f_name}">
-												<img src="/resources/upload/${gvo.f_name}">
+											<a href="/board_down?f_name=${rvo.rev_filename}">
+												<img src="/resources/upload/${rvo.rev_filename}">
 											</a>
 										</li>
 										<li>
-											<p class="img_name"><span>파일명</span> ${gvo.f_name}</p>
+											<p class="img_name"><span>파일명</span> ${rvo.rev_filename}</p>
 											<p>
-												<a class="img_down" href="/review_down?f_name=${gvo.f_name}">다운로드</a>
+												<a class="img_down" href="/review_down?f_name=${rvo.rev_filename}">다운로드</a>
 											</p>
 										</li>
 									</ul>
@@ -135,9 +117,9 @@
 							 		</li>
 							 	</ul>
 								<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
-								<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
-								<input type="hidden" name="c_ref" value="${k.c_ref}">
-								<input type="hidden" name="idxn_idx" value="${k.c_ref}">
+								<input type="hidden" name="rev_idx" value="${rvo.rev_idx}">
+								<input type="hidden" name="c_bor" value="review">
+								<input type="hidden" name="c_ref" value="${rvo.rev_idx}">
 								<input type="hidden" name="cPage" value="${cPage}">
 							</div>
 							</form>
@@ -159,7 +141,7 @@
 						<div class="insert_comment">
 							<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 남겨보세요." required></textarea>
 							<!-- 댓글 저장 시 어떤 댓글이 원글인지 저장해야 한다. -->
-							<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}">
+							<input type="hidden" name="rev_idx" value="${rvo.rev_idx}">
 							<input type="hidden" name="cPage" value="${cPage}">
 							<input type="hidden" name="c_out" value="0">
 							<input type="hidden" name="c_bor" value="review">
@@ -173,8 +155,8 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
-		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	<input type="hidden" name="r_idx" value="${rvo.rev_idx}" /> 
+		                	<input type="hidden" name="u_idx" value="${rvo.u_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="review_list()">
 							<input type="button" value="수정" onclick="review_update(this.form)">
@@ -188,6 +170,7 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
+	<script src="/resources/js/admin_common.js"></script>
 
 	<script>
 	

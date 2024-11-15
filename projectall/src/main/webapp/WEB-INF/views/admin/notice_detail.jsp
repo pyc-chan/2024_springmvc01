@@ -32,29 +32,6 @@
 
 			<table class="popuptable">
 					<tr>
-						<td>옵션</td>
-						<td>
-	                        <c:choose>
-	                        	<c:when test="${nvo.n_chk == 'check'}">
-		                        	<label>
-		                        		공지
-		                        	</label>
-	                        	</c:when>
-	                        	<c:otherwise>
-		                        	<label>
-		                        		옵션이 없습니다.
-		                        	</label>
-	                        	</c:otherwise>
-	                        </c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td>카테고리</td>
-						<td>
-		                    ${nvo.n_opt}
-						</td>
-					</tr>
-					<tr>
 						<td>제목</td>
 						<td>
 		                    ${nvo.n_tle}
@@ -128,9 +105,9 @@
 							 		</li>
 							 	</ul>
 								<%-- 컨트롤러 가서 DB 삭제 후 다시 이곳으로 와야 한다. (나중에 ajax로 변경하자) --%>
-								<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
-								<input type="hidden" name="c_ref" value="${k.c_ref}">
-								<input type="hidden" name="idxn_idx" value="${k.c_ref}">
+								<input type="hidden" name="n_idx" value="${nvo.n_idx}">
+								<input type="hidden" name="c_bor" value="notice">
+								<input type="hidden" name="c_ref" value="${nvo.n_idx}">
 								<input type="hidden" name="cPage" value="${cPage}">
 							</div>
 							</form>
@@ -141,9 +118,9 @@
 				
 			</c:forEach>
                
-               <%-- 댓글 입력 창 --%>
+            <%-- 댓글 입력 창 --%>
 			<div class="comment_conteainer">
-				<form action="/comment_insert" method="post">
+				<form action="/notice/comment_insert" method="post">
 					<fieldset>
 						<!-- 아이디 number -->
 						<input type="hidden" name="u_idx" value="1">
@@ -152,7 +129,7 @@
 						<div class="insert_comment">
 							<textarea rows="3" cols="40" name="c_con" placeholder="댓글을 남겨보세요." required></textarea>
 							<!-- 댓글 저장 시 어떤 댓글이 원글인지 저장해야 한다. -->
-							<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}">
+							<input type="hidden" name="n_idx" value="${nvo.n_idx}">
 							<input type="hidden" name="cPage" value="${cPage}">
 							<input type="hidden" name="c_out" value="0">
 							<input type="hidden" name="c_bor" value="notice">
@@ -166,7 +143,7 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="idxn_idx" value="${nvo.idxn_idx}" /> 
+		                	<input type="hidden" name="n_idx" value="${nvo.n_idx}" /> 
 		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
 		                	
 							<input type="button" value="목록" onclick="notice_list()">
@@ -181,7 +158,9 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-
+	
+	<script src="/resources/js/admin_common.js"></script>
+	
 	<script>
 	
     const btns = document.querySelectorAll(".topmenu, .menubtn");

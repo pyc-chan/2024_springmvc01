@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="nt_list" parameterType="map" resultType="nvo">
-		select * from notice_db order by n_idx desc limit #{limit} offset #{offset}
+		select * from notice_db order by idxn_idx desc limit #{limit} offset #{offset}
 	</select>
 
 	<insert id="nt_insert" parameterType="nvo">
@@ -18,11 +18,11 @@
 	</insert>
     
     <update id="nt_hit" parameterType="String">
-    	update notice_db set n_hit = n_hit + 1 where n_idx = #{n_idx}
+    	update notice_db set n_hit = n_hit + 1 where idxn_idx = #{idxn_idx}
     </update>
     
     <select id="nt_detail" parameterType="String" resultType="nvo">
-    	select * from notice_db where idxn_idx = #{n_idx}
+    	select * from notice_db where idxn_idx = #{idxn_idx}
     </select>
 	
     <update id="nt_update" parameterType="nvo">

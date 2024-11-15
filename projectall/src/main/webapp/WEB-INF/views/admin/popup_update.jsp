@@ -52,7 +52,7 @@
                         	<div class="filebox">
 							    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
 							    <label for="file">파일찾기</label> 
-							    <input type="file" id="file" name="file_name">
+							    <input type="file" id="file" name="pop_pic">
 							</div>
 						</td>
 					</tr>
@@ -79,7 +79,7 @@
 						<td>활성화 여부</td>
 						<td>
 	                        <c:choose>
-	                        	<c:when test="${gvo.pop_act == 'on'}">
+	                        	<c:when test="${pvo.pop_act == 'on'}">
 									<label>
 						            	<input type="radio" name="pop_act" class="in_title" value="활성" checked> 활성
 									</label>
@@ -100,7 +100,7 @@
 					</tr>
 				</table>
 				<div class="btns">
-					<input type="hidden" name="fna_idx" value="${fvo.fna_idx }">
+					<input type="hidden" name="pop_idx" value="${pvo.pop_idx }">
 					<button onclick="popup_update_ok(this.form)">수정완료</button>
 					<button onclick="popup_list()">목록</button>
 				</div>
@@ -113,6 +113,7 @@
     
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
+	<script src="/resources/js/admin_common.js"></script>
 	
 	<script type="text/javascript">
 		$(function() {

@@ -66,9 +66,6 @@
 		</div>
 		<div class="menu_btn_cont">
 			<ul>
-				<li class="homepage" onclick="move_main()">
-					<i class="fa-solid fa-house"></i> 홈페이지
-				</li>
 				<li class="admin_account" onclick="admin_list()">
 					<i class="fa-solid fa-gear"></i> 관리자 계정
 				</li>

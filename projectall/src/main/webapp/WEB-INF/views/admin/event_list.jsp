@@ -69,12 +69,12 @@
 						<c:otherwise>
 							<c:forEach items="${fvo_list}" var="k" varStatus="c">
 								<tr class="hover_back"  onclick="event_detail()">
-									<td>No</td>
-									<td>행사 이름 ${k.ev_na}</td>
-									<td>경도 ${k.ev_lat}</td>
-									<td>위도 ${k.ev_lon}</td>
-									<td>시작날짜 ${k.ev_sdat}</td>
-									<td>종료날짜 ${k.ev_edat}</td>
+									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
+									<td>${k.ev_na}</td>
+									<td>${k.ev_lat}</td>
+									<td>${k.ev_lon}</td>
+									<td>${k.ev_sdat}</td>
+									<td>${k.ev_edat}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -87,18 +87,20 @@
 						</tr>
 					</tfoot>
 				</table>
+				<jsp:include page="../common/every_paging.jsp"/>
 			</div>
 
 
 		</div>
 	</div>
-		
+	<jsp:include page="../common/arrow.jsp"/>
     <jsp:include page="../common/admin_footer.jsp"></jsp:include>
+    <script src="/resources/js/admin_common.js"></script>
+	
+	
 	<script>
 
-
-
-const btns = document.querySelectorAll(".topmenu, .menubtn");
+		const btns = document.querySelectorAll(".topmenu, .menubtn");
 
 
             function removeActiveClasses() {

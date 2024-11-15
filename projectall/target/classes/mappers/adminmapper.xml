@@ -10,10 +10,6 @@
 		select * from admin_db order by a_idx asc
 	</select>
 	
-	<select id="admin_list" resultType="avo" parameterType="String">
-		select * from admin_db where a_id = #{a_id}
-	</select>
-	
 	<select id="admin_detail" parameterType="String" resultType="avo">
 		select * from admin_db where a_idx = #{a_idx}
 	</select>

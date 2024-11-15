@@ -30,81 +30,31 @@
 		<div class="popuplayer">
 			<p class="write_title">자주묻는 질문 수정</p>
 
-			<form method="post" encType="multipart/form-data">
+			<form method="post">
 				<table class="popuptable">
-					<tr>
-						<td>옵션</td>
-						<td>
-	                        <c:choose>
-	                        	<c:when test="${gvo.n_chk == 'check'}">
-		                        	<label>
-		                        		<input type="checkbox" name="n_chk" value="check" checked> 공지
-		                        	</label>
-	                        	</c:when>
-	                        	<c:otherwise>
-		                        	<label>
-		                        		<input type="checkbox" name="n_chk" value="check"> 공지
-		                        	</label>
-	                        	</c:otherwise>
-	                        </c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td>카테고리</td>
-						<td>
-                        	<select name="n_opt" class="board_select" required>
-                        		<option value="공원">공원</option>
-                        		<option value="가로수길">가로수길</option>
-                        		<option value="보호수">보호수</option>
-                        		<option value="녹지행사">녹지행사</option>
-                        	</select>
-                        	<div class="choose_category"><span>현재 카테고리 :</span> ${gvo.n_opt}</div>
-						</td>
-					</tr>
 					<tr>
 						<td>제목</td>
 						<td>
-				            <input type="text" name="n_tle" class="in_title" placeholder="제목을 입력해주세요." required>
+				            <input type="text" name="f_tle" class="in_title" placeholder="제목을 입력해주세요." required>
 						</td>
 					</tr>
 					<tr>
-						<td>내용</td>
+						<td>질문</td>
 						<td>
-							<textarea id="content" name="n_con" rows="20"></textarea>
+							<textarea id="content" name="f_ccon" rows="20"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>답변</td>
+						<td>
+							<textarea id="content" name="f_acon" rows="20"></textarea>
 						</td>
 					</tr>
 					<!-- 여기가 첨부파일 입니다. -->
-					<tr>
-						<td>첨부파일</td>
-						<td>
-							<c:choose>
-								<c:when test="${empty gvo.f_name}">
-									<div class="filebox">
-									    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
-									    <label for="file">파일찾기</label> 
-									    <input type="file" id="file" name="file_name">
-									    <b>이전 파일 없음</b>
-										<input type="hidden" name="old_file_name" value="">
-									</div>
-								</c:when>
-								<c:otherwise>
-									<div class="filebox">
-									    <input class="upload-name" value="${gvo.f_name}" placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
-									    <label for="file">파일찾기</label> 
-									    <input type="file" id="file" name="file_name">
-									</div>
-							
-		                            <div class="file_lst">
-		                                <label><span>다운로드 : </span> <a href="">${gvo.f_name}</a></label>
-		                            </div>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
 					<!-- 여기가 첨부파일 입니다. -->
 				</table>
 				<div class="btns">
-					<input type="hidden" name="fna_idx" value="${fvo.fna_idx }">
+					<input type="hidden" name="f_idx" value="${fvo.f_idx }">
 					<button onclick="fna_update_ok(this.form)">수정완료</button>
 					<button onclick="fna_list()">목록</button>
 				</div>
@@ -117,6 +67,7 @@
     
 	<script src="/resources/js/summernote-lite.js" ></script>
 	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
+	<script src="/resources/js/admin_common.js"></script>
 	
 	<script type="text/javascript">
 		$(function() {
