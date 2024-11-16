@@ -3,6 +3,7 @@ package com.ict.project.qna.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,17 @@ public class QnaController {
 		mv.addObject("fvo", fvo);
 		mv.addObject("cPage", cPage);
 		return mv;
+	}
+	
+	@PostMapping("/qna/insertgo")
+	public ModelAndView getQnaInsertGo(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		Object u_id = session.getAttribute("u_id");
+		mv.addObject("u_id", u_id);
+		mv.setViewName("sub/qna_write");
+		return mv;
+		
 	}
 	
 	@PostMapping("/qna/insert")

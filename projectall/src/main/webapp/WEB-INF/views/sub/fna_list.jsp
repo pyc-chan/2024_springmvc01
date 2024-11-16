@@ -6,8 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>고객의 소리</title>
-	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
+	<title>공지사항</title>
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     
@@ -31,10 +30,10 @@
         
         <!-- 컨텐츠 영역(main) 시작 -->
         <main>
-             <div id="sub_container">
+            <div id="sub_container">
                 <ul class="contents_box">
                     <li class="textleft">
-                        <h2 class="great_title">고객의 소리</h2>
+                        <h2 class="great_title">공지사항</h2>
                         <div class="search-bar">
 		                    <div class="search-text">전체 <span>${paging.totalRecored}</span>건</div>
 		                </div>
@@ -58,6 +57,11 @@
 		                    		</c:otherwise>
 		                    	</c:choose>
 		                    </ul>
+		                    <div class="button_box">
+		                        <div>
+		                        	<button onclick="move_notice_write()">글쓰기</button>
+		                        </div>
+		                    </div>
 		                </div>
 		                    
                     	<jsp:include page="../common/every_paging.jsp"/>
@@ -75,12 +79,12 @@
         <jsp:include page="../common/sub_m_menu.jsp"></jsp:include>
     </div>
     
-    <jsp:include page="../common/arrow.jsp"/>
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
     <script src="/resources/js/admin_common.js"></script>
-
+    <jsp:include page="../common/arrow.jsp"></jsp:include>
     
     <script>
+    
         $(document).ready(function () {
             function toggleSidebar() {
                 $(".button").toggleClass("active");

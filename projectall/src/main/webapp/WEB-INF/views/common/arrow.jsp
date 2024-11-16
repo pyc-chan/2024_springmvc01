@@ -18,8 +18,7 @@
 		
 	    // 페이지 이동
 	    if (nowPage !== currentPage) {
-	        // 페이지를 이동하는 방법에 따라 URL을 변경하거나 AJAX 요청을 보낼 수 있습니다.
-	        window.location.href = `${cmd}?cPage=${nowPage}`; // 페이지 URL을 적절히 수정
+	        window.location.href = `${cmd}?cPage=${nowPage}`; // 페이지 URL을 controller에서 처리
 	    }
 	}
 </script>

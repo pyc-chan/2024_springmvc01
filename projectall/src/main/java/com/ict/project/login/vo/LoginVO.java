@@ -3,9 +3,17 @@ package com.ict.project.login.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class LoginVO {
-	private String u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_out, a_idx, u_outr, u_kakao, u_naver, u_pic, u_reg;
+	private String u_idx, u_id, u_pw, u_na, u_phone, u_gen, u_bir, u_em, u_out, a_idx, u_outr, u_kakao, u_naver, u_pic, u_reg;
 	// u_pic은 사진 경로로 저장
 	
+	public String getU_idx() {
+		return u_idx;
+	}
+
+	public void setU_idx(String u_idx) {
+		this.u_idx = u_idx;
+	}
+
 	public String getU_reg() {
 		return u_reg;
 	}

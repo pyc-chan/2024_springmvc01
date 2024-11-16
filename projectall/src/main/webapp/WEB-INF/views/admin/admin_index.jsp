@@ -40,16 +40,22 @@
 				<div class="usertable">
 					<div class=title>
 						<p>회원관리</p>
-						<button onclick="user_list()">
+						<!-- 메인에서 가는 cPage는 1 -->
+						<button onclick="user_list(1)">
 							더보기
 							<i class="material-icons see_more">chevron_right</i>
 						</button>
 					</div>
 					<table>
+						<colgroup>
+							<col width="25%">
+							<col width="30%">
+							<col width="25%">
+							<col width="20%">
+						</colgroup>
 						<tr>
 							<th>아이디</th>
 							<th>이름</th>
-							<th>휴대폰</th>
 							<th>이메일</th>
 							<th>가입일</th>
 						</tr>
@@ -57,7 +63,6 @@
 							<tr>
 								<td>${k.u_id }</td>
 								<td>${k.u_na }</td>
-								<td>${k.u_phone }</td>
 								<td>${k.u_em }</td>
 								<td>${k.u_reg }</td>
 							</tr>
@@ -67,7 +72,8 @@
 				<div class="inquirytable">
 					<div class="title">
 						<p>1:1 문의</p>
-						<button onclick="qna_list()">
+						<!-- 메인에서 가는 cPage는 1 -->
+						<button onclick="qna_list(1)">
 							더보기
 							<i class="material-icons see_more">chevron_right</i>
 						</button>
@@ -113,7 +119,7 @@
 				<div class="servicetable">
 					<div class="title">
 						<p>공지사항</p>
-						<button onclick="notice_list()">
+						<button onclick="notice_list(1)">
 							더보기
 							<i class="material-icons see_more">chevron_right</i>
 						</button>

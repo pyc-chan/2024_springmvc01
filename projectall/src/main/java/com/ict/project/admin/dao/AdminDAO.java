@@ -12,5 +12,6 @@ public interface AdminDAO {
 	public AdminVO adminDetail(String a_idx);
 	public int adminCount();
 	public AdminVO adminLogin(String a_id);
+	public int adminIdChk(String a_id);
 		
 }

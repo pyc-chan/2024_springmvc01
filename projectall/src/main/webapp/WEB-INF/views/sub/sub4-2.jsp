@@ -66,14 +66,14 @@
 							<c:forEach items="${list}" var="k">
 								<ul class="region_event_list">
 									<li class="event_held"><c:choose>
-											<c:when test="${k.ev_s_dat > currentDate}">
+											<c:when test="${k.ev_sdat > currentDate}">
 						                    개최 전
 						                </c:when>
 											<c:when
-												test="${k.ev_s_dat <= currentDate && k.ev_e_dat >= currentDate}">
+												test="${k.ev_sdat <= currentDate && k.ev_edat >= currentDate}">
 						                    개최 중
 						                </c:when>
-											<c:when test="${k.ev_e_dat < currentDate}">
+											<c:when test="${k.ev_edat < currentDate}">
 						                    행사 종료
 						                </c:when>
 										</c:choose></li>
@@ -82,14 +82,14 @@
 									</li>
 									<li class="event_contents">
 										<p class="event_title">${k.ev_idx }</p>
-										<p class="event_subtitle">${k.ev_na }</p>
+										<p class="event_subtitle">${k.ev_name }</p>
 										<p class="event_start_day">
-											<span>시작일 :</span> ${k.ev_s_dat} (${fn:substring(k.ev_s_dat, 0, 10)})
-											<fmt:formatDate value="${k.ev_s_dat}" pattern="EEEE" />
+											<span>시작일 :</span> ${k.ev_sdat} (${fn:substring(k.ev_sdat, 0, 10)})
+											<fmt:formatDate value="${k.ev_sdat}" pattern="EEEE" />
 										</p>
 										<p class="event_end_day">
-											<span>종료일 :</span> ${k.ev_e_dat} (${fn:substring(k.ev_e_dat, 0, 10)})
-											<fmt:formatDate value="${k.ev_e_dat}" pattern="EEEE" />
+											<span>종료일 :</span> ${k.ev_edat} (${fn:substring(k.ev_edat, 0, 10)})
+											<fmt:formatDate value="${k.ev_edat}" pattern="EEEE" />
 										</p>
 									</li>
 								</ul>

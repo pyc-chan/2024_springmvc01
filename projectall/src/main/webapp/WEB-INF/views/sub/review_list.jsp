@@ -43,7 +43,7 @@
 		            <div id="sub_container">
 		                <ul class="photo_list_ul">
 		                	<c:forEach var="k" items="${list }">
-		                    <li onclick="movepage('${k}')">
+		                    <li onclick="review_detail(${k.rev_idx})">
 		                        <div class="photo_list_img box">
 		                            <img src="/resources/images/${k.rev_filename}" alt="이미지가 없습니다" class="content">
 		                        </div>

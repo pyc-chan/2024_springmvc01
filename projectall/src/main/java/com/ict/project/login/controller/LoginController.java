@@ -213,8 +213,6 @@ public class LoginController {
 				session.setAttribute("adminok", "ok");
 			}
 		}
-		
-		
 		// DB에서 로그인 정보 가져옴
 		LoginVO lvo2 = loginService.getDetail(lvo.getU_id());
 		// 아이디가 DB에 없을때

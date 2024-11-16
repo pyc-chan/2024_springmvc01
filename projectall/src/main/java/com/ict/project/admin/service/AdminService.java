@@ -20,6 +20,7 @@ public interface AdminService {
 	public AdminVO adminDetail(String a_idx);
 	public int adminCount();
 	public AdminVO adminLogin(String a_id);
+	public int adminIdChk(String a_id);
 	
 	LoginService loginService();
 	QnaService qnaService();

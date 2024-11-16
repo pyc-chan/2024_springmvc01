@@ -206,8 +206,10 @@ public class NoticeController {
 	
 	// notice 글쓰기
 	@RequestMapping("/notice_write")
-	public ModelAndView getMoveNoticeWrite() {
-		return new ModelAndView("sub/notice_write");
+	public ModelAndView getMoveNoticeWrite(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("sub/notice_write");
+		mv.addObject("cPage", request.getParameter("cPage"));
+		return mv; 
 	}
 	
 	@PostMapping("/notice_write_ok")
@@ -262,11 +264,12 @@ public class NoticeController {
 	// notice 상세보기
 	@RequestMapping("/notice_detail")
 	public ModelAndView getMoveNoticeDetail(@RequestParam("cPage") String cPage,
-			@RequestParam("idxn_idx") String n_idx,
+			@RequestParam("n_idx") String n_idx,
 			CommentVO cvo) {
-		ModelAndView mv = new ModelAndView("sub/notice_detail");
+		ModelAndView mv = new ModelAndView();
 		
-		// hit 업데이트
+		if (n_idx != null) {
+			// hit 업데이트
 		noticeService.getBoardHit(n_idx);
 		// 상세보기
 		NoticeVO nvo = noticeService.getBoardDetail(n_idx);
@@ -286,27 +289,27 @@ public class NoticeController {
 		mv.addObject("clist", clist);
 		mv.addObject("paging", paging);
 		
-		if (nvo != null) {
 			mv.addObject("u_id", avo.getA_na());
 			mv.addObject("nvo", nvo);
 			mv.addObject("cPage", cPage);
 			mv.addObject("cmd", "/notice_detail");
-			
-			return mv;
+			mv.setViewName("sub/notice_detail");
+		}else {
+			mv.setViewName("index");
 		}
 		
-		return null;
+		return mv;
 	}
 	
 	@GetMapping("/notice_down")
 	// void 반환형 없음
 	public void noticeDown(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			String f_name = request.getParameter("f_name");
+			String n_pic = request.getParameter("n_pic");
 			
-			System.out.println(f_name);
+			System.out.println(n_pic);
 			
-			String path = request.getSession().getServletContext().getRealPath("/resources/upload/"+f_name);
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/"+n_pic);
 			String r_path = URLEncoder.encode(path, "UTF-8");
 			
 			response.setContentType("application/x-msdownload");
@@ -326,9 +329,9 @@ public class NoticeController {
 	// notice 댓글 등록
 	@PostMapping("/notice/comment_insert")
 	public ModelAndView getCommentInsert(CommentVO cvo, 
-			 @ModelAttribute("idxn_idx") String idxn_idx,
+			 @ModelAttribute("n_idx") String n_idx,
 			 @ModelAttribute("cPage") String cPage) {
-		System.out.println(idxn_idx);
+		System.out.println(n_idx);
 		
 		ModelAndView mv = new ModelAndView("redirect:/notice_detail");
 		
@@ -340,7 +343,7 @@ public class NoticeController {
 	// notice 댓글 수정
 	@PostMapping("/notice/comment_update")
 	public ModelAndView getCommentUpdate(CommentVO cvo,
-			@ModelAttribute("idxn_idx") String idxn_idx,
+			@ModelAttribute("n_idx") String n_idx,
 			@ModelAttribute("cPage") String cPage) {
 		
 		ModelAndView mv = new ModelAndView("redirect:/notice_detail");
@@ -352,17 +355,17 @@ public class NoticeController {
 	
 	// notice 댓글 삭제
 	 @PostMapping("/notice/comment_delete")
-	 public ModelAndView getCommentDelete(@RequestParam("idxc_idx") String idxc_idx,
-			 @ModelAttribute("idxn_idx") String idxn_idx,
+	 public ModelAndView getCommentDelete(@RequestParam("c_idx") String c_idx,
+			 @ModelAttribute("n_idx") String n_idx,
 			 @ModelAttribute("cPage") String cPage) {
 		 
-		 System.out.println("idxc_idx : " + idxc_idx);
+		 System.out.println("c_idx : " + c_idx);
 		 System.out.println("cPage : " + cPage);
-		 System.out.println("idxn_idx : " + idxn_idx);
+		 System.out.println("n_idx : " + n_idx);
 		 
 		 ModelAndView mv = new ModelAndView("redirect:/notice_detail");
 		 
-		 commentService.getCommentDelete(idxc_idx);
+		 commentService.getCommentDelete(c_idx);
 		 
 		 return mv;
 	 }
@@ -393,12 +396,12 @@ public class NoticeController {
 	@PostMapping("/notice_update_ok")
 	public ModelAndView getMoveNoticeUpdateOk(
 			@ModelAttribute("cPage") String cPage,
-			@ModelAttribute("idxn_idx") String idxn_idx,
+			@ModelAttribute("n_idx") String n_idx,
 			NoticeVO nvo, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		NoticeVO nvo2 = noticeService.getBoardDetail(idxn_idx);
+		NoticeVO nvo2 = noticeService.getBoardDetail(n_idx);
 		
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/upload");

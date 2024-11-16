@@ -41,122 +41,167 @@ public class AdminController {
 
 	@Autowired
 	private PagingService pagingService;
-
+	
+	
+	// 관리자 페이지 메인
 	@GetMapping("/admin/index")
 	public ModelAndView adminIndex(HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		
-		ModelAndView mv = new ModelAndView("admin/admin_index");
-		// login
-		LoginService loginad = adminService.loginService();
-		PerPageConstant perPageConstant = new PerPageConstant();
-		int perPage = perPageConstant.getAdminuserpage();
-		List<LoginVO> userlist = loginad.getList(0, perPage);
-		mv.addObject("userlist", userlist);
-		
-		// Qna
-		QnaService qnaad = adminService.qnaService();
-		List<QnaVO> qnalist = qnaad.getQnaList(0, perPage);
-		mv.addObject("qnalist",qnalist);
-		
-		// Notice
-		NoticeService noticead = adminService.noticeService();
-		List<NoticeVO> noticelist = noticead.getBoardList(0, perPage);
-		mv.addObject("noticelist", noticelist);
-		return mv;
+		if (session.getAttribute("a_id") != null) {
+
+			ModelAndView mv = new ModelAndView("admin/admin_index");
+			// login
+			LoginService loginad = adminService.loginService();
+			PerPageConstant perPageConstant = new PerPageConstant();
+			int perPage = perPageConstant.getAdminuserpage();
+			List<LoginVO> userlist = loginad.getList(0, perPage);
+			mv.addObject("userlist", userlist);
+
+			// Qna
+			QnaService qnaad = adminService.qnaService();
+			List<QnaVO> qnalist = qnaad.getQnaList(0, perPage);
+			mv.addObject("qnalist", qnalist);
+
+			// Notice
+			NoticeService noticead = adminService.noticeService();
+			List<NoticeVO> noticelist = noticead.getBoardList(0, perPage);
+			mv.addObject("noticelist", noticelist);
+			return mv;
 		}
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/mainGo");
 	}
 
 	// 관리자 목록
 	@RequestMapping("/admin/adminlist")
 	public ModelAndView adminList(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		ModelAndView mv = new ModelAndView("admin/admin_list");
-		
-		if(request.getAttribute("a_id").equals("root")) {
-			
-		int count = adminService.adminCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getAdminpage();
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
+				ModelAndView mv = new ModelAndView("admin/admin_list");
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+				int count = adminService.adminCount();
+				String cPage = request.getParameter("cPage");
+				PerPageConstant constant = new PerPageConstant();
+				int perpage = constant.getAdminpage();
 
-		List<AdminVO> list = adminService.adminList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/adminlist");
-		return mv;
-		}
-		else {
-			return new ModelAndView("redirect:/admin/index");
-		}
+				Paging paging = pagingService.pagingservice(count, cPage, perpage);
+				int offset = paging.getOffset();
+				int limit = paging.getNumPerPage();
+
+				List<AdminVO> list = adminService.adminList(offset, limit);
+				mv.addObject("list", list);
+				mv.addObject("paging", paging);
+				mv.addObject("cmd", "/admin/adminlist");
+				return mv;
+			} else {
+				return new ModelAndView("redirect:/admin/index");
+			}
 		}
 		return new ModelAndView("index");
 	}
 
 	// 관리자 정보
 	@PostMapping("/admin/admindetail")
-	public ModelAndView adminDetail(String a_idx, String cPage) {
-		ModelAndView mv = new ModelAndView("admin/admin_detail");
-		AdminVO avo = adminService.adminDetail(a_idx);
-		mv.addObject("avo", avo);
-		mv.addObject("cPage", cPage);
-		return mv;
+	public ModelAndView adminDetail(String a_idx, String cPage, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
+				ModelAndView mv = new ModelAndView("admin/admin_detail");
+				AdminVO avo = adminService.adminDetail(a_idx);
+				mv.addObject("avo", avo);
+				mv.addObject("cPage", cPage);
+				return mv;
+			}
+			return new ModelAndView("redirect:/admin/index");
+		}
+		return new ModelAndView("index");
+
 	}
 
 	// 관리자 탈퇴
 	@PostMapping("/admin/admindelete")
-	public ModelAndView adminDelete(AdminVO avo) {
-		ModelAndView mv = new ModelAndView("redirect:/admin/adminlist");
-		adminService.adminDelete(avo);
+	public ModelAndView adminDelete(AdminVO avo, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
 
-		return mv;
+				ModelAndView mv = new ModelAndView("redirect:/admin/adminlist");
+				adminService.adminDelete(avo);
+				return mv;
+			}
+			return new ModelAndView("redirect:/admin/index");
+
+		}
+		return new ModelAndView("index");
 	}
 
 	// 관리자 업데이트
 	@PostMapping("/admin/adminupdate")
-	public ModelAndView adminUpdate(AdminVO avo) {
-		ModelAndView mv = new ModelAndView("redirect:/admin/admindetail?a_idx=" + avo.getA_idx());
-		adminService.adminUpdate(avo);
+	public ModelAndView adminUpdate(AdminVO avo, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
 
+				ModelAndView mv = new ModelAndView("redirect:/admin/admindetail?a_idx=" + avo.getA_idx());
+				adminService.adminUpdate(avo);
+
+				return mv;
+			}
+			return new ModelAndView("redirect:/admin/index");
+		}
+		return new ModelAndView("index");
+
+	}
+	
+	@GetMapping("/admin/admininsertgo")
+	public ModelAndView adminInsertGo(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
+				mv.setViewName("admin/admin_insert");
+				return mv;
+			}
+			mv.setViewName("redirect:/admin/index");
+			return mv;
+		}
+		mv.setViewName("index");
 		return mv;
 	}
-
-	// 회원 삽입
+	
+	
+	
+	// 관리자 삽입
 	@PostMapping("/admin/admininsert")
-	public ModelAndView adminInsert(LoginVO lvo) {
-		ModelAndView mv = new ModelAndView("redirect:/admin/adminlist");
-		LoginService loginad = adminService.loginService();
-		loginad.loginInsert(lvo);
-		return mv;
+	public ModelAndView adminInsert(LoginVO lvo, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
+			if (session.getAttribute("a_id").equals("root")) {
+				ModelAndView mv = new ModelAndView("redirect:/admin/adminlist");
+				LoginService loginad = adminService.loginService();
+				loginad.loginInsert(lvo);
+				return mv;
+			}
+			return new ModelAndView("admin/index");
+		}
+		return new ModelAndView("index");
 	}
 
 	// 회원 목록
 	@GetMapping("/admin/userlist")
 	public ModelAndView userList(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		ModelAndView mv = new ModelAndView("");
-		LoginService loginad = adminService.loginService();
+		if (session.getAttribute("a_id") != null) {
+			ModelAndView mv = new ModelAndView("");
+			LoginService loginad = adminService.loginService();
 
-		int count = loginad.userCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getAdminuserspage();
+			int count = loginad.userCount();
+			String cPage = request.getParameter("cPage");
+			PerPageConstant constant = new PerPageConstant();
+			int perpage = constant.getAdminuserspage();
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+			Paging paging = pagingService.pagingservice(count, cPage, perpage);
+			int offset = paging.getOffset();
+			int limit = paging.getNumPerPage();
 
-		List<LoginVO> list = loginad.getList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/userlist");
+			List<LoginVO> list = loginad.getList(offset, limit);
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("cmd", "/admin/userlist");
 
-		return mv;
+			return mv;
 		}
 		return new ModelAndView("index");
 	}
@@ -174,11 +219,12 @@ public class AdminController {
 
 	// 회원 탈퇴
 	@PostMapping("/admin/userdelete")
-	public ModelAndView userDelete(LoginVO lvo) {
+	public ModelAndView userDelete(LoginVO lvo, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("");
+		Object cPage = request.getAttribute("cPage");
 		LoginService loginad = adminService.loginService();
 		loginad.logindelete(lvo);
-
+		mv.addObject("cPage", cPage);
 		return mv;
 	}
 
@@ -204,25 +250,25 @@ public class AdminController {
 	// qna 목록
 	@GetMapping("/admin/qnalist")
 	public ModelAndView qnaList(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		ModelAndView mv = new ModelAndView("admin/qna_list");
-		QnaService qnaad = adminService.qnaService();
+		if (session.getAttribute("a_id") != null) {
+			ModelAndView mv = new ModelAndView("admin/qna_list");
+			QnaService qnaad = adminService.qnaService();
 
-		int count = qnaad.getQnaCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getAdminqnaspage();
+			int count = qnaad.getQnaCount();
+			String cPage = request.getParameter("cPage");
+			PerPageConstant constant = new PerPageConstant();
+			int perpage = constant.getAdminqnaspage();
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+			Paging paging = pagingService.pagingservice(count, cPage, perpage);
+			int offset = paging.getOffset();
+			int limit = paging.getNumPerPage();
 
-		List<QnaVO> list = qnaad.getQnaList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/qnalist");
+			List<QnaVO> list = qnaad.getQnaList(offset, limit);
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("cmd", "/admin/qnalist");
 
-		return mv;
+			return mv;
 		}
 		return new ModelAndView("index");
 	}
@@ -271,25 +317,25 @@ public class AdminController {
 	// fna 목록
 	@GetMapping("/admin/fnalist")
 	public ModelAndView fnaList(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		ModelAndView mv = new ModelAndView("");
-		FnaService fnaad = adminService.fnaService();
+		if (session.getAttribute("a_id") != null) {
+			ModelAndView mv = new ModelAndView("");
+			FnaService fnaad = adminService.fnaService();
 
-		int count = fnaad.getFnaCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getFnapage();
+			int count = fnaad.getFnaCount();
+			String cPage = request.getParameter("cPage");
+			PerPageConstant constant = new PerPageConstant();
+			int perpage = constant.getFnapage();
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+			Paging paging = pagingService.pagingservice(count, cPage, perpage);
+			int offset = paging.getOffset();
+			int limit = paging.getNumPerPage();
 
-		List<FnaVO> list = fnaad.getFnaList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/fnalist");
+			List<FnaVO> list = fnaad.getFnaList(offset, limit);
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("cmd", "/admin/fnalist");
 
-		return mv;
+			return mv;
 		}
 		return new ModelAndView("index");
 	}
@@ -338,25 +384,25 @@ public class AdminController {
 	// 공지사항 리스트
 	@GetMapping("/admin/noticelist")
 	public ModelAndView noticeList(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		ModelAndView mv = new ModelAndView("admin/notice_list");
-		NoticeService noticead = adminService.noticeService();
+		if (session.getAttribute("a_id") != null) {
+			ModelAndView mv = new ModelAndView("admin/notice_list");
+			NoticeService noticead = adminService.noticeService();
 
-		int count = noticead.getTotalCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getFnapage();
+			int count = noticead.getTotalCount();
+			String cPage = request.getParameter("cPage");
+			PerPageConstant constant = new PerPageConstant();
+			int perpage = constant.getFnapage();
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+			Paging paging = pagingService.pagingservice(count, cPage, perpage);
+			int offset = paging.getOffset();
+			int limit = paging.getNumPerPage();
 
-		List<NoticeVO> list = noticead.getBoardList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/noticelist");
+			List<NoticeVO> list = noticead.getBoardList(offset, limit);
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("cmd", "/admin/noticelist");
 
-		return mv;
+			return mv;
 		}
 		return new ModelAndView("index");
 	}
@@ -402,31 +448,31 @@ public class AdminController {
 
 		return mv;
 	}
-	
+
 	// 댓글 목록
 	@RequestMapping("/admin/commentlist")
 	public ModelAndView commentList(HttpServletRequest request, CommentVO cvo, HttpSession session) {
-		if(session.getAttribute("a_id")!=null) {
-		
-		ModelAndView mv = new ModelAndView("");
-		CommentService commentad = adminService.commentService();
+		if (session.getAttribute("a_id") != null) {
 
-		// 페이징 기법
-		int count = commentad.getCommentCount();
-		String cPage = request.getParameter("cPage");
-		PerPageConstant constant = new PerPageConstant();
-		int perpage = constant.getFnapage();
+			ModelAndView mv = new ModelAndView("");
+			CommentService commentad = adminService.commentService();
 
-		Paging paging = pagingService.pagingservice(count, cPage, perpage);
-		int offset = paging.getOffset();
-		int limit = paging.getNumPerPage();
+			// 페이징 기법
+			int count = commentad.getCommentCount();
+			String cPage = request.getParameter("cPage");
+			PerPageConstant constant = new PerPageConstant();
+			int perpage = constant.getFnapage();
 
-		List<CommentVO> list = commentad.getCommentList(offset, limit);
-		mv.addObject("list", list);
-		mv.addObject("paging", paging);
-		mv.addObject("cmd", "/admin/commentlist");
+			Paging paging = pagingService.pagingservice(count, cPage, perpage);
+			int offset = paging.getOffset();
+			int limit = paging.getNumPerPage();
 
-		return mv;
+			List<CommentVO> list = commentad.getCommentList(offset, limit);
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("cmd", "/admin/commentlist");
+
+			return mv;
 		}
 		return new ModelAndView("index");
 	}
@@ -461,11 +507,11 @@ public class AdminController {
 
 		return mv;
 	}
-	
+
 	// 리뷰 목록
-		@RequestMapping("/admin/reviewlist")
-		public ModelAndView reviewList(HttpServletRequest request, HttpSession session) {
-			if(session.getAttribute("a_id")!=null) {
+	@RequestMapping("/admin/reviewlist")
+	public ModelAndView reviewList(HttpServletRequest request, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
 			ModelAndView mv = new ModelAndView("");
 			ReviewService reviewad = adminService.reviewService();
 
@@ -485,45 +531,45 @@ public class AdminController {
 			mv.addObject("cmd", "/admin/reviewlist");
 
 			return mv;
-			}
-			return new ModelAndView("index");
 		}
+		return new ModelAndView("index");
+	}
 
-		// review 삭제
-		@PostMapping("/admin/reviewdelete")
-		public ModelAndView reviewDelete(ReviewVO revo, RedirectAttributes redirectAttributes) {
-			ModelAndView mv = new ModelAndView("redirect:/admin/reviewlist");
-			ReviewService reviewad = adminService.reviewService();
-			reviewad.getReviewDelete(revo.getRev_idx());
-			redirectAttributes.addFlashAttribute("revo", revo);
+	// review 삭제
+	@PostMapping("/admin/reviewdelete")
+	public ModelAndView reviewDelete(ReviewVO revo, RedirectAttributes redirectAttributes) {
+		ModelAndView mv = new ModelAndView("redirect:/admin/reviewlist");
+		ReviewService reviewad = adminService.reviewService();
+		reviewad.getReviewDelete(revo.getRev_idx());
+		redirectAttributes.addFlashAttribute("revo", revo);
 
-			return mv;
-		}
+		return mv;
+	}
 
-		// review 업데이트
-		@PostMapping("/admin/reviewupdate")
-		public ModelAndView reviewUpdate(ReviewVO revo) {
-			ModelAndView mv = new ModelAndView("redirect:/admin/reviewdetail?c_idx=" + revo.getRev_idx());
-			ReviewService reviewad = adminService.reviewService();
-			reviewad.getReviewUpdate(revo);
+	// review 업데이트
+	@PostMapping("/admin/reviewupdate")
+	public ModelAndView reviewUpdate(ReviewVO revo) {
+		ModelAndView mv = new ModelAndView("redirect:/admin/reviewdetail?c_idx=" + revo.getRev_idx());
+		ReviewService reviewad = adminService.reviewService();
+		reviewad.getReviewUpdate(revo);
 
-			return mv;
-		}
+		return mv;
+	}
 
-		// review 삽입
-		@PostMapping("/admin/reviewinsert")
-		public ModelAndView reviewInsert(ReviewVO revo) {
-			ModelAndView mv = new ModelAndView("redirect:/admin/reviewlist");
-			ReviewService reviewad = adminService.reviewService();
-			reviewad.getReviewInsert(revo);
+	// review 삽입
+	@PostMapping("/admin/reviewinsert")
+	public ModelAndView reviewInsert(ReviewVO revo) {
+		ModelAndView mv = new ModelAndView("redirect:/admin/reviewlist");
+		ReviewService reviewad = adminService.reviewService();
+		reviewad.getReviewInsert(revo);
 
-			return mv;
-		}
-		
-		// inquery 목록
-		@RequestMapping("/admin/inquerylist")
-		public ModelAndView inqueryList(HttpServletRequest request, HttpSession session) {
-			if(session.getAttribute("a_id")!=null) {
+		return mv;
+	}
+
+	// inquery 목록
+	@RequestMapping("/admin/inquerylist")
+	public ModelAndView inqueryList(HttpServletRequest request, HttpSession session) {
+		if (session.getAttribute("a_id") != null) {
 			ModelAndView mv = new ModelAndView("");
 			ReviewService reviewad = adminService.reviewService();
 
@@ -543,51 +589,52 @@ public class AdminController {
 			mv.addObject("cmd", "/admin/inquerylist");
 
 			return mv;
-			}
-			return new ModelAndView("index");
 		}
-		// inquery 작성
-		@PostMapping("/admin/inqueryinsert")
-		public ModelAndView inqueryInquery(InqueryVO ivo) {
-			ModelAndView mv = new ModelAndView("redirect:/admin/inquerylist");
-			InqueryService inqueryad = adminService.inqueryService();
-			inqueryad.getInqueryInsert(ivo);
-			
-			return mv;
-		}
-		// inquery 삭제
-		@PostMapping("/admin/inquerydelete")
-		public ModelAndView inqueryDelete(String i_idx) {
-			ModelAndView mv = new ModelAndView();
-			InqueryService inqueryad = adminService.inqueryService();
-			inqueryad.getInqueryDelete(i_idx);
-			
-			return mv;
-		}
-		// inquery 댓글 작성
-		@PostMapping("/admin/inquerydetail")
-		public ModelAndView inqueryDetail(String i_idx, String cPage, HttpSession session) {
-			ModelAndView mv = new ModelAndView();
-			InqueryService inqueryad = adminService.
-					inqueryService();
-			InqueryVO ivo = inqueryad.getInqueryDetail(i_idx);
-			
-			mv.addObject("a_idx", session.getAttribute("a_idx"));
-			mv.addObject("ivo", ivo);
-			mv.addObject("cPage", cPage);
-			
-			return mv;
-		}
-		
-		// inquery 댓글 작성
-		@PostMapping("/admin/inqueryupdate")
-		public ModelAndView inqueryUpdate(InqueryVO ivo) {
-			ModelAndView mv = new ModelAndView();
-			InqueryService inqueryad = adminService.inqueryService();
-			inqueryad.getAdminUpdate(ivo);
-			
-			return mv;
-		}
-		
-	
+		return new ModelAndView("index");
+	}
+
+	// inquery 작성
+	@PostMapping("/admin/inqueryinsert")
+	public ModelAndView inqueryInquery(InqueryVO ivo) {
+		ModelAndView mv = new ModelAndView("redirect:/admin/inquerylist");
+		InqueryService inqueryad = adminService.inqueryService();
+		inqueryad.getInqueryInsert(ivo);
+
+		return mv;
+	}
+
+	// inquery 삭제
+	@PostMapping("/admin/inquerydelete")
+	public ModelAndView inqueryDelete(String i_idx) {
+		ModelAndView mv = new ModelAndView();
+		InqueryService inqueryad = adminService.inqueryService();
+		inqueryad.getInqueryDelete(i_idx);
+
+		return mv;
+	}
+
+	// inquery 댓글 작성
+	@PostMapping("/admin/inquerydetail")
+	public ModelAndView inqueryDetail(String i_idx, String cPage, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		InqueryService inqueryad = adminService.inqueryService();
+		InqueryVO ivo = inqueryad.getInqueryDetail(i_idx);
+
+		mv.addObject("a_idx", session.getAttribute("a_idx"));
+		mv.addObject("ivo", ivo);
+		mv.addObject("cPage", cPage);
+
+		return mv;
+	}
+
+	// inquery 댓글 작성
+	@PostMapping("/admin/inqueryupdate")
+	public ModelAndView inqueryUpdate(InqueryVO ivo) {
+		ModelAndView mv = new ModelAndView();
+		InqueryService inqueryad = adminService.inqueryService();
+		inqueryad.getAdminUpdate(ivo);
+
+		return mv;
+	}
+
 }

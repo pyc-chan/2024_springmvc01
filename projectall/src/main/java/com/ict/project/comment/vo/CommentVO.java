@@ -3,7 +3,7 @@ package com.ict.project.comment.vo;
 public class CommentVO {
 	
 	// 게시판마다 변수명 확인해서 작성하기
-	private String c_idx, u_idx, c_con, c_dat, c_up, c_out, c_bor, c_ref;
+	private String c_idx, u_id, c_con, c_dat, c_up, c_out, c_bor, c_ref;
 
 	public String getC_idx() {
 		return c_idx;
@@ -13,8 +13,8 @@ public class CommentVO {
 		this.c_idx = c_idx;
 	}
 
-	public String getU_idx() {
-		return u_idx;
+	public String getU_id() {
+		return u_id;
 	}
 
 	public String getC_up() {
@@ -33,8 +33,8 @@ public class CommentVO {
 		this.c_out = c_out;
 	}
 
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
 	}
 
 	public String getC_con() {

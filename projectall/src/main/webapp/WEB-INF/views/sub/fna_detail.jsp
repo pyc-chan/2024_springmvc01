@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공원 이야기</title>
+	<title>fna - 상세보기</title>
 	<link rel="icon" type="image/x-icon" href="resources/images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     
@@ -14,13 +15,10 @@
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     
     <link rel="stylesheet" href="resources/css/menu.css" />
-    <link rel="stylesheet" href="resources/css/common.css" />
-    <link rel="stylesheet" href="resources/css/notice_write.css" />
+    <link rel="stylesheet" href="resources/css/notice_detail.css" />
     <link rel="stylesheet" href="/resources/css/weather.css"><!-- 날씨 위젯 추가 -->
     
-	<link rel="stylesheet" href="resources/css/summernote-lite.css">
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="resources/js/menu.js"></script>
     <script src="/resources/js/weather.js"></script><!-- 날씨 위젯 추가 -->
 </head>
@@ -31,72 +29,54 @@
         
         <!-- 컨텐츠 영역(main) 시작 -->
         <main>
-	            <div id="sub_container">
-	                <ul class="contents_box">
-	                    <li class="textleft">
-	                        <h2 class="great_title">공지사항</h2>
-	                        <p class="subheading_title">도심녹지 관련 소식을 안내합니다</p>
-        					
-							<form method="post" encType="multipart/form-data">
-	                        <div class="content_box">
-				                <ul>
-				                    <li class="row">
-				                        <div class="label">옵션</div>
-				                        <div class="input">
-				                        	<label>
-				                        		<input type="checkbox" name="n_chk" value="check"> 공지
-				                        	</label>
-				                        </div>
-				                    </li>
-				                    <li class="row">
-				                        <div class="label">카테고리</div>
-				                        <div class="input">
-				                        	<select name="n_opt" class="board_select" required>
-				                        		<option value="공원" selected>공원</option>
-				                        		<option value="가로수길">가로수길</option>
-				                        		<option value="보호수">보호수</option>
-				                        		<option value="녹지행사">녹지행사</option>
-				                        	</select>
-				                        </div>
-				                    </li>
-				                    <li class="row">
-				                        <div class="label">제목</div>
-				                        <div class="input">
-				                        	<input type="text" name="n_tle" class="in_title" placeholder="제목을 입력해주세요." required>
-				                        </div>
-				                    </li>
-				                    <li class="top">
-				                        <div class="label">내용</div>
-				                        <div class="input">
-				                        	<textarea id="content" name="n_con" rows="20"></textarea>
-				                        </div>
-				                    </li>
-				                    <li class="row">
-				                        <div class="label">첨부파일</div>
-				                        <div class="input">
-				                        	<div class="filebox">
-											    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
-											    <label for="file">파일찾기</label> 
-											    <input type="file" id="file" name="file_name">
-											</div>
-											
-				                        </div>
-				                    </li>
-				                </ul>
-				            </div>
-							
-				            <div class="button_box">                
-				                <div>
+            <div id="sub_container">
+                <ul class="contents_box">
+                    <li class="textleft">
+                        <h2 class="great_title">자주하는 질문</h2>
+                        <div class="content">
+		                    <ul>
+		                        <li>
+		                            <h2 class="title">${fvo.f_tle}</h2>
+		                            <div class="tt">
+		                                <ul>
+		                                    <li>
+		                                        <span class="title">작성자</span>
+		                                        <span class="cont">${fvo.a_idx}</span>
+		                                    </li>
+		                                    <li>
+		                                        <span class="title">작성일</span>
+		                                        <span class="cont">${fvo.f_dat}</span>
+		                                    </li>
+		                                </ul>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                    <ul>
+		                        <li class="bodyCont">
+		                        <span class="title">질문</span>
+		                        	${fvo.f_fcon}
+		                        </li>
+		                        <li class="bodyCont">
+		                        <span class="title">답변</span>
+		                        	${fvo.f_acon}
+		                        </li>
+		                    </ul>
+		                </div>
+		                
+		                
+		                
+		                
+			            <div>               
+			                <div class="button_box">
+			                    <form method="post">  
+			                    	<button class="cancle" onclick="fna_list(this.form)">목록</button>  
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
-				                	<input type="hidden" name="a_idx" value="admin" /> 
-				                    <button class="write" onclick="move_notice_write_ok(this.form)">작성완료</button>    
-				                    <button class="cancle" onclick="move_notice()">목록</button>    
-				                </div>
-				            </div>
-            				</form>
-	                    </li>
-	                </ul>
-	            </div>
+	                			</form>
+			                </div>
+			            </div>
+                    </li>
+                </ul>
+            </div>
         	<!-- 컨텐츠 영역(main) 끝 -->
         	
         	
@@ -110,56 +90,9 @@
     
     
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
-    
-    
-	<script src="/resources/js/summernote-lite.js" ></script>
-	<script src="/resources/js/lang/summernote-ko-KR.js" ></script>
-	
-	<script type="text/javascript">
-		$(function() {
-			$("#content").summernote({
-				lang : 'ko-KR',
-				height : 300,
-				focus : true,
-				placeholder : "최대 3000자까지 쓸 수 있습니다.",
-				callbacks : {
-		        	onImageUpload : function(files, editor) {
-						for (let i = 0; i < files.length; i++) {
-							sendImage(files[i], editor);
-						}
-					}
-		        }
-			});
-		});
-		
-		function sendImage(file, editor) {
-			// FormData 객체를 전송할 때 , JQuery 가 설정
-			let frm = new FormData();
-			frm.append("s_file", file);
-			$.ajax({
-				url : "/saveImg",
-				data: frm,
-				method: "post",
-			  	contentType : false,
-			  	processData : false,
-				cache : false,
-				dataType : "json",
-				success : function(data) {
-					const path = data.path;
-					const fname = data.fname;
-					$("#content").summernote("editor.insertImage", path+"/"+fname);
-				},
-				error : function() {
-					alert("읽기 실패");
-				}
-			});	
-		}
-	</script>
-	
-
+    <script src="/resources/js/admin_common.js"></script>
 
     
-    <script src="resources/js/common.js"></script>
     <script>
         $(document).ready(function () {
             function toggleSidebar() {

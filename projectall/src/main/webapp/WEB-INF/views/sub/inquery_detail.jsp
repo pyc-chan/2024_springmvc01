@@ -45,7 +45,7 @@
 		                                <ul>
 		                                    <li>
 		                                        <span class="title">작성자</span>
-		                                        <span class="cont">${ivo.u_idx}</span>
+		                                        <span class="cont">${ivo.u_id}</span>
 		                                    </li>
 		                                    <li>
 		                                        <span class="title">작성일</span>
@@ -64,7 +64,7 @@
 		                <div>
 		                	<ul>
 		                		<li>
-		                			<span class="title">작성자</span>
+		                			<span class="title">답변자</span>
 		                            <span class="cont">${ivo.a_idx }</span>
 		                			
 		                		</li>
@@ -74,11 +74,25 @@
 		                		
 		                	</ul>
 		                </div>
+		                
+		                <div>
+							<ul class="but_layout">
+								<li>
+				                    <form method="post">  
+					                	<input type="hidden" name="cPage" value="${cPage}" /> 
+					                	<input type="hidden" name="i_idx" value="${ivo.i_idx}" /> 
+					                	<input type="hidden" name="u_id" value="${ivo.u_id}" /> 
+					                	
+										<input type="button" value="목록" onclick="event_list(this.form)">
+										<input type="button" value="수정" onclick="event_update(this.form)">
+										<input type="button" value="삭제" onclick="event_delete(this.form)"> 
+			               			</form>
+								</li>
+							</ul>
+						</div>
                     </li>
                 </ul>
             </div>
-        	<!-- 컨텐츠 영역(main) 끝 -->
-        	
         	
         	<!-- footer 불러오기 -->
         	<jsp:include page="../common/sub_footer.jsp"></jsp:include>
@@ -90,8 +104,7 @@
     
     
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
-    
-
+    <script src="/resources/js/admin_common.js"></script>
     
     <script>
         $(document).ready(function () {

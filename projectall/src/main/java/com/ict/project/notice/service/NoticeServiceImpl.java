@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ict.project.comment.vo.CommentVO;
 import com.ict.project.notice.dao.NoticeDAO;
 import com.ict.project.notice.vo.NoticeVO;
 
@@ -27,8 +26,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int getBoardInsert(NoticeVO gvo) {
-		return noticeDAO.getBoardInsert(gvo);
+	public int getBoardInsert(NoticeVO nvo) {
+		return noticeDAO.getBoardInsert(nvo);
 	}
 
 	@Override
@@ -47,8 +46,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int getBoardUpdate(NoticeVO gvo) {
-		return noticeDAO.getBoardUpdate(gvo);
+	public int getBoardUpdate(NoticeVO nvo) {
+		return noticeDAO.getBoardUpdate(nvo);
 	}
 
 	

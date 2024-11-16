@@ -87,9 +87,9 @@
 				            <div class="button_box">    
 				                <div>
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
-									<input type="hidden" name="idxn_idx" value="${gvo.idxn_idx}" /> 
+									<input type="hidden" name="rev_idx" value="${rvo.rev_idx}" /> 
 				                    <button class="write" onclick="move_notice_update_ok(this.form)">작성완료</button>    
-				                    <input type="button" class="cancle" value="목록" onclick="move_notice()">
+				                    <input type="button" class="cancle" value="목록" onclick="review_list(${cPage})">
 				                </div> 
 				            </div>
             				</form>

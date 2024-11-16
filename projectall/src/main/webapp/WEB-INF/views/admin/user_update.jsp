@@ -36,19 +36,7 @@
 					<tr>
 						<td>아이디</td>
 						<td>
-				            <input type="text" name="u_id" value="${nvo.u_id}" class="in_title" required>
-						</td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td>
-				            <input type="text" name="u_pw" value="${nvo.u_pw}" class="in_title" required>
-						</td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td>
-				            <input type="text" name="u_na" value="${nvo.u_na}" class="in_title" required>
+				            ${lvo.u_id }
 						</td>
 					</tr>
 					<tr>
@@ -56,68 +44,51 @@
 						<td>
 							<!-- 여기가 첨부파일 입니다. -->
 							<c:choose>
-								<c:when test="${empty gvo.f_name}">
-									<div class="filebox">
-									    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
-									    <label for="file">파일찾기</label> 
-									    <input type="file" id="file" name="file_name">
-									    <b>이전 파일 없음</b>
-										<input type="hidden" name="old_file_name" value="">
-									</div>
-								</c:when>
-								<c:otherwise>
-									<div class="filebox">
-									    <input class="upload-name" value="${gvo.f_name}" placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요.">
-									    <label for="file">파일찾기</label> 
-									    <input type="file" id="file" name="file_name">
-									</div>
-							
-		                            <div class="file_lst">
-		                                <label><span>다운로드 : </span> <a href="">${gvo.f_name}</a></label>
-		                            </div>
-								</c:otherwise>
-							</c:choose>
+										<c:when test="${empty lvo.u_pic}">
+											<span>등록된 첨부파일이 없습니다.</span>
+										</c:when>
+										<c:otherwise>
+											<p class="attachment_name">첨부파일</p>
+											<ul class="attachment">
+												<li class="img_box">
+													<img src="/resources/upload/${lvo.u_pic}">
+												</li>
+												<li>
+													<p class="img_name"><span>파일명</span> ${lvo.u_pic}</p>
+												</li>
+											</ul>
+										</c:otherwise>
+									</c:choose>
 							<!-- 여기가 첨부파일 입니다. -->
 						</td>
 					</tr>
 					<tr>
 						<td>전화번호</td>
 						<td>
-				            <input type="text" name="u_pho" value="${nvo.u_pho}" class="in_title" required>
-						</td>
-					</tr>
-					<tr>
-						<td>성별</td>
-						<td>
-							<select name="u_gen" id="gen">
-								<option value="male">남성</option>
-								<option value="female">여성</option>
-							</select>
-							<div class="choose_category"><span>현재 카테고리 :</span> ${nvo.u_gen}</div>
+				            ${nvo.u_pho}
 						</td>
 					</tr>
 					<tr>
 						<td>생년월일</td>
 						<td>
-							<input type="date" name="u_bir" value="${nvo.u_bir}">
+							${nvo.u_bir}
 						</td>
 					</tr>
 					<tr>
-						<td>이메일</td>
 						<td>
-							<input type="text" name="u_em" value="${nvo.u_em}">
+							${nvo.u_em}
 						</td>
 					</tr>
 					<tr>
 						<td>생성일자</td>
 						<td>
-							<input type="date" name="u_reg" value="${nvo.u_reg}">
+							${nvo.u_reg}
 						</td>
 					</tr>
 					<tr>
 						<td>탈퇴일자</td>
 						<td>
-							<input type="date" name="u_out" value="${nvo.u_out}">
+							${nvo.u_out}
 						</td>
 					</tr>
 					<tr>
@@ -127,7 +98,7 @@
 								수정한 사람 정보가 자동으로 나오게 해주세요. 
 								탈퇴 담당자는 누가 수정을 할 수가 없습니다.
 							-->
-							<input type="text" name="a_idx" value="${nvo.a_idx}" readonly>
+							${nvo.a_idx}
 						</td>
 					</tr>
 					<tr>
@@ -136,17 +107,12 @@
 							<textarea name="n_con" class="textarea" rows="20" placeholder="탈퇴사유를 적어주세요"></textarea>
 						</td>
 					</tr>
-					<tr>
-						<td>내용</td>
-						<td>
-							<textarea id="content" name="u_etc" rows="20"></textarea>
-						</td>
-					</tr>
 				</table>
 				<div class="btns">
 					<input type="hidden" name="admin_idx" value="${fvo.admin_idx }">
 					<button onclick="user_update_ok(this.form)">수정완료</button>
 					<button onclick="user_list()">목록</button>
+					<button id="userdelete" onclick="user_delete(f)">유저 탈퇴</button>
 				</div>
 			</form>
 		</div>

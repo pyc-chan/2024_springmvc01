@@ -27,16 +27,12 @@
 	<div id="sub_main_container">
         <!-- sub_header 불러오기 -->
         <jsp:include page="../common/sub_header.jsp"></jsp:include>
-        
         <!-- 컨텐츠 영역(main) 시작 -->
         <main>
             <div id="sub_container">
                 <ul class="contents_box">
                     <li class="textleft">
                         <h2 class="great_title">공지사항</h2>
-                        <p class="subheading_title">도심녹지 관련 소식을 안내합니다</p>
-
-
                         <div class="search-bar">
 		                    <div class="search-text">전체 <span>${paging.totalRecored}</span>건</div>
 		                </div>
@@ -60,30 +56,20 @@
 		                    		</c:otherwise>
 		                    	</c:choose>
 		                    </ul>
-		                    <div class="button_box">
-		                        <div>
-		                        	<button onclick="move_notice_write()">글쓰기</button>
-		                        </div>
-		                    </div>
 		                </div>
 		                    
                     	<jsp:include page="../common/every_paging.jsp"/>
                     </li>
                 </ul>
             </div>
-        	<!-- 컨텐츠 영역(main) 끝 -->
-        	
-        	
-        	<!-- footer 불러오기 -->
         	<jsp:include page="../common/sub_footer.jsp"></jsp:include>
         </main>
-        	
         <!-- 모바일 메뉴 불러오기 -->
         <jsp:include page="../common/sub_m_menu.jsp"></jsp:include>
     </div>
     
     <jsp:include page="../common/topBtn.jsp"></jsp:include>
-    
+    <script src="/resources/js/admin_common.js"></script>
     <jsp:include page="../common/arrow.jsp"></jsp:include>
     
     <script>
@@ -99,10 +85,7 @@
             $(".button").on("click tap", function () {
                 toggleSidebar();
             });
-
-            
         });
-
         const btns = document.querySelectorAll(".sub_menu_area, .btn");
 
         btns.forEach((btn) => {
@@ -134,9 +117,6 @@
                 $(".sidebar").removeClass("displayBlock");
                 $("main").removeClass("move-to-left");
                 $(".button").removeClass("active");
-
-                
-                    
             } else if(windowWidth > 768) {
                 //창 가로 크기가 500 미만일 경우  
                 console.log("768px 이상");

@@ -34,25 +34,6 @@
 			<form method="post" encType="multipart/form-data">
 				<table class="popuptable">
 					<tr>
-						<td>옵션</td>
-						<td>
-							<label>
-                        		<input type="checkbox" name="n_chk" value="check"> 공지
-                        	</label>
-						</td>
-					</tr>
-					<tr>
-						<td>카테고리</td>
-						<td>
-	                       	<select name="n_opt" class="board_select" required>
-	                       		<option value="공원" selected>공원</option>
-	                       		<option value="가로수길">가로수길</option>
-	                       		<option value="보호수">보호수</option>
-	                       		<option value="녹지행사">녹지행사</option>
-	                       	</select>
-						</td>
-					</tr>
-					<tr>
 						<td>제목</td>
 						<td>
 				            <input type="text" name="n_tle" class="in_title" placeholder="제목을 입력해주세요." required>
@@ -71,7 +52,7 @@
                         	<div class="filebox">
 							    <input class="upload-name" value="파일찾기를 클릭해서 첨부파일을 등록해주세요." placeholder="파일찾기를 클릭해서 첨부파일을 등록해주세요." readonly>
 							    <label for="file">파일찾기</label> 
-							    <input type="file" id="file" name="n_pic">
+							    <input type="file" id="file" name="n_file">
 							</div>
 						</td>
 					</tr>
@@ -81,7 +62,7 @@
                 	<input type="hidden" name="cPage" value="${cPage}" /> 
                 	<input type="hidden" name="c_bor" value="admin" /> 
 					<button onclick="notice_write_ok(this.form)">저장</button>
-					<button onclick="notice_list()">목록</button>
+					<button onclick="notice_list(${cPage})">목록</button>
 				</div>
 			</form>
 		</div>

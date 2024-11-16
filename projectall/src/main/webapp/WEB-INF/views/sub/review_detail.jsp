@@ -41,7 +41,7 @@
 		                                <ul>
 		                                    <li>
 		                                        <span class="title">작성자</span>
-		                                        <span class="cont">${u_na}</span>
+		                                        <span class="cont">${u_id}</span>
 		                                    </li>
 		                                    <li>
 		                                        <span class="title">작성일</span>

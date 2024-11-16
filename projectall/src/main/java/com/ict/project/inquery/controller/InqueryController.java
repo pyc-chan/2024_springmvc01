@@ -3,6 +3,7 @@ package com.ict.project.inquery.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,6 +67,17 @@ public class InqueryController {
 		ModelAndView mv = new ModelAndView();
 		inqueryService.getInqueryInsert(fbvo);
 		return mv;
+	}
+	
+	@PostMapping("/inquery/insertgo")
+	public ModelAndView getInqueryInsertGo(HttpSession session) {
+		Object u_id = session.getAttribute("u_id"); 
+		if(u_id != null) {
+		ModelAndView mv = new ModelAndView("sub/inquery_write");
+		mv.addObject("u_id", u_id);
+		return mv;
+		}
+		return new ModelAndView("index");
 	}
 	
 	@PostMapping("/inquery/update")

@@ -63,7 +63,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="k" varStatus="c">
-								<tr class="hover_back"  onclick="admin_detail(k)">
+								<tr class="hover_back"  onclick="admin_detail(${k.a_idx})">
 									<td>${(paging.nowBlock-1)*paging.numPerPage+c}</td>
 									<td>${k.a_id}</td>
 									<td>${k.a_na}</td>
@@ -75,7 +75,9 @@
 						</c:otherwise>
 					</c:choose>
 				</table>
-				
+				<div class="btns">
+					<button onclick="admin_insert()">관리자 생성</button>
+				</div>
 				<jsp:include page="../common/every_paging.jsp"/>
 			</div>
 		</div>
@@ -83,11 +85,9 @@
     	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
     	<jsp:include page="../common/arrow.jsp"/>
     	<script src="/resources/js/admin_common.js"></script>
-    	
-		<script src="/resources/js/common.js"></script>
     	<script type="text/javascript">
     		function admin_detail(f){
-    			document.location.href="/admin/adminlist?a_idx="+f.a_idx+"&cPage="+paging.nowPage
+    			document.location.href=`/admin/adminlist?a_idx=${f.a_idx}&cPage=${paging.nowPage}`;
     		}
     		
     	</script>

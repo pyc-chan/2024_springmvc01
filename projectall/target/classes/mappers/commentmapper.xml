@@ -8,7 +8,7 @@
 	
 	<select id="Comment_list" resultType="cvo" parameterType="Map">
 		select * from comment_db order by c_idx desc
-		where c_ref = #{c_ref} and c_bor = #{c_ref} limit #{offset}, #{limit}
+		where c_ref = #{c_ref} and c_bor = #{c_bor} limit #{offset}, #{limit}
 	</select>
 	
 	<select id="Comment_userlist" resultType="cvo" parameterType="Map">
@@ -27,7 +27,7 @@
 	
 	<select id="Comment_subcount" resultType="int" parameterType="cvo">
 		select count(*) from comment_db 
-		where c_ref = #{c_ref} and c_bor = #{c_ref}
+		where c_ref = #{c_ref} and c_bor = #{c_bor}
 	</select>
 	
 	<select id="Comment_usercount" resultType="int" parameterType="String">

@@ -8,9 +8,23 @@ function getAdminGo() {
 	location.href = "/admin_go";
 }
 
+// 공지사항 디테일
+function move_notice_detail(idx,cPage){
+	location.href = `/notice_detail?cPage=${cPage}&n_idx=${idx}`;
+}
+
+function move_notice(cPage){
+	location.href= "/notice_list?cPage=${cPage}"
+}
+
+function move_notice_write(f){
+	f.action = "/notice_write";
+	f.submit();
+}
+
 // 공지사항 리스트
-function notice_list() {
-	location.href = "/admin/noticelist";
+function notice_list(cPage) {
+	location.href = "/admin/noticelist?cPage=${cPage}";
 }
 
 function notice_detail() {
@@ -55,10 +69,11 @@ function notice_delete_ok(f) {
 }
 
 // 1:1 문의 리스트
-function qna_list() {
-	location.href = "/admin/qnalist";
+function qna_list(cPage) {
+	location.href = "/admin/qnalist?cPage=${cPage}";
 }
 
+// 1:1 문의 detail
 function qna_detail() {
 	location.href = "/admin/qnadetail";
 }
@@ -101,8 +116,8 @@ function qna_delete_ok(f) {
 }
 
 // 고객의 소리
-function inquery_list() {
-	location.href = "/inquery/list";
+function inquery_list(cPage) {
+	location.href = `/inquery/list?cPage=${cPage}`;
 }
 
 function inquery_detail() {
@@ -147,8 +162,9 @@ function inquery_delete_ok(f) {
 }
 
 // 자주하는 질문 리스트
-function fna_list() {
-	location.href = "/admin/fnalist";
+function fna_list(f) {
+	f.action = "/fna/list";
+	f.submit();
 }
 
 function admin_inquery_list(f) {
@@ -192,8 +208,8 @@ function fna_update_ok(f) {
 }
 
 // 회원관리 리스트
-function user_list() {
-	location.href = "/admin/userlist";
+function user_list(cPage) {
+	location.href = "/admin/userlist?cPage=${cPage}";
 }
 
 function user_detail() {
@@ -239,21 +255,22 @@ function user_delete_ok(f) {
 }
 
 // 관리자 리스트
-function admin_list() {
-	location.href = "/admin/adminlist";
+function admin_list(cPage) {
+	location.href = "/admin/adminlist?cPage=${cPage}";
 }
 
-function admin_detail() {
-	location.href = "/admin/admindetail";
+
+function admin_detail(a_idx) {
+	location.href = "/admin/admindetail?a_idx=${a_idx}";
 }
 
-// 관리자 글쓰기
-function admin_write() {
-	location.href = "/admin/admininsert";
+// 관리자 생성
+function admin_insert() {
+	location.href = "/admin/admininsertgo";
 }
 
 function admin_write_ok(f) {
-	f.action = "/admin/admininsertok";
+	f.action = "/admin/admininsert";
 	f.submit();
 }
 
@@ -288,8 +305,8 @@ function admin_delete_ok(f) {
 
 
 // 녹지 행사 관리
-function event_list() {
-	location.href = "/ev/list";
+function event_list(cPage) {
+	location.href = "/ev/list?cPage=${cPage}";
 }
 
 function event_detail() {
@@ -335,22 +352,13 @@ function event_delete_ok(f) {
 
 
 
-// 게시판 댓글 관리
-function comment_list() {
-	location.href = "/comment/list";
-}
-
-function comment_delete() {
-	location.href = "/comment/delete";
-}
-
 // 리뷰 관리
-function review_list() {
-	location.href = "/admin/reviewlist";
+function review_list(cPage) {
+	location.href = "/admin/reviewlist?cPage=${cPage}";
 }
 
-function review_detail() {
-	location.href = "/admin/reviewdetail";
+function review_detail(rev_idx) {
+	location.href = "/admin/reviewdetail?c_bor=review&c_ref=${rev_idx}";
 }
 
 // 리뷰 관리 글쓰기
@@ -393,8 +401,8 @@ function review_delete_ok(f) {
 
 
 // 팝업 관리
-function popup_list() {
-	location.href = "/pop/list";
+function popup_list(cPage) {
+	location.href = "/pop/list?cPage=${cPage}";
 }
 
 function popup_detail() {

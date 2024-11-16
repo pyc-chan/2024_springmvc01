@@ -69,8 +69,8 @@
 				            <div class="button_box">                
 				                <div>
 				                	<input type="hidden" name="cPage" value="${cPage}" /> 
-				                    <button class="write" onclick="move_notice_write_ok(this.form)">작성완료</button>    
-				                    <button class="cancle" onclick="move_notice()">목록</button>    
+				                    <button class="write" onclick="review_write_ok(this.form)">작성완료</button>    
+				                    <button class="cancle" onclick="review_list(${cPage})">목록</button>    
 				                </div>
 				            </div>
             				</form>

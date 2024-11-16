@@ -13,7 +13,7 @@ import com.ict.project.notice.vo.NoticeVO;
 
 
 @Repository
-public class NoticeImpl implements NoticeDAO {
+public class NoticeDAOImpl implements NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
@@ -34,8 +34,8 @@ public class NoticeImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int getBoardInsert(NoticeVO gvo) {
-		return sqlSessionTemplate.insert("notice.nt_insert", gvo);
+	public int getBoardInsert(NoticeVO nvo) {
+		return sqlSessionTemplate.insert("notice.nt_insert", nvo);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class NoticeImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int getBoardUpdate(NoticeVO gvo) {
-		return sqlSessionTemplate.update("notice.update", gvo);
+	public int getBoardUpdate(NoticeVO nvo) {
+		return sqlSessionTemplate.update("notice.update", nvo);
 	}
 
 

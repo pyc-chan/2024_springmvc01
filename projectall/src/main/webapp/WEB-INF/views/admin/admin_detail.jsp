@@ -70,7 +70,7 @@
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
 		                	<input type="hidden" name="a_idx" value="${avo.a_idx}" /> 
 		                	
-							<input type="button" value="목록" onclick="admin_list(this.form)">
+							<input type="button" value="목록" onclick="admin_list(${cPage})">
 							<input type="button" value="회원 수정" onclick="admin_update(this.form)">
 							<input type="button" value="회원 삭제" onclick="admin_delete(this.form)"> 
                			</form>
@@ -84,21 +84,7 @@
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
 	<script src="/resources/js/admin_common.js"></script>
 	<script>
-	function admin_list(f) {
-		f.action="/admin/adminlist";
-		f.submit();
-	}
-	
-	function admin_update(f) {
-		f.action="/admin/adminupdate";
-		f.submit();
-	} 
-	
-	function admin_delete(f) {
-		f.action="/admin/admindelete";
-		f.submit();
-	}
-	
+
     const btns = document.querySelectorAll(".topmenu, .menubtn");
         function removeActiveClasses() {
             btns.forEach((btn) => {

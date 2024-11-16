@@ -106,6 +106,11 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.adminLogin(a_id);
 	}
 
+	@Override
+	public int adminIdChk(String a_id) {
+		return adminDAO.adminIdChk(a_id);
+	}
+
 
 	
 }

@@ -60,17 +60,19 @@ public class ReviewController {
 		return mv;
 	}
 	
+	// review 디테일
 	@RequestMapping("/review/detail")
 	public ModelAndView getReviewDetail(CommentVO cvo, String cPage) {
 		ModelAndView mv = new ModelAndView("review/detail");
 		String rev_idx = cvo.getC_ref();
+		// 조회수 증가
 		reviewService.getReviewHit(rev_idx);
-		
-		
+		// 댓글 갯수
 		int count = commentService.getCommentSubCount(cvo);
 		PerPageConstant perPageConstant = new PerPageConstant();
 		int perPage = perPageConstant.getReviewcommpage();
 		
+		// 페이징
 		Paging paging = pagingService.pagingservice(count, cPage, perPage);
 		
 		

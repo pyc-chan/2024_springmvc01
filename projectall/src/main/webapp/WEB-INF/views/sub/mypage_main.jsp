@@ -48,7 +48,7 @@
                                 <p>나의 리뷰</p>
 
                                 <span onclick="my_review()">
-                                    <p>더보기</p> <i class="material-icons">chevron_right</i>
+                                    더보기 <i class="material-icons">chevron_right</i>
                                 </span>
                             </div>
 
@@ -60,7 +60,7 @@
                                     <div class="contents">
                                         <p class="place_name">조회수</p>
                                         <p class="place_content">
-                                            ${list.rev_hit }                        
+                                            ${list.rev_hit }
                                         </p>
                                     </div>
                                 </li>

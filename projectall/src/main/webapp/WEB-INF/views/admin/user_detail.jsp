@@ -34,40 +34,40 @@
 				<tr>
 					<td>아이디</td>
 					<td>
-	                    ${nvo.u_id}
+	                    ${lvo.u_id}
 					</td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
 					<td>
-	                    ${nvo.u_pw}
+	                    ${lvo.u_pw}
 					</td>
 				</tr>
 				<tr>
 					<td>이름</td>
 					<td>
-	                    ${nvo.u_na}
+	                    ${lvo.u_na}
 					</td>
 				</tr>
 				<tr>
 					<td>프로필 이미지</td>
 					<td>
                        	<c:choose>
-							<c:when test="${empty nvo.u_pic}">
+							<c:when test="${empty lvo.u_pic}">
 								<span>등록된 첨부파일이 없습니다.</span>
 							</c:when>
 							<c:otherwise>
 								<p class="attachment_name">첨부파일</p>
 								<ul class="attachment">
 									<li class="img_box">
-										<a href="/board_down?f_name=${nvo.u_pic}">
-											<img src="/resources/upload/${nvo.u_pic}">
+										<a href="/board_down?f_name=${lvo.u_pic}">
+											<img src="/resources/upload/${lvo.u_pic}">
 										</a>
 									</li>
 									<li>
-										<p class="img_name"><span>파일명</span> ${nvo.u_pic}</p>
+										<p class="img_name"><span>파일명</span> ${lvo.u_pic}</p>
 										<p>
-											<a class="img_down" href="/user_down?f_name=${nvo.u_pic}">다운로드</a>
+											<a class="img_down" href="/user_down?f_name=${lvo.u_pic}">다운로드</a>
 										</p>
 									</li>
 								</ul>
@@ -78,49 +78,49 @@
 				<tr>
 					<td>전화번호</td>
 					<td>
-	                    ${nvo.u_pho}
+	                    ${lvo.u_pho}
 					</td>
 				</tr>
 				<tr>
 					<td>성별</td>
 					<td>
-	                    ${nvo.u_gen}
+	                    ${lvo.u_gen}
 					</td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
 					<td>
-	                    ${nvo.u_bir}
+	                    ${lvo.u_bir}
 					</td>
 				</tr>
 				<tr>
 					<td>이메일</td>
 					<td>
-	                    ${nvo.u_em}
+	                    ${lvo.u_em}
 					</td>
 				</tr>
 				<tr>
 					<td>생성일자</td>
 					<td>
-	                    ${nvo.u_reg}
+	                    ${lvo.u_reg}
 					</td>
 				</tr>
 				<tr>
 					<td>탈퇴일자</td>
 					<td>
-	                    ${nvo.u_out}
+	                    ${lvo.u_out}
 					</td>
 				</tr>
 				<tr>
 					<td>탈퇴담당자</td>
 					<td>
-	                    ${nvo.a_idx}
+	                    ${lvo.a_idx}
 					</td>
 				</tr>
 				<tr>
 					<td>탈퇴사유</td>
 					<td>
-	                    ${nvo.u_outr}
+	                    ${lvo.u_outr}
 					</td>
 				</tr>
 			</table>
@@ -130,8 +130,7 @@
 					<li>
 	                    <form method="post">  
 		                	<input type="hidden" name="cPage" value="${cPage}" /> 
-		                	<input type="hidden" name="n_idx" value="${nvo.n_idx}" /> 
-		                	<input type="hidden" name="a_idx" value="${nvo.a_idx}" /> 
+		                	<input type="hidden" name="u_id" value="${lvo.u_id}" /> 
 		                	
 							<input type="button" value="목록" onclick="user_list()">
 							<input type="button" value="회원 수정" onclick="user_update(this.form)">
@@ -145,7 +144,7 @@
 	</div>
 	<!-- container div -->
 	<jsp:include page="../common/admin_footer.jsp"></jsp:include>
-
+	<script src="/resources/js/admin_common.js"></script>
 	<script>
 	
     const btns = document.querySelectorAll(".topmenu, .menubtn");

@@ -65,21 +65,21 @@
 		                    <ul>
 		                        <li>
 		                        	<c:choose>
-										<c:when test="${empty nvo.f_name}">
+										<c:when test="${empty nvo.n_file}">
 											<span>등록된 첨부파일이 없습니다.</span>
 										</c:when>
 										<c:otherwise>
 											<p class="attachment_name">첨부파일</p>
 											<ul class="attachment">
 												<li class="img_box">
-													<a href="/board_down?f_name=${nvo.f_name}">
-														<img src="/resources/upload/${nvo.f_name}">
+													<a href="/board_down?f_name=${nvo.n_file}">
+														<img src="/resources/upload/${nvo.n_file}">
 													</a>
 												</li>
 												<li>
-													<p class="img_name"><span>파일명</span> ${nvo.f_name}</p>
+													<p class="img_name"><span>파일명</span> ${nvo.n_file}</p>
 													<p>
-														<a class="img_down" href="/notice_down?f_name=${nvo.f_name}">다운로드</a>
+														<a class="img_down" href="/notice_down?n_pic=${nvo.n_pic}">다운로드</a>
 													</p>
 												</li>
 											</ul>
@@ -124,7 +124,7 @@
 														<button class="update_btn" onclick="move_comment_update(this.form)">수정</button>
 														<button class="delete_btn" onclick="move_comment_delete(this.form)">삭제</button>
 													</div>
-														<input type="hidden" name="idxc_idx" value="${k.idxc_idx}">
+														<input type="hidden" name="c_idx" value="${k.c_idx}">
 														<input type="hidden" name="c_bor" value="notice">
 														<input type="hidden" name="n_idx" value="${k.n_idx}">
 														<input type="hidden" name="cPage" value="${cPage}">

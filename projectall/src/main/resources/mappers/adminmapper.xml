@@ -14,6 +14,10 @@
 		select * from admin_db where a_idx = #{a_idx}
 	</select>
 	
+	<select id="admin_idchk" parameterType="String" resultType="int">
+		select count(*) from admin_db where a_idx = #{a_idx}
+	</select>
+	
 	<select id="admin_count" resultType="int">
 		select count(*) from admin_db
 	</select>
